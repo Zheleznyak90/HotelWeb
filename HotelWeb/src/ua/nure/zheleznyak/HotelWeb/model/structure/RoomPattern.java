@@ -11,6 +11,7 @@ public class RoomPattern implements Serializable{
 	private int size;
 	private String description;
 	private String photoSetPath;
+	private static final String PhotoSetDefault = "view/PhotoSets/";
 	
 	public String getRoomClass() {
 		return roomClass;
@@ -37,7 +38,7 @@ public class RoomPattern implements Serializable{
 		this.description = description;
 	}
 	public String getPhotoSetPath() {
-		return photoSetPath;
+		return PhotoSetDefault+photoSetPath;
 	}
 	public void setPhotoSetPath(String photoSetPath) {
 		this.photoSetPath = photoSetPath;

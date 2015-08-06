@@ -15,7 +15,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 /**
  * Servlet implementation class MainPage
  */
-@WebServlet("/")
+@WebServlet("/m")
 public class MainPage extends HttpServlet {
 
 	/**

@@ -3,10 +3,10 @@
 <%@taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="<c:url value="/view/styles/styles.css" />" />
+<link href="<c:url value="/view/styles/styles.css" />" rel="stylesheet" type="text/css">
+<%-- 
+<link rel="stylesheet" type="text/css" href="<c:url value="/view/styles/styles.css" />" /> --%>
 <title>Header</title>
-
-
 </head>
 
 <body>
