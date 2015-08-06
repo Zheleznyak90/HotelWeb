@@ -1,0 +1,56 @@
+@CHARSET "UTF-8";
+.container {
+    margin: 10px;
+    border: 1px solid #fff;
+    background-color: #ffffff;
+}
+.mainbody,
+.header,
+.footer {
+    padding: 5px;
+}
+.mainbody {
+    margin-top: 0;
+}
+.header {
+    height:40px;
+    width:100%;
+    border-bottom: 1px solid #EEE;
+}
+.hcontainer{
+	background-color: #ff00ff;
+	
+	display: table;
+    width: 100%;
+}
+.home,
+.lang,
+.auth,
+.reg{
+	display: table-cell;
+	vertical-align: middle;
+	width: auto;
+}
+
+.home{
+display: block;	
+}
+.lang{
+	background-color: #FFF2BC;
+    width: 90%;
+    padding: 0 50px 0 10px;
+}
+.auth{
+	white-space: nowrap;
+    padding:22px;
+}
+.reg{
+	white-space: nowrap;
+	padding:22px;
+}
+
+.footer {
+    height: 40px;
+    background-color: whiteSmoke;
+    border-top: 1px solid #DDD;
+}
