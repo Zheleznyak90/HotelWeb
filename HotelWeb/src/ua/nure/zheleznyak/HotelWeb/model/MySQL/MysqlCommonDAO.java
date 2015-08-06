@@ -68,9 +68,25 @@ public class MysqlCommonDAO implements CommonDAO {
 
 	@Override
 	public boolean registrateUser(User user) {
+		Connection con = null;
+		boolean isRegistered = false;
+		try{
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.REGISTRATE_USER);
+			pst.setString(1, user.getEmail());
+			pst.setString(2, user.getPassword());
+			pst.setString(3, user.getFullName());
+			pst.setString(4, user.getPhoneNumber());
+			isRegistered = pst.execute();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		finally{
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
 		
-		// TODO Auto-generated method stub
-		return false;
+		return isRegistered;
 	}
 
 	@Override

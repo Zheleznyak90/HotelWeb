@@ -4,7 +4,8 @@ public class SQLPatterns {
 	//Common sql requests
 	public static final String VERIFY_USER = "SELECT email, password, fullName, role "
 			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
-	public static final String REGISTRATE_USER = "";
+	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
+			+ "(1, ?, ?, ?, ?)";
 	public static final String GET_ROOM_PATTERN = "SELECT class, size, price, description, photoSetPath "
 			+ "FROM room_pattern rp, room_class rc "
 			+ "WHERE rp.class_id = rc.id";
