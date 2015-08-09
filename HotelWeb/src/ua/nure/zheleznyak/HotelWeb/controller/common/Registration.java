@@ -38,8 +38,8 @@ public class Registration extends HttpServlet {
 		currUser.setPassword(request.getParameter("password"));
 		currUser.setFullName(request.getParameter("fName"));
 		currUser.setPhoneNumber(request.getParameter("phone"));
-		System.out.println(MysqlCommonDAO.getSingleton().registrateUser(currUser));
-		System.out.println("registration call");
+		MysqlCommonDAO.getSingleton().registrateUser(currUser);
+
 	}
 
 }

@@ -2,5 +2,5 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper>
-	<jsp:include page="/view/content/main.jsp" />
+	<jsp:include page="/view/content/requestForm.jsp" />
 </t:wrapper>

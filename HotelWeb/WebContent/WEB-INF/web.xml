@@ -19,4 +19,12 @@
     <url-pattern>/authorization</url-pattern>
   </servlet-mapping>
   
+  <servlet>
+    <servlet-name>AfterReqRedirect</servlet-name>
+    <jsp-file>/view/pages/tnxForRequest.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AfterReqRedirect</servlet-name>
+    <url-pattern>/client/redirect</url-pattern>
+  </servlet-mapping>  
 </web-app>

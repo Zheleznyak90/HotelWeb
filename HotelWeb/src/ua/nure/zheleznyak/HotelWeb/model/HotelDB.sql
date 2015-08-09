@@ -89,8 +89,9 @@ CREATE TABLE request(
 	client_id INT NOT NULL,
 	manager_id INT,
 	number_of_person INT NOT NULL,
-	from_date DATE NOT NULL,
-	till_date DATE NOT NULL,
+	checkIn_date DATE NOT NULL,
+	checkOut_date DATE NOT NULL,
+	created DATETIME NOT NULL,
 	isServed BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (client_id) REFERENCES userT(id) 

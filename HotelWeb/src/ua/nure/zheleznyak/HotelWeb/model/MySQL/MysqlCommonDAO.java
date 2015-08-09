@@ -14,7 +14,6 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlCommonDAO implements CommonDAO {
-
 	
 	private static MysqlCommonDAO singleton;
 	

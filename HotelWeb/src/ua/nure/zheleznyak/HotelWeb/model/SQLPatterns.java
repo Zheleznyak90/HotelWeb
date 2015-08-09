@@ -41,12 +41,14 @@ public class SQLPatterns {
 			+ "(room_id, client_id, order_status, meal, created, from_date, since_date) VALUES "
 			+ "(?, ?, ?, ?, ?, ?, ?)";
 	public static final String CONFIRM_BOOKING_MANAGER = "UPDATE orderT SET order_status = '2' WHERE id = ?";
-	public static final String GET_ALL_REQUESTS = "SELECT * FROM request";
+	public static final String GET_ALL_UNSERVERD_REQUESTS = "SELECT * FROM request WHERE isServed=0";
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 	
 	//Client sql requests
-	public static final String ROOM_REQUEST = "INSERT";
+	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class"; 
+	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, number_of_person, checkIn_date, checkOut_date, created) "
+			+ "VALUES((SELECT id FROM userT WHERE email = ?),?,?,?,?)";
 	public static final String BOOK_ROOM = "INSERT";
 	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
 	public static final String CANCEL_BOOKING = "UPDATE";

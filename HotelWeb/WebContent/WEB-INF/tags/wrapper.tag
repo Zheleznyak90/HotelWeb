@@ -4,8 +4,13 @@
 <html>
 <head>
 <link href="<c:url value="/view/styles/styles.css" />" rel="stylesheet" type="text/css">
-<%-- 
-<link rel="stylesheet" type="text/css" href="<c:url value="/view/styles/styles.css" />" /> --%>
+<!-- jQuery -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+<!-- Verify.js (with Notify.js included) -->
+<script src="//raw.github.com/jpillora/verifyjs/gh-pages/dist/verify.notify.min.js"></script>
+
+
 <title>Header</title>
 </head>
 
