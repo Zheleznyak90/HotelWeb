@@ -37,7 +37,7 @@ public class IsAdmin implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("Do filter");
+		System.out.println("Do admin filter");
 		
 		if (((HttpServletRequest) request).getSession().getAttribute("User") == null) {
 			((HttpServletResponse) response).sendRedirect("Authorization");

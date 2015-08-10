@@ -1,5 +1,4 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<jsp:include page="/view/content/roomSort.jsp" />
 <div class="rightPanel">
 	<c:forEach var="room" items="${roomList}">
 		<div class="room">

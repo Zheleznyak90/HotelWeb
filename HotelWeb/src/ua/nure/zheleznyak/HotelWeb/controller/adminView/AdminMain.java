@@ -15,8 +15,11 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
  */
 @WebServlet("/Admin/AdminMain")
 public class AdminMain extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-    
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5252569357905658249L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

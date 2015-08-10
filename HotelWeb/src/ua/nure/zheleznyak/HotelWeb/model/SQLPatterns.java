@@ -6,19 +6,19 @@ public class SQLPatterns {
 			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_ROOM_PATTERN = "SELECT class, size, price, description, photoSetPath "
+	public static final String GET_ROOM_LIST = "SELECT class, size, price, description, photoSetPath "
 			+ "FROM room_pattern rp, room_class rc "
 			+ "WHERE rp.class_id = rc.id";
-	public static final String GET_ROOM_LIST = "SELECT rc.class, rp.size, rp.price, COUNT(r.id) as amount"
-			+ " FROM room_pattern rp, room r, room_status rs, room_class rc"
-			+ " WHERE r.room_pattern = rp.id AND rp.class_id=rc.id AND r.status_id=rs.id "
-			+ " GROUP BY rp.id";
 	
 	//Administrator sql requests
 	public static final String ADD_USER = "";
 	public static final String DELETE_USER = "";
 	public static final String CHANGE_ROLE = "UPDATE userT SET role_id = ? WHERE id = ?";
 	
+	
+	public static final String GET_PATTERN_LIST = "SELECT room_pattern.id, class, size, price, description, photoSetPath, rating "
+			+ "FROM room_pattern, room_class "
+			+ "WHERE room_pattern.class_id = room_class.id";
 	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, size, price) VALUES (? ,? ,?)";
 	public static final String CHANGE_ROOM_PRICE = "UPDATE room_pattern SET price = ? WHERE id = ?";
 	public static final String CHANGE_ROOM_CLASS = "UPDATE room_pattern SET class_id = ? WHERE id = ?";

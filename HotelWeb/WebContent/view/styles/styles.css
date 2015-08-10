@@ -1,22 +1,40 @@
 @CHARSET "UTF-8";
 
+html,body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
 .container {
-	border: 1px solid #fff;
+	min-height: 100%;
+	position: relative;
 	background-color: #ffffff;
 }
 
-.mainbody,.header,.footer {
+.mainbody,.footer {
 	padding-top: 5px;
-}
-
-.mainbody {
-	margin-top: 5px;
 }
 
 .header {
 	height: 40px;
 	width: 100%;
 	border-bottom: 1px solid #EEE;
+}
+
+.mainbody {
+	margin-top: 5px;
+	padding-bottom:40px;
+}
+
+.footer {
+	height: 40px;
+	width: 100%;
+	background-color: whiteSmoke;
+	border-top: 1px solid #DDD;
+	position:absolute;
+	bottom: 0;
+	left: 0;
 }
 
 .hcontainer {
@@ -40,12 +58,6 @@
 .home,.auth,.reg {
 	white-space: nowrap;
 	padding: 22px;
-}
-
-.footer {
-	height: 40px;
-	background-color: whiteSmoke;
-	border-top: 1px solid #DDD;
 }
 
 /* room list styles */
@@ -97,6 +109,6 @@
 	width: 9em
 }
 
-.rightPanel{
+.rightPanel {
 	padding-left: 11em;
 }

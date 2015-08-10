@@ -40,7 +40,7 @@ CREATE TABLE room_pattern(
 	price INT ,
 	description TEXT,
 	photoSetPath VARCHAR(500),
-	rating VARCHAR(3),
+	rating DECIMAL DEFAULT 0,
 	PRIMARY KEY (id),
 	FOREIGN KEY (class_id) REFERENCES room_class(id) 
 	ON DELETE RESTRICT

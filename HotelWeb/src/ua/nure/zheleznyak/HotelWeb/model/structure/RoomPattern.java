@@ -13,6 +13,7 @@ public class RoomPattern implements Serializable {
 	private String description;
 	private String photoSetPath;
 	private static final String PhotoSetDefault = "view/PhotoSets/";
+	private float rating;
 
 	public int getId() {
 		return id;
@@ -60,6 +61,14 @@ public class RoomPattern implements Serializable {
 
 	public void setPhotoSetPath(String photoSetPath) {
 		this.photoSetPath = photoSetPath;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
 	}
 
 }
