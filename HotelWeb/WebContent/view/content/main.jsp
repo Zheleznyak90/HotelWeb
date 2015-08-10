@@ -1,6 +1,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="/view/content/roomSort.jsp" />
-<div class="roomList">
+<div class="rightPanel">
 	<c:forEach var="room" items="${roomList}">
 		<div class="room">
 			<img src="${room.photoSetPath}/1.jpg" class="photo" alt="Room Photo">

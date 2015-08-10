@@ -1,4 +1,4 @@
-<div class="sorts">
+<div class="leftPanel">
 	Sort by:
 	<ul>
 		<li>Class

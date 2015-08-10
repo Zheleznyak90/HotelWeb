@@ -10,6 +10,7 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ManagerDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.BookingPeriod;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
@@ -36,7 +37,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 	@Override
 	public List<Request> showClientRequests() {
 		List<Request> requests = null;
-		/*Connection con = null;
+		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			requests = new ArrayList<Request>();
@@ -46,8 +47,10 @@ public class MysqlManegerDAO implements ManagerDAO {
 			while (rs.next()) {
 				Request currReq = new Request();
 				currReq.setNumberOfPerson(rs.getInt("number_of_person"));
-				currReq.setCheckIn(rs.getDate("checkIn_date"));
-				currReq.setCheckOut(rs.getDate("checkOut_date"));
+				BookingPeriod period = new BookingPeriod();
+				period.setCheckInDate(rs.getDate("checkIn_date"));
+				period.setCheckOutDate(rs.getDate("checkOut_date"));
+				currReq.setPeriod(period);
 				requests.add(currReq);
 			}
 		} catch (SQLException e) {
@@ -55,7 +58,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
-	*/	return requests;
+		return requests;
 	}
 
 	@Override

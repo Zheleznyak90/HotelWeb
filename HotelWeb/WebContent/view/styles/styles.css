@@ -90,13 +90,13 @@
 	width: 45%;
 }
 
-.sorts {
+.leftPanel {
 	position: absolute;
 	top: 6em;
 	left: 1em;
 	width: 9em
 }
 
-.roomList{
+.rightPanel{
 	padding-left: 11em;
 }

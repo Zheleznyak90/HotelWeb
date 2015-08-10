@@ -51,6 +51,7 @@ CREATE TABLE room(
 	room_pattern INT NOT NULL,
 	number INT NOT NULL,
 	floor INT ,
+	isMaintained BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (room_pattern) REFERENCES room_pattern(id) 
 	ON DELETE RESTRICT,
