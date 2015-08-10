@@ -9,7 +9,6 @@
     <servlet-name>RegistrationJsp</servlet-name>
     <url-pattern>/registration</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AuthorizationJsp</servlet-name>
     <jsp-file>/view/pages/authorization.jsp</jsp-file>
@@ -18,7 +17,6 @@
     <servlet-name>AuthorizationJsp</servlet-name>
     <url-pattern>/authorization</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>AfterReqRedirect</servlet-name>
     <jsp-file>/view/pages/tnxForRequest.jsp</jsp-file>
@@ -26,5 +24,5 @@
   <servlet-mapping>
     <servlet-name>AfterReqRedirect</servlet-name>
     <url-pattern>/client/redirect</url-pattern>
-  </servlet-mapping>  
+  </servlet-mapping>
 </web-app>

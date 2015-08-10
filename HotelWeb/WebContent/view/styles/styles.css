@@ -1,89 +1,102 @@
 @CHARSET "UTF-8";
+
 .container {
-    border: 1px solid #fff;
-    background-color: #ffffff;
+	border: 1px solid #fff;
+	background-color: #ffffff;
 }
-.mainbody,
-.header,
-.footer {
-    padding-top: 5px;
+
+.mainbody,.header,.footer {
+	padding-top: 5px;
 }
+
 .mainbody {
-    margin-top: 5px;
+	margin-top: 5px;
 }
+
 .header {
-    height:40px;
-    width:100%;
-    border-bottom: 1px solid #EEE;
+	height: 40px;
+	width: 100%;
+	border-bottom: 1px solid #EEE;
 }
-.hcontainer{
+
+.hcontainer {
 	background-color: #ff00ff;
 	display: table;
-    width: 100%;
+	width: 100%;
 }
-.home,
-.lang,
-.auth,
-.reg{
+
+.home,.lang,.auth,.reg {
 	display: table-cell;
 	vertical-align: middle;
 	width: auto;
 }
 
-.home{
-display: block;	
-}
-.lang{
+.lang {
 	background-color: #FFF2BC;
-    width: 90%;
-    padding: 0 50px 0 10px;
-}
-.auth,
-.reg{
-	white-space: nowrap;
-    padding:22px;
+	width: 90%;
+	padding: 0 50px 0 10px;
 }
 
+.home,.auth,.reg {
+	white-space: nowrap;
+	padding: 22px;
+}
 
 .footer {
-    height: 40px;
-    background-color: whiteSmoke;
-    border-top: 1px solid #DDD;
+	height: 40px;
+	background-color: whiteSmoke;
+	border-top: 1px solid #DDD;
 }
 
 /* room list styles */
+.room,.photo,.infoBlock,.price {
+	margin: 5px;
+	padding: 3px;
+}
 
-.room,.photo,.infoBlock,.price{
-margin:5px;
-padding:3px;
+.room {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+	overflow: auto;
 }
-.room{
--webkit-border-radius: 5px;
--moz-border-radius: 5px;
-border-radius: 5px;
-border:1px solid black;
-overflow:auto;
+
+.photo {
+	height: 128px;
+	width: 150px;
+	border: 1px solid black;
+	float: left;
 }
-.photo{
-  height:128px;
-  width:150px;
-  border:1px solid black;
-    float:left;
+
+.infoBlock {
+	border: 1px solid black;
+	overflow: hidden;
 }
-.infoBlock{
-  border:1px solid black;
-  overflow:hidden;
+
+.price {
+	border: 1px solid black;
+	width: 15%;
+	height: 128px;
+	float: right;
 }
-.price{
-  border:1px solid black;
-  width:15%;
-  height:128px;
-  float:right;
+
+.description {
+	height: 109px;
 }
-.description{
-    height:109px;
+
+.size,.roomClass {
+	display: inline-block;
+	width: 45%;
 }
-.size,.roomClass{ 
-    display: inline-block;
-    width:45%;
+
+.sorts {
+	position: absolute;
+	top: 6em;
+	left: 1em;
+	width: 9em
+}
+
+.roomList{
+	padding-left: 11em;
 }

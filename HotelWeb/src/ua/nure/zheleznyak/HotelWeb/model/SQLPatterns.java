@@ -38,17 +38,19 @@ public class SQLPatterns {
 	
 	//Manager sql requests
 	public static final String OFFER_ROOM = "INSERT INTO orderT "
-			+ "(room_id, client_id, order_status, meal, created, from_date, since_date) VALUES "
-			+ "(?, ?, ?, ?, ?, ?, ?)";
+			+ "(room_id, client_id, manager_id, order_status, meal, created, checkIn_date, checkOut_date)"
+			+ " VALUES (?, ?, ?, (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
 	public static final String CONFIRM_BOOKING_MANAGER = "UPDATE orderT SET order_status = '2' WHERE id = ?";
-	public static final String GET_ALL_UNSERVERD_REQUESTS = "SELECT * FROM request WHERE isServed=0";
+	public static final String GET_ALL_UNSERVED_REQUESTS = "SELECT number_of_person, checkIn_date, checkOut_date FROM request WHERE isServed=0 ORDER BY created DESC";
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 	
 	//Client sql requests
+	public static final String CREATE_PERIOD = "INSERT INTO booking_period(checkIn_date, checkOut_date) "
+			+ "VALUES (?,?)";
 	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class"; 
-	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, number_of_person, checkIn_date, checkOut_date, created) "
-			+ "VALUES((SELECT id FROM userT WHERE email = ?),?,?,?,?)";
+	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, number_of_person, booking_period, created) "
+			+ "VALUES((SELECT id FROM userT WHERE email = ?),?,?,?)";
 	public static final String BOOK_ROOM = "INSERT";
 	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
 	public static final String CANCEL_BOOKING = "UPDATE";

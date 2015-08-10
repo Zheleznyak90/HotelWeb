@@ -5,7 +5,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.BookingPeriod;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
@@ -56,9 +56,11 @@ public class RequestProc extends HttpServlet {
 		try {
 			DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			Date currDate = new Date();
+			BookingPeriod bp = new BookingPeriod();
 			//Some strange convertation from MM/dd/yyyy to sql date format
-			roomReq.setCheckIn(new java.sql.Date (sdf.parse(request.getParameter("checkInDate")).getTime()));
-			roomReq.setCheckOut(new java.sql.Date (sdf.parse(request.getParameter("checkOutDate")).getTime()));
+			bp.setCheckInDate(new java.sql.Date (sdf.parse(request.getParameter("checkInDate")).getTime()));
+			bp.setCheckOutDate(new java.sql.Date (sdf.parse(request.getParameter("checkOutDate")).getTime()));
+			roomReq.setPeriod(bp);
 			roomReq.setCreated(new java.sql.Date (currDate.getTime()));
 		} catch (ParseException e) {
 			e.printStackTrace();

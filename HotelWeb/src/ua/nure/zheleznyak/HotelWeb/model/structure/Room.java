@@ -8,11 +8,18 @@ public class Room implements Serializable{
 	 */
 	private static final long serialVersionUID = 2036673802378064539L;
 	
+	private int id;
 	private RoomPattern pattern;
 	private int floor;
 	private int number;
 	private String status;
 	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public int getFloor() {
 		return floor;
 	}

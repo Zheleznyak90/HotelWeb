@@ -70,13 +70,24 @@ public class MysqlClientDAO implements ClientDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.ROOM_REQUEST);
-			pst.setString(1, req.getClient().getEmail());
-			pst.setInt(2,req.getNumberOfPerson());
-			pst.setDate(3, req.getCheckIn());
-			pst.setDate(4, req.getCheckOut());
-			pst.setDate(5, new Date(System.currentTimeMillis()));
-			pst.execute();
+			PreparedStatement pst = con.prepareStatement(
+					SQLPatterns.CREATE_PERIOD, Statement.RETURN_GENERATED_KEYS);
+			pst.setDate(1, req.getPeriod().getCheckInDate());
+			pst.setDate(2, req.getPeriod().getCheckOutDate());
+			pst.executeUpdate();
+			ResultSet rs = pst.getGeneratedKeys();
+			if (rs.next()) {
+				pst = con.prepareStatement(SQLPatterns.ROOM_REQUEST);
+				pst.setString(1, req.getClient().getEmail());
+				pst.setInt(2, req.getNumberOfPerson());
+				pst.setLong(3, rs.getLong(1));
+				pst.setDate(4, new Date(System.currentTimeMillis()));
+				pst.execute();
+
+			} else {
+				// SQL problems code
+				return 301;
+			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();

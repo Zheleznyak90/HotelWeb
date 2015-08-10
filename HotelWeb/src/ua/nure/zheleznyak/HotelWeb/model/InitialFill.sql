@@ -22,24 +22,18 @@ INSERT INTO room_pattern(class_id, size, price, photoSetPath) VALUES
 ("2","3","70","middle2"),
 ("3","2","200","lux1");
 
-INSERT INTO room_status(status) VALUES
-("free"),
-("booked"),
-("occupied"),
-("maintenance");
-
-INSERT INTO room(room_pattern, status_id, number, floor) VALUES
-("1","1","12","1"),
-("1","2","13","1"),
-("2","3","21","2"),
-("2","3","23","2"),
-("2","2","25","2"),
-("3","3","22","2"),
-("3","3","24","2"),
-("3","1","26","2"),
-("3","2","28","2"),
-("3","1","20","2"),
-("4","4","30","3");
+INSERT INTO room(room_pattern, number, floor) VALUES
+("1","12","1"),
+("1","13","1"),
+("2","21","2"),
+("2","23","2"),
+("2","25","2"),
+("3","22","2"),
+("3","24","2"),
+("3","26","2"),
+("3","28","2"),
+("3","20","2"),
+("4","30","3");
 
 INSERT INTO meal(meal, price) VALUES 
 ("breakfast included", "0"),

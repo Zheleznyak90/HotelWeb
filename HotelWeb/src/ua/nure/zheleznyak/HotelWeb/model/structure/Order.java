@@ -16,8 +16,6 @@ public class Order implements Serializable {
 	private User manager;
 	private String status;
 	
-	private Date sinceDate;
-	private Date fromDate;
 	private Date creationDate;
 	
 	public Meal getMeal() {
@@ -49,18 +47,6 @@ public class Order implements Serializable {
 	}
 	public void setStatus(String status) {
 		this.status = status;
-	}
-	public Date getSinceDate() {
-		return sinceDate;
-	}
-	public void setSinceDate(Date sinceDate) {
-		this.sinceDate = sinceDate;
-	}
-	public Date getFromDate() {
-		return fromDate;
-	}
-	public void setFromDate(Date fromDate) {
-		this.fromDate = fromDate;
 	}
 	public Date getCreationDate() {
 		return creationDate;

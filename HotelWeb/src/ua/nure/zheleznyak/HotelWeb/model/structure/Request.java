@@ -14,9 +14,8 @@ public class Request implements Serializable{
 	private int numberOfPerson;
 	
 	private String apartmentClass;
-	private Date checkIn;
-	private Date checkOut;
 	private Date created;
+	private BookingPeriod period;
 	
 	boolean isServed = false;
 	
@@ -38,18 +37,6 @@ public class Request implements Serializable{
 	public void setNumberOfPerson(int numberOfPerson) {
 		this.numberOfPerson = numberOfPerson;
 	}
-	public Date getCheckIn() {
-		return checkIn;
-	}
-	public void setCheckIn(Date checkIn) {
-		this.checkIn = checkIn;
-	}
-	public Date getCheckOut() {
-		return checkOut;
-	}
-	public void setCheckOut(Date checkOut) {
-		this.checkOut = checkOut;
-	}
 	public Date getCreated() {
 		return created;
 	}
@@ -67,6 +54,12 @@ public class Request implements Serializable{
 	}
 	public void setApartmentClass(String apartmentClass) {
 		this.apartmentClass = apartmentClass;
+	}
+	public BookingPeriod getPeriod() {
+		return period;
+	}
+	public void setPeriod(BookingPeriod period) {
+		this.period = period;
 	}
 
 }
