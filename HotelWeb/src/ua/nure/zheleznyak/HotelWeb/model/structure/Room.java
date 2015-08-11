@@ -12,7 +12,7 @@ public class Room implements Serializable {
 	private RoomPattern pattern;
 	private int floor;
 	private int number;
-	private String status;
+	private boolean maintained;
 
 	public int getId() {
 		return id;
@@ -38,14 +38,6 @@ public class Room implements Serializable {
 		this.number = number;
 	}
 
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
 	public RoomPattern getPattern() {
 		return pattern;
 	}
@@ -53,5 +45,14 @@ public class Room implements Serializable {
 	public void setPattern(RoomPattern pattern) {
 		this.pattern = pattern;
 	}
+
+	public boolean isMaintained() {
+		return maintained;
+	}
+
+	public void setMaintained(boolean maintained) {
+		this.maintained = maintained;
+	}
+
 
 }

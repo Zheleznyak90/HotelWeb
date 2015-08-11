@@ -18,8 +18,11 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
  */
 @WebServlet("/UserValidation")
 public class UserValidation extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7466333530644352759L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)

@@ -95,7 +95,7 @@ public class MysqlCommonDAO implements CommonDAO {
 		try{
 			con = MySQLConnection.getSingleton().getConnection();
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOM_LIST);
+			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOMS_MPAGE);
 			while(rs.next()){
 				RoomPattern currPattern = new RoomPattern();
 				currPattern.setRoomClass(rs.getString("class"));

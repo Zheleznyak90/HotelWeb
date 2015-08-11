@@ -7,32 +7,30 @@
 	<table border="1">
 		<tr>
 			<td>Id</td>
-			<td>Class</td>
-			<td>Price</td>
-			<td>Size</td>
-			<td>Description</td>
-			<td>PhotoSetPath</td>
-			<td>Rating</td>
+			<td>Room pattern</td>
+			<td>Number</td>
+			<td>Floor</td>
+			<td>Maintance</td>
+			
 			<td>Edit</td>
 			<td>Delete</td>
 
 		</tr>
-		<c:forEach var="pattern" items="${patterns}">
+		<c:forEach var="room" items="${rooms}">
 			<tr>
-				<td>${pattern.id}</td>
-				<td>${pattern.roomClass}</td>
-				<td>${pattern.price}</td>
-				<td>${pattern.size}</td>
-				<td>${pattern.description}</td>
-				<td>${pattern.photoSetPath}</td>
-				<td>${pattern.rating}</td>
+				<td>${room.id}</td>
+				<td>${room.pattern.id}</td>
+				<td>${room.number}</td>
+				<td>${room.floor}</td>
+				<td>${room.maintained}</td>
+
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
-					class="btnImg" alt="editBtn" id="editBtn_${pattern.id}"
+					class="btnImg" alt="editBtn" id="editBtn_${room.id}"
 					onClick="editPattern('${pageContext.request.contextPath}',this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
-					class="btnImg" alt="deleteBtn" id="deleteBtn_${pattern.id}"
+					class="btnImg" alt="deleteBtn" id="deleteBtn_${room.id}"
 					onClick="deletePattern('${pageContext.request.contextPath}',this)"></td>
 			</tr>
 

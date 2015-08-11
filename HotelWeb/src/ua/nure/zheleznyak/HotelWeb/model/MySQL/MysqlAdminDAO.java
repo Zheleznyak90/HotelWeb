@@ -1,6 +1,7 @@
 package ua.nure.zheleznyak.HotelWeb.model.MySQL;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -9,24 +10,26 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.AdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 public class MysqlAdminDAO implements AdminDAO {
-	
+
 	private static MysqlAdminDAO singleton;
-	
-	private MysqlAdminDAO (){}
-	
-	public static MysqlAdminDAO getSingleton(){
-		if(singleton == null){
-			singleton = new MysqlAdminDAO ();
+
+	private MysqlAdminDAO() {
+	}
+
+	public static MysqlAdminDAO getSingleton() {
+		if (singleton == null) {
+			singleton = new MysqlAdminDAO();
 		}
 		return singleton;
 	}
 
 	@Override
-	public void getUsers() {}
-
+	public void getUsers() {
+	}
 
 	@Override
 	public boolean deleteUser(String login) {
@@ -54,14 +57,13 @@ public class MysqlAdminDAO implements AdminDAO {
 
 	@Override
 	public List<RoomPattern> getPatternList() {
-		List<RoomPattern> roomList = new ArrayList<RoomPattern>();
+		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
 		Connection con = null;
-		try{
+		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERN_LIST);
-			System.out.println(SQLPatterns.GET_PATTERN_LIST);
-			while(rs.next()){
+			while (rs.next()) {
 				RoomPattern currPattern = new RoomPattern();
 				currPattern.setId(rs.getInt("id"));
 				currPattern.setRoomClass(rs.getString("class"));
@@ -70,13 +72,65 @@ public class MysqlAdminDAO implements AdminDAO {
 				currPattern.setDescription(rs.getString("description"));
 				currPattern.setPhotoSetPath(rs.getString("photoSetPath"));
 				currPattern.setRating(rs.getFloat("rating"));
-				roomList.add(currPattern);
+				patternList.add(currPattern);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
 		}
-		finally{
+		return patternList;
+	}
+
+	@Override
+	public int deletePattern(int id) {
+		Connection con = null;
+		int resCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.DELETE_ROOM_PATTERN);
+			pst.setInt(1, id);
+			pst.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			resCode = 301;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return resCode;
+	}
+
+	@Override
+	public List<Room> getRoomList() {
+		List<Room> roomList = new ArrayList<Room>();
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+
+			List<RoomPattern> patterns = getPatternList();
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOM_LIST);
+			while (rs.next()) {
+				Room currRoom = new Room();
+				currRoom.setId(rs.getInt("id"));
+				int patternId = rs.getInt("room_pattern");
+
+				currRoom.setFloor(rs.getInt("floor"));
+				currRoom.setNumber(rs.getInt("number"));
+				System.out.println(rs.getBoolean("isMaintained"));
+				currRoom.setMaintained(rs.getBoolean("isMaintained"));
+				for (RoomPattern currPattern : patterns) {
+					if (currPattern.getId() == patternId) {
+						currRoom.setPattern(currPattern);
+						break;
+					}
+				}
+				roomList.add(currRoom);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return roomList;

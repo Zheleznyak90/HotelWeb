@@ -12,10 +12,12 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.nure.zheleznyak.HotelWeb.model.structure.User;
+
 /**
  * Servlet Filter implementation class IsAdmin
  */
-@WebFilter(urlPatterns = { "/Admin/*" }, servletNames = { "AdminMain" })
+@WebFilter(urlPatterns = { "/admin/*" })
 public class IsAdmin implements Filter {
 
 	/**
@@ -37,10 +39,10 @@ public class IsAdmin implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		System.out.println("Do admin filter");
-		
-		if (((HttpServletRequest) request).getSession().getAttribute("User") == null) {
-			((HttpServletResponse) response).sendRedirect("Authorization");
+		User currUser = (User) ((HttpServletRequest) request).getSession().getAttribute("User");
+		if ( currUser == null || !currUser.getRole().equals("admin")) {
+			String contextPath = ((HttpServletRequest)request).getContextPath();
+			((HttpServletResponse) response).sendRedirect(contextPath+"/authorization");
 		} else {
 			chain.doFilter(request, response);
 		}

@@ -14,15 +14,15 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class PatterManagment
+ * Servlet implementation class UserManagment
  */
-@WebServlet("/admin/PatterManagment")
-public class PatterManagment extends HttpServlet {
-
+@WebServlet("/admin/UserManagment")
+public class UserManagment extends HttpServlet {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1445773309452786757L;
+	private static final long serialVersionUID = 4987682219979014131L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -44,10 +44,7 @@ public class PatterManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
-		List<String> classes = MysqlClientDAO.getSingleton().getRoomClasses();
-		request.setAttribute("patterns", patterns);
-		request.setAttribute("classes", classes);
-		request.getRequestDispatcher("/view/pages/patternManagment.jsp").forward(request, response);
+	
+		request.getRequestDispatcher("/view/pages/userManagment.jsp").forward(request, response);
 	}
 }

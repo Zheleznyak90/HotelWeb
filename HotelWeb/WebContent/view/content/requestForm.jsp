@@ -29,8 +29,4 @@
 
 </form>
 
-<link href="<c:url value="/jslib/jquery-ui.css" />" rel="stylesheet" type="text/css"/>
-<script src="<c:url value="/jslib/jquery.min.js" />" type="text/javascript" ></script>
-<script src="<c:url value="/jslib/jquery-ui.min.js" />" type="text/javascript"></script>
-
 <script src="<c:url value="/jslib/requestPage.js" />"></script>

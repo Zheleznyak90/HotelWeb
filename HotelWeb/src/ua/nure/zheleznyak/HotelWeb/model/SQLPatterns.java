@@ -6,7 +6,7 @@ public class SQLPatterns {
 			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_ROOM_LIST = "SELECT class, size, price, description, photoSetPath "
+	public static final String GET_ROOMS_MPAGE = "SELECT class, size, price, description, photoSetPath "
 			+ "FROM room_pattern rp, room_class rc "
 			+ "WHERE rp.class_id = rc.id";
 	
@@ -24,11 +24,14 @@ public class SQLPatterns {
 	public static final String CHANGE_ROOM_CLASS = "UPDATE room_pattern SET class_id = ? WHERE id = ?";
 	public static final String CHANGE_ROOM_SIZE = "UPDATE room_pattern SET size = ? WHERE id = ?";
 	public static final String CHANGE_ROOM_DESCRIPTION = "UPDATE room_pattern SET description = ? WHERE id = ?";
-	//TODO delete room pattern
-	
+	public static final String DELETE_ROOM_PATTERN = "DELETE FROM room_pattern WHERE id = ?";
+
+	public static final String GET_ROOM_LIST = "SELECT * FROM ROOM";
+
 	public static final String ADD_ROOM = "INSERT INTO room(room_pattern, status_id, number, floor) VALUES(?, ?, ?, ?)";
 	public static final String CHANGE_ROOM_STATUS = "UPDATE room SET status_id = ? WHERE id = ?";
 	public static final String CHANGE_ROOM_PATTERN = "UPDATE room SET pattern_id = ? WHERE id = ?";
+	
 	//TODO delete room
 	public static final String ADD_MEAL = "INSERT INTO meal(meal, price) VALUES (?, ?)";
 	public static final String CHANGE_MEAL_PRICE = "UPDATE meal SET price = ? WHERE id = ?";
