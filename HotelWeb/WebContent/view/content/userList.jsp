@@ -1,38 +1,32 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="rightPanel">
-<div id="errorMsg">
-123
-</div>
+	<div id="errorMsg">123</div>
 	<table border="1">
 		<tr>
 			<td>Id</td>
-			<td>Class</td>
-			<td>Price</td>
-			<td>Size</td>
-			<td>Description</td>
-			<td>PhotoSetPath</td>
-			<td>Rating</td>
+			<td>Role</td>
+			<td>Email</td>
+			<td>Full name</td>
+			<td>Phone number</td>
 			<td>Edit</td>
 			<td>Delete</td>
 
 		</tr>
-		<c:forEach var="pattern" items="${patterns}">
+		<c:forEach var="user" items="${users}">
 			<tr>
-				<td>${pattern.id}</td>
-				<td>${pattern.roomClass}</td>
-				<td>${pattern.price}</td>
-				<td>${pattern.size}</td>
-				<td>${pattern.description}</td>
-				<td>${pattern.photoSetPath}</td>
-				<td>${pattern.rating}</td>
+				<td>${user.id}</td>
+				<td>${user.role}</td>
+				<td>${user.email}</td>
+				<td>${user.fullName}</td>
+				<td>${user.phoneNumber}</td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
-					class="btnImg" alt="editBtn" id="editBtn_${pattern.id}"
+					class="btnImg" alt="editBtn" id="editBtn_${user.id}"
 					onClick="editPattern('${pageContext.request.contextPath}',this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
-					class="btnImg" alt="deleteBtn" id="deleteBtn_${pattern.id}"
+					class="btnImg" alt="deleteBtn" id="deleteBtn_${user.id}"
 					onClick="deletePattern('${pageContext.request.contextPath}',this)"></td>
 			</tr>
 

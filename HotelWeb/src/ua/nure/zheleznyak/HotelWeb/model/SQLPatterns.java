@@ -11,6 +11,8 @@ public class SQLPatterns {
 			+ "WHERE rp.class_id = rc.id";
 	
 	//Administrator sql requests
+	public static final String GET_USER_LIST = "SELECT u.id AS id, role, email, fullName, phoneNumber "
+			+ "FROM UserT u, Role r WHERE r.id=u.role_id";
 	public static final String ADD_USER = "";
 	public static final String DELETE_USER = "";
 	public static final String CHANGE_ROLE = "UPDATE userT SET role_id = ? WHERE id = ?";
@@ -27,7 +29,6 @@ public class SQLPatterns {
 	public static final String DELETE_ROOM_PATTERN = "DELETE FROM room_pattern WHERE id = ?";
 
 	public static final String GET_ROOM_LIST = "SELECT * FROM ROOM";
-
 	public static final String ADD_ROOM = "INSERT INTO room(room_pattern, status_id, number, floor) VALUES(?, ?, ?, ?)";
 	public static final String CHANGE_ROOM_STATUS = "UPDATE room SET status_id = ? WHERE id = ?";
 	public static final String CHANGE_ROOM_PATTERN = "UPDATE room SET pattern_id = ? WHERE id = ?";

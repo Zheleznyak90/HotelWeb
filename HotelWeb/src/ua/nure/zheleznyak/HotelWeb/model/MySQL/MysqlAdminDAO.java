@@ -12,6 +12,7 @@ import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.AdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
+import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlAdminDAO implements AdminDAO {
 
@@ -25,10 +26,6 @@ public class MysqlAdminDAO implements AdminDAO {
 			singleton = new MysqlAdminDAO();
 		}
 		return singleton;
-	}
-
-	@Override
-	public void getUsers() {
 	}
 
 	@Override
@@ -118,7 +115,6 @@ public class MysqlAdminDAO implements AdminDAO {
 
 				currRoom.setFloor(rs.getInt("floor"));
 				currRoom.setNumber(rs.getInt("number"));
-				System.out.println(rs.getBoolean("isMaintained"));
 				currRoom.setMaintained(rs.getBoolean("isMaintained"));
 				for (RoomPattern currPattern : patterns) {
 					if (currPattern.getId() == patternId) {
@@ -134,6 +130,52 @@ public class MysqlAdminDAO implements AdminDAO {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return roomList;
+	}
+
+	@Override
+	public List<User> getUsers() {
+		List<User> userList = new ArrayList<User>();
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_USER_LIST);
+			System.out.println(pst);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()){
+				User currUser = new User();
+				currUser.setId(rs.getInt("id"));
+				currUser.setEmail(rs.getString("email"));
+				currUser.setFullName(rs.getString("fullName"));
+				currUser.setPhoneNumber(rs.getString("PhoneNumber"));
+				currUser.setRole(rs.getString("role"));
+				userList.add(currUser);
+			}
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return userList;
+	}
+
+	@Override
+	public int deleteRoom() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addRoom(Room room) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addPattern(RoomPattern pattern) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

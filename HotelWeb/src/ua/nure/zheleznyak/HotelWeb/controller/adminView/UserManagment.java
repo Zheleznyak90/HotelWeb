@@ -10,8 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
+import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
  * Servlet implementation class UserManagment
@@ -45,6 +44,8 @@ public class UserManagment extends HttpServlet {
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 	
-		request.getRequestDispatcher("/view/pages/userManagment.jsp").forward(request, response);
+		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
+		request.setAttribute("users", users);
+		request.getRequestDispatcher("/view/pages/usrManagment.jsp").forward(request, response);
 	}
 }
