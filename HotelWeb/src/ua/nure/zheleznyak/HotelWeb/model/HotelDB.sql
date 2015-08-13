@@ -37,7 +37,7 @@ CREATE TABLE room_pattern(
 	id INT NOT NULL AUTO_INCREMENT,
 	class_id INT NOT NULL,
 	size INT NOT NULL,
-	price INT ,
+	price DECIMAL ,
 	description TEXT,
 	photoSetPath VARCHAR(500),
 	rating DECIMAL DEFAULT 0,
@@ -68,7 +68,7 @@ CREATE TABLE order_status(
 CREATE TABLE meal(
 	id INT NOT NULL AUTO_INCREMENT,
 	meal VARCHAR(50) NOT NULL,
-	price INT NOT NULL,
+	price DECIMAL NOT NULL,
 	description TEXT,
 	isActive BOOLEAN NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (id),

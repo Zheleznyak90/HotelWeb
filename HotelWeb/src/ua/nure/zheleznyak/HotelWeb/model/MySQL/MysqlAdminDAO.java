@@ -10,6 +10,7 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.AdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
@@ -26,30 +27,6 @@ public class MysqlAdminDAO implements AdminDAO {
 			singleton = new MysqlAdminDAO();
 		}
 		return singleton;
-	}
-
-	@Override
-	public boolean deleteUser(String login) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean addUser(String email, String pass, String fullName) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean promoteManager(String email) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean demoteManager(String email) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override
@@ -77,25 +54,6 @@ public class MysqlAdminDAO implements AdminDAO {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return patternList;
-	}
-
-	@Override
-	public int deletePattern(int id) {
-		Connection con = null;
-		int resCode = 0;
-		try {
-			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.DELETE_ROOM_PATTERN);
-			pst.setInt(1, id);
-			pst.execute();
-		} catch (SQLException e) {
-			e.printStackTrace();
-			resCode = 301;
-		} finally {
-			MySQLConnection.getSingleton().closeConnection(con);
-		}
-		return resCode;
 	}
 
 	@Override
@@ -161,19 +119,75 @@ public class MysqlAdminDAO implements AdminDAO {
 	}
 
 	@Override
-	public int deleteRoom() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
 	public int addRoom(Room room) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
+
 	@Override
-	public int addPattern(RoomPattern pattern) {
+	public List<Meal> getMealsList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int addMeal(Meal meal) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int changeFieldValue(String table, String field, int id, Object value) {
+		Connection con = null;
+		int resCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.CHANGE_FIELD_P1+table+SQLPatterns.CHANGE_FIELD_P2+field+SQLPatterns.CHANGE_FIELD_P3);
+			//Create statement UPDATE tableName SET fieldName=? WHERE id=?
+			pst.setInt(1, id);
+			pst.setString(2, value.toString());
+			pst.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			resCode = 301;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return resCode;
+	}
+
+	@Override
+	public int deleteField(String table, int id) {
+		Connection con = null;
+		int resCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.DELETE_ROW_P1+table+SQLPatterns.DELETE_ROW_P2);
+			//Create statement DELETE FROM tableName WHERE id = ?
+			
+			pst.setInt(1, id);
+			System.out.println(pst);
+			pst.execute();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			resCode = 301;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return resCode;
+	}
+
+	@Override
+	public int addRoomPattern(RoomPattern pattern) {
 		// TODO Auto-generated method stub
 		return 0;
 	}

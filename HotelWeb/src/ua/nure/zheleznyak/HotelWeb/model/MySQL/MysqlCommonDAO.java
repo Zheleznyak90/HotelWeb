@@ -36,23 +36,15 @@ public class MysqlCommonDAO implements CommonDAO {
 			PreparedStatement pst = connection.prepareStatement(SQLPatterns.VERIFY_USER);
 			pst.setString(1, email);
 			pst.setString(2, password);
-			//System.out.println(pst);
 			ResultSet rs = pst.executeQuery();
 			if(!rs.next()){
 				//Not valid login+pass
 			}
 			else{
 				currUser = new User();
-				//System.out.println(rs.getString("email"));
 				currUser.setEmail(rs.getString("email"));
-				
-				//System.out.println(rs.getString("password"));
 				currUser.setPassword(rs.getString("password"));
-				
-				//System.out.println(rs.getString("fullName"));
 				currUser.setFullName(rs.getString("fullName"));
-				
-				//System.out.println(rs.getString("role"));
 				currUser.setRole(rs.getString("role"));
 			}
 			
@@ -115,44 +107,5 @@ public class MysqlCommonDAO implements CommonDAO {
 		return roomList;
 	}
 
-/*	@Override
-	public User getUSerByLogin(String login) {
-		User currUser = null;
-		Connection connection = null;
-		try {
-			connection = getConnection();
-			PreparedStatement pst = connection.prepareStatement(SQL_GET_USER_BY_LOGIN);
-			pst.setString(1, login);
-			//System.out.println(pst);
-			ResultSet rs = pst.executeQuery();
-			if(!rs.next()){
-				//Not valid login
-			}
-			else{
-				currUser = new User();
-				//System.out.println(rs.getString("email"));
-				currUser.setEmail(rs.getString("email"));
-				
-				//System.out.println(rs.getString("login"));
-				currUser.setLogin(rs.getString("login"));
-				
-				//System.out.println(rs.getString("password"));
-				currUser.setPassword(rs.getString("password"));
-				
-				//System.out.println(rs.getString("fullName"));
-				currUser.setFullName(rs.getString("fullName"));
-				
-				//System.out.println(rs.getString("role"));
-				currUser.setRole(rs.getString("role"));
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		finally{
-			closeConnection(connection);
-		}
-		return currUser;
-	}
 
-*/}
+}

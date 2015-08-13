@@ -23,17 +23,17 @@
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
 					class="btnImg" alt="editBtn" id="editBtn_${user.id}"
-					onClick="editPattern('${pageContext.request.contextPath}',this)"></td>
+					onClick="editRow('${pageContext.request.contextPath}','userT',this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
 					class="btnImg" alt="deleteBtn" id="deleteBtn_${user.id}"
-					onClick="deletePattern('${pageContext.request.contextPath}',this)"></td>
+					onClick="deleteRow('${pageContext.request.contextPath}','userT', this)"></td>
 			</tr>
 
 		</c:forEach>
 	</table>
 </div>
-<script src="<c:url value="/view/js/patternListScripts.js" />"
+<script src="<c:url value="/view/js/dbAdministrationScripts.js" />"
 	type="text/javascript"></script>
 <link href="<c:url value="/jslib/jquery-ui.css" />" rel="stylesheet"
 	type="text/css" />

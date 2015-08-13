@@ -9,13 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class PatternDelete
+ * Servlet implementation class RowDelete
  */
-@WebServlet("/admin/PatternDelete")
-public class PatternDelete extends HttpServlet {
+@WebServlet("/admin/RowDelete")
+public class RowDelete extends HttpServlet {
 
 
 	/**
@@ -41,7 +40,8 @@ public class PatternDelete extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		
 		int deleteId = Integer.parseInt(request.getParameter("id"));
-		int code = MysqlAdminDAO.getSingleton().deletePattern(deleteId);
+		String table = request.getParameter("table");
+		int code = MysqlAdminDAO.getSingleton().deleteField(table, deleteId);
 		response.setContentType("text/plain");
 		response.getWriter().print(code);
 	}

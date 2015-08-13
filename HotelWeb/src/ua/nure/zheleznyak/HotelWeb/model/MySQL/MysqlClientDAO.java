@@ -52,15 +52,13 @@ public class MysqlClientDAO implements ClientDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			classes = new ArrayList<String>();
-			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery(SQLPatterns.GET_ROOM_CLASSES);
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOM_CLASSES);
 			while (rs.next()) {
 				classes.add(rs.getString("class"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally {
-			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return classes;
 	}
