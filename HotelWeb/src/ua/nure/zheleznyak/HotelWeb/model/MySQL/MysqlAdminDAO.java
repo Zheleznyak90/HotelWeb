@@ -10,6 +10,7 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.AdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
@@ -38,15 +39,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERN_LIST);
 			while (rs.next()) {
-				RoomPattern currPattern = new RoomPattern();
-				currPattern.setId(rs.getInt("id"));
-				currPattern.setRoomClass(rs.getString("class"));
-				currPattern.setPrice(rs.getInt("price"));
-				currPattern.setSize(rs.getInt("size"));
-				currPattern.setDescription(rs.getString("description"));
-				currPattern.setPhotoSetPath(rs.getString("photoSetPath"));
-				currPattern.setRating(rs.getFloat("rating"));
-				patternList.add(currPattern);
+				patternList.add(FillBean.getSingleton().generateRoomPattern(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -62,25 +55,10 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-
-			List<RoomPattern> patterns = getPatternList();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOM_LIST);
 			while (rs.next()) {
-				Room currRoom = new Room();
-				currRoom.setId(rs.getInt("id"));
-				int patternId = rs.getInt("room_pattern");
-
-				currRoom.setFloor(rs.getInt("floor"));
-				currRoom.setNumber(rs.getInt("number"));
-				currRoom.setMaintained(rs.getBoolean("isMaintained"));
-				for (RoomPattern currPattern : patterns) {
-					if (currPattern.getId() == patternId) {
-						currRoom.setPattern(currPattern);
-						break;
-					}
-				}
-				roomList.add(currRoom);
+				roomList.add(FillBean.getSingleton().generateRoom(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -96,19 +74,12 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_USER_LIST);
-			System.out.println(pst);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_USER_LIST);
 			ResultSet rs = pst.executeQuery();
-			while(rs.next()){
-				User currUser = new User();
-				currUser.setId(rs.getInt("id"));
-				currUser.setEmail(rs.getString("email"));
-				currUser.setFullName(rs.getString("fullName"));
-				currUser.setPhoneNumber(rs.getString("PhoneNumber"));
-				currUser.setRole(rs.getString("role"));
-				userList.add(currUser);
+			while (rs.next()) {
+				userList.add(FillBean.getSingleton().generateUser(rs));
 			}
-			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -119,28 +90,25 @@ public class MysqlAdminDAO implements AdminDAO {
 	}
 
 	@Override
-	public int addRoom(Room room) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+	public List<Meal> getMealList() {
+		List<Meal> mealList = new ArrayList<Meal>();
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_MEAL_LIST);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				mealList.add(FillBean.getSingleton().generateMeal(rs));
+			}
 
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return mealList;
 
-	@Override
-	public List<Meal> getMealsList() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public int addMeal(Meal meal) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public int addUser(User user) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 	@Override
@@ -150,8 +118,10 @@ public class MysqlAdminDAO implements AdminDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.CHANGE_FIELD_P1+table+SQLPatterns.CHANGE_FIELD_P2+field+SQLPatterns.CHANGE_FIELD_P3);
-			//Create statement UPDATE tableName SET fieldName=? WHERE id=?
+					.prepareStatement(SQLPatterns.CHANGE_FIELD_P1 + table
+							+ SQLPatterns.CHANGE_FIELD_P2 + field
+							+ SQLPatterns.CHANGE_FIELD_P3);
+			// Create statement UPDATE tableName SET fieldName=? WHERE id=?
 			pst.setInt(1, id);
 			pst.setString(2, value.toString());
 			pst.execute();
@@ -171,11 +141,11 @@ public class MysqlAdminDAO implements AdminDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.DELETE_ROW_P1+table+SQLPatterns.DELETE_ROW_P2);
-			//Create statement DELETE FROM tableName WHERE id = ?
-			
+					.prepareStatement(SQLPatterns.DELETE_ROW_P1 + table
+							+ SQLPatterns.DELETE_ROW_P2);
+			// Create statement DELETE FROM tableName WHERE id = ?
+
 			pst.setInt(1, id);
-			System.out.println(pst);
 			pst.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -192,4 +162,97 @@ public class MysqlAdminDAO implements AdminDAO {
 		return 0;
 	}
 
+	@Override
+	public int addMeal(Meal meal) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addUser(User user) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int addRoom(Room room) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public User getUserById(String id) {
+		User currUser = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_USER_BY_ID);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currUser = FillBean.getSingleton().generateUser(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currUser;
+	}
+
+	@Override
+	public Room getRoomById(String id) {
+		Room currRoom = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ROOM_BY_ID);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currRoom = FillBean.getSingleton().generateRoom(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currRoom;
+	}
+
+	@Override
+	public RoomPattern getPatternById(String id) {
+		RoomPattern currRoomPattern = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_PATTERN_BY_ID);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currRoomPattern = FillBean.getSingleton().generateRoomPattern(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currRoomPattern;
+	}
+
+	@Override
+	public Meal getMealById(String id) {
+		Meal currMeal = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_MEAL_BY_ID);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currMeal = FillBean.getSingleton().generateMeal(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currMeal;
+	}
 }

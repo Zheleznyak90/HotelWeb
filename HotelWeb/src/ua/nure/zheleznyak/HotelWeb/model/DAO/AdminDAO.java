@@ -11,15 +11,19 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 public interface AdminDAO {
 	
 	public List<User> getUsers();
+	public User getUserById(String id);
 	public int addUser(User user);
 	
 	public List<Room> getRoomList();
+	public Room getRoomById(String id);
 	public int addRoom(Room room);
 			
 	public List<RoomPattern> getPatternList();
+	public RoomPattern getPatternById(String id);
 	public int addRoomPattern(RoomPattern pattern);
 	
-	public List<Meal> getMealsList();
+	public List<Meal> getMealList();
+	public Meal getMealById(String id);
 	public int addMeal(Meal meal);
 	
 	public int changeFieldValue(String table, String field, int id, Object value);

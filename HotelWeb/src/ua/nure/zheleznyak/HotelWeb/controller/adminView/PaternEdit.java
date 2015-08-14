@@ -10,23 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.User;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class UserManagment
+ * Servlet implementation class PaternEdit
  */
-@WebServlet("/admin/UserManagment")
-public class UserManagment extends HttpServlet {
-	
+@WebServlet("/admin/PaternEdit")
+public class PaternEdit extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4987682219979014131L;
+	private static final long serialVersionUID = -8017576581778428687L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
@@ -43,9 +39,13 @@ public class UserManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-	
-		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
-		request.setAttribute("users", users);
-		request.getRequestDispatcher("/view/pages/admin/usrManagment.jsp").forward(request, response);
+		String id = request.getParameter("id");
+		RoomPattern currPattern = MysqlAdminDAO.getSingleton().getPatternById(id);
+		List<String> classes = MysqlClientDAO.getSingleton().getRoomClasses();
+		request.setAttribute("pattern", currPattern);
+		request.setAttribute("classes", classes);
+		request.getRequestDispatcher("/view/pages/admin/patternEdit.jsp").forward(request, response);
 	}
+
+
 }

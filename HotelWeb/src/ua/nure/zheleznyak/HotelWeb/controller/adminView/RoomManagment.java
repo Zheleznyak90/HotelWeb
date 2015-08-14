@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
@@ -51,6 +50,6 @@ public class RoomManagment extends HttpServlet {
 		
 		request.setAttribute("rooms", rooms);
 		request.setAttribute("patterns", patterns);
-		request.getRequestDispatcher("/view/pages/roomManagment.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/pages/admin/roomManagment.jsp").forward(request, response);
 	}
 }

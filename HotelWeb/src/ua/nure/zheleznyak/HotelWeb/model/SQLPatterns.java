@@ -1,7 +1,7 @@
 package ua.nure.zheleznyak.HotelWeb.model;
 
 public class SQLPatterns {
-	//Common sql requests
+	// Common sql requests
 	public static final String VERIFY_USER = "SELECT email, password, fullName, role "
 			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
@@ -9,29 +9,34 @@ public class SQLPatterns {
 	public static final String GET_ROOMS_MPAGE = "SELECT class, size, price, description, photoSetPath "
 			+ "FROM room_pattern rp, room_class rc "
 			+ "WHERE rp.class_id = rc.id AND rp.id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern HAVING COUNT(*)>0)";
-	
-	//Administrator sql requests
+
+	// Administrator sql requests
 	public static final String GET_USER_LIST = "SELECT u.id AS id, role, email, fullName, phoneNumber "
 			+ "FROM UserT u, Role r WHERE r.id=u.role_id";
-	
+	public static final String GET_USER_BY_ID = "SELECT * FROM userT WHERE id =?";
+
 	public static final String GET_PATTERN_LIST = "SELECT room_pattern.id, class, size, price, description, photoSetPath, rating "
 			+ "FROM room_pattern, room_class "
 			+ "WHERE room_pattern.class_id = room_class.id";
+	public static final String GET_PATTERN_BY_ID = "SELECT * FROM room_pattern WHERE id =?";
 	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, size, price) VALUES (? ,? ,?)";
-	
+
+	public static final String GET_MEAL_LIST = "SELECT * FROM meal";
+	public static final String GET_MEAL_BY_ID = "SELECT * FROM meal WHERE id =?";
+	public static final String ADD_MEAL = "INSERT INTO meal(meal, price) VALUES (?, ?)";
+
 	public static final String GET_ROOM_LIST = "SELECT * FROM room";
+	public static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE id =?";
 	public static final String ADD_ROOM = "INSERT INTO room(room_pattern, status_id, number, floor) VALUES(?, ?, ?, ?)";
-	
+
 	public static final String CHANGE_FIELD_P1 = "UPDATE ";
 	public static final String CHANGE_FIELD_P2 = " SET ";
 	public static final String CHANGE_FIELD_P3 = " = ? WHERE id=?";
-	
+
 	public static final String DELETE_ROW_P1 = "DELETE FROM ";
 	public static final String DELETE_ROW_P2 = " WHERE id = ?";
-	
-	public static final String ADD_MEAL = "INSERT INTO meal(meal, price) VALUES (?, ?)";
-	
-	//Manager sql requests
+
+	// Manager sql requests
 	public static final String OFFER_ROOM = "INSERT INTO orderT "
 			+ "(room_id, client_id, manager_id, order_status, meal, created, checkIn_date, checkOut_date)"
 			+ " VALUES (?, ?, ?, (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
@@ -39,18 +44,17 @@ public class SQLPatterns {
 	public static final String GET_ALL_UNSERVED_REQUESTS = "SELECT number_of_person, checkIn_date, checkOut_date FROM request WHERE isServed=0 ORDER BY created DESC";
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
-	
-	//Client sql requests
+
+	// Client sql requests
 	public static final String CREATE_PERIOD = "INSERT INTO booking_period(checkIn_date, checkOut_date) "
 			+ "VALUES (?,?)";
-	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class"; 
+	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class";
 	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, number_of_person, booking_period, created) "
 			+ "VALUES((SELECT id FROM userT WHERE email = ?),?,?,?)";
 	public static final String BOOK_ROOM = "INSERT";
 	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
 	public static final String CANCEL_BOOKING = "UPDATE";
-	
-	//public static final String VERIFY_USER = "";
-	
-	
+
+	// public static final String VERIFY_USER = "";
+
 }

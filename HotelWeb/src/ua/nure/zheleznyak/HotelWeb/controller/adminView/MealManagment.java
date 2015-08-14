@@ -10,31 +10,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.User;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
- * Servlet implementation class UserManagment
+ * Servlet implementation class MealManagment
  */
-@WebServlet("/admin/UserManagment")
-public class UserManagment extends HttpServlet {
+@WebServlet("/admin/MealManagment")
+public class MealManagment extends HttpServlet {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 4987682219979014131L;
+	private static final long serialVersionUID = -7287010345355170954L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -43,9 +40,9 @@ public class UserManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-	
-		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
-		request.setAttribute("users", users);
-		request.getRequestDispatcher("/view/pages/admin/usrManagment.jsp").forward(request, response);
+		List<Meal> meals = MysqlAdminDAO.getSingleton().getMealList();
+		request.setAttribute("meals", meals);
+		request.getRequestDispatcher("/view/pages/admin/mealManagment.jsp").forward(request, response);
 	}
+
 }

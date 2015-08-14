@@ -12,7 +12,9 @@ public class Meal implements Serializable {
 	private int id;
 
 	private String meal;
-	private boolean isActive;
+	private double price;
+	private String description;
+	private boolean active;
 
 	public int getId() {
 		return id;
@@ -31,11 +33,27 @@ public class Meal implements Serializable {
 	}
 
 	public boolean isActive() {
-		return isActive;
+		return active;
 	}
 
 	public void setActive(boolean isActive) {
-		this.isActive = isActive;
+		this.active = isActive;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

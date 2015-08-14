@@ -48,6 +48,6 @@ public class PatternManagment extends HttpServlet {
 		List<String> classes = MysqlClientDAO.getSingleton().getRoomClasses();
 		request.setAttribute("patterns", patterns);
 		request.setAttribute("classes", classes);
-		request.getRequestDispatcher("/view/pages/patternManagment.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/pages/admin/patternManagment.jsp").forward(request, response);
 	}
 }
