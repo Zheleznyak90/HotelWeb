@@ -12,7 +12,7 @@ import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.CommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
-import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Role;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
@@ -47,7 +47,7 @@ public class MysqlCommonDAO implements CommonDAO {
 				currUser.setEmail(rs.getString("email"));
 				currUser.setPassword(rs.getString("password"));
 				currUser.setFullName(rs.getString("fullName"));
-				currUser.setRole(rs.getString("role"));
+				currUser.setUserRole(getRoleById(rs.getInt("role_id")));
 			}
 
 		} catch (SQLException e) {
@@ -146,6 +146,50 @@ public class MysqlCommonDAO implements CommonDAO {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return currApartmentClass;
+	}
+	
+	@Override
+	public List<Role> getRoles() {
+		List<Role> roles = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			roles = new ArrayList<Role>();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_ROLES);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				roles.add(FillBean.getSingleton()
+						.generateRole(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return roles;
+		
+	}
+
+	@Override
+	public Role getRoleById(int id) {
+		Role currRole = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_ROLE_BY_ID);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currRole = FillBean.getSingleton()
+					.generateRole(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currRole;
 	}
 
 }

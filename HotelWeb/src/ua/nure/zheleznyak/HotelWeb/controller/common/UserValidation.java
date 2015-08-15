@@ -50,19 +50,19 @@ public class UserValidation extends HttpServlet {
 					response);
 
 		} else {
-			String userRole = currUser.getRole();
+			String userRole = currUser.getUserRole().getRole();
 
 			switch (userRole) {
 			case "client":
 				HttpSession userSession = request.getSession();
 				userSession.setAttribute("User", currUser);
-				response.sendRedirect("ClientMain");
+				response.sendRedirect("m");
 
 				break;
 			case "manager":
 				HttpSession managerSession = request.getSession();
 				managerSession.setAttribute("User", currUser);
-				response.sendRedirect("Manager/ManagerMain");
+				response.sendRedirect("m");
 				break;
 				
 			case "admin":

@@ -66,7 +66,7 @@ public class FillBean {
 			currUser.setEmail(rs.getString("email"));
 			currUser.setFullName(rs.getString("fullName"));
 			currUser.setPhoneNumber(rs.getString("PhoneNumber"));
-			currUser.setRole(rs.getString("role"));
+			currUser.setUserRole(MysqlCommonDAO.getSingleton().getRoleById(rs.getInt("role_id")));
 
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -12,7 +12,8 @@ public class User implements Serializable {
 	private String password;
 	private String email;
 	private String fullName;
-	private String role;
+	
+	private Role userRole;
 	private String phoneNumber;
 
 	public int getId() {
@@ -29,14 +30,6 @@ public class User implements Serializable {
 
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
 	}
 
 	public String getPassword() {
@@ -62,5 +55,15 @@ public class User implements Serializable {
 	public void setFullName(String fullName) {
 		this.fullName = fullName;
 	}
+
+	public Role getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(Role userRole) {
+		this.userRole = userRole;
+	}
+	
+	
 
 }

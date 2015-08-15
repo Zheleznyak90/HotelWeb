@@ -40,7 +40,7 @@ public class IsAdmin implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		User currUser = (User) ((HttpServletRequest) request).getSession().getAttribute("User");
-		if ( currUser == null || !currUser.getRole().equals("admin")) {
+		if ( currUser == null || !currUser.getUserRole().getRole().equals("admin")) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse) response).sendRedirect(contextPath+"/authorization");
 		} else {

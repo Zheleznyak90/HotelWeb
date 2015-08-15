@@ -2,8 +2,8 @@ package ua.nure.zheleznyak.HotelWeb.model;
 
 public class SQLPatterns {
 	// Common sql requests
-	public static final String VERIFY_USER = "SELECT email, password, fullName, role "
-			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
+	public static final String VERIFY_USER = "SELECT email, password, fullName, role_id "
+			+ "FROM userT WHERE email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
 	public static final String GET_ROOMS_MPAGE = "SELECT class_id, size, price, description, photoSetPath "
@@ -12,12 +12,12 @@ public class SQLPatterns {
 	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
 	public static final String GET_APPARTMENT_CLASS_BY_ID = "SELECT * FROM room_class WHERE id = ?";
 	
-	// Administrator sql requests
 	public static final String GET_ROLES = "SELECT * FROM role";
 	public static final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE id = ?";
 	
-	public static final String GET_USER_LIST = "SELECT u.id AS id, role, email, fullName, phoneNumber "
-			+ "FROM UserT u, Role r WHERE r.id=u.role_id";
+	// Administrator sql requests
+	
+	public static final String GET_USER_LIST = "SELECT id, role_id, email, fullName, phoneNumber FROM UserT ";
 	public static final String GET_USER_BY_ID = "SELECT * FROM userT WHERE id =?";
 
 	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, photoSetPath, rating "
