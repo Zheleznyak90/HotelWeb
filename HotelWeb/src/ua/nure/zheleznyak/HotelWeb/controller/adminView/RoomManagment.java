@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
-import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
  * Servlet implementation class RoomManagment

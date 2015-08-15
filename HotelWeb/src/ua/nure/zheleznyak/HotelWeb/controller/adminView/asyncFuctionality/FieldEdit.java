@@ -31,6 +31,8 @@ public class FieldEdit extends HttpServlet {
 		Object value = request.getParameter("value");
 		
 		int code = MysqlAdminDAO.getSingleton().changeFieldValue(table, field, id, value);
+		response.setContentType("text/plain");
+		response.getWriter().print(code);
 		
 	}
 

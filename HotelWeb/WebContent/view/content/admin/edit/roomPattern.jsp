@@ -9,7 +9,6 @@
 		</c:forEach>
 		</select>
 		
-		<%-- <input type="text" value="${pattern.pattern}" class="changeable" id="pattern_pattern_${pattern.id}"> --%>
 		<br> Price <br> <input type="text" value="${pattern.price}" class="changeable" id="price">
 		<br> Size <br> <input type="number" value="${pattern.size}" class="changeable" id="size">
 		<br> Description <br> <input type="text" value="${pattern.description}" class="changeable" id="description">
