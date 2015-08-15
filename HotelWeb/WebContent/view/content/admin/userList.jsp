@@ -5,8 +5,9 @@
 	<table border="1">
 		<tr>
 			<td>Id</td>
-			<td>Role</td>
 			<td>Email</td>
+			<td>Role</td>
+			
 			<td>Full name</td>
 			<td>Phone number</td>
 			<td>Edit</td>
@@ -16,14 +17,14 @@
 		<c:forEach var="user" items="${users}">
 			<tr>
 				<td>${user.id}</td>
-				<td>${user.userRole.role}</td>
 				<td>${user.email}</td>
+				<td>${user.userRole.role}</td>
 				<td>${user.fullName}</td>
 				<td>${user.phoneNumber}</td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
 					class="btnImg" alt="editBtn" id="editBtn_${user.id}"
-					onClick="editRow('${pageContext.request.contextPath}','userT',this)"></td>
+					onClick="editRow('${pageContext.request.contextPath}','UserEdit',this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
 					class="btnImg" alt="deleteBtn" id="deleteBtn_${user.id}"

@@ -1,6 +1,7 @@
 package ua.nure.zheleznyak.HotelWeb.controller.adminView;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Role;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
@@ -39,9 +42,9 @@ public class UserEdit extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		User currUser = MysqlAdminDAO.getSingleton().getUserById(id);
-		// TODO List<String> roles = MysqlAdminDAO.getSingleton().getRoleList();
+		List<Role> roles = MysqlCommonDAO.getSingleton().getRoles();
 		request.setAttribute("user", currUser);
-		//request.setAttribute("roles", roles);
+		request.setAttribute("roles", roles);
 		request.getRequestDispatcher("/view/pages/admin/userEdit.jsp").forward(request, response);
 	}
 

@@ -1,9 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="rightPanel">
-<div id="errorMsg">
-123
-</div>
+	<div id="errorMsg"></div>
 	<table border="1">
 		<tr>
 			<td>Id</td>
@@ -11,7 +9,7 @@
 			<td>Price</td>
 			<td>Size</td>
 			<td>Description</td>
-			<td>PhotoSetPath</td>
+			<td>Name</td>
 			<td>Rating</td>
 			<td>Edit</td>
 			<td>Delete</td>
@@ -24,7 +22,7 @@
 				<td>${pattern.price}</td>
 				<td>${pattern.size}</td>
 				<td>${pattern.description}</td>
-				<td>${pattern.photoSetPath}</td>
+				<td>${pattern.name}</td>
 				<td>${pattern.rating}</td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
