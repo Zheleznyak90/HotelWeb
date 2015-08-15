@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
@@ -41,7 +43,7 @@ public class PatternEdit extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		RoomPattern currPattern = MysqlAdminDAO.getSingleton().getPatternById(id);
-		List<String> classes = MysqlClientDAO.getSingleton().getRoomClasses();
+		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
 		request.setAttribute("pattern", currPattern);
 		request.setAttribute("classes", classes);
 		request.getRequestDispatcher("/view/pages/admin/patternEdit.jsp").forward(request, response);
