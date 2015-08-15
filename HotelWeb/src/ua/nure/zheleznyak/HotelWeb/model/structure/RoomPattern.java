@@ -7,7 +7,8 @@ public class RoomPattern implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private int id;
-	private String roomClass;
+	private ApartmentClass aClass;
+	
 	private int price;
 	private int size;
 	private String description;
@@ -22,13 +23,13 @@ public class RoomPattern implements Serializable {
 	public void setId(int id) {
 		this.id = id;
 	}
-
-	public String getRoomClass() {
-		return roomClass;
+	
+	public ApartmentClass getaClass() {
+		return aClass;
 	}
 
-	public void setRoomClass(String roomClass) {
-		this.roomClass = roomClass;
+	public void setaClass(ApartmentClass aClass) {
+		this.aClass = aClass;
 	}
 
 	public int getPrice() {

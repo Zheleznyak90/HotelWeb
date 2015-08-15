@@ -25,7 +25,7 @@
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
 					class="btnImg" alt="editBtn" id="editBtn_${meal.id}"
-					onClick="editRow('${pageContext.request.contextPath}', 'meal', this)"></td>
+					onClick="editRow('${pageContext.request.contextPath}', 'MealEdit', this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
 					class="btnImg" alt="deleteBtn" id="deleteBtn_${meal.id}"

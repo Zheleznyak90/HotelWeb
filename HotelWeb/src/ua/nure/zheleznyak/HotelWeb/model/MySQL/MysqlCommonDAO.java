@@ -10,48 +10,49 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.CommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
+import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlCommonDAO implements CommonDAO {
-	
+
 	private static MysqlCommonDAO singleton;
-	
-	private MysqlCommonDAO(){
+
+	private MysqlCommonDAO() {
 	}
-	
-	public static MysqlCommonDAO getSingleton(){
-		if(singleton == null){
+
+	public static MysqlCommonDAO getSingleton() {
+		if (singleton == null) {
 			singleton = new MysqlCommonDAO();
 		}
 		return singleton;
 	}
-	
+
 	public User validateUser(String email, String password) {
 		User currUser = null;
 		Connection connection = null;
 		try {
-			
 			connection = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = connection.prepareStatement(SQLPatterns.VERIFY_USER);
+			PreparedStatement pst = connection
+					.prepareStatement(SQLPatterns.VERIFY_USER);
 			pst.setString(1, email);
 			pst.setString(2, password);
 			ResultSet rs = pst.executeQuery();
-			if(!rs.next()){
-				//Not valid login+pass
-			}
-			else{
+			if (!rs.next()) {
+				// Not valid login+pass
+			} else {
 				currUser = new User();
 				currUser.setEmail(rs.getString("email"));
 				currUser.setPassword(rs.getString("password"));
 				currUser.setFullName(rs.getString("fullName"));
 				currUser.setRole(rs.getString("role"));
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			MySQLConnection.getSingleton().closeConnection(connection);
 		}
 		return currUser;
@@ -61,22 +62,21 @@ public class MysqlCommonDAO implements CommonDAO {
 	public boolean registrateUser(User user) {
 		Connection con = null;
 		boolean isRegistered = false;
-		try{
+		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.REGISTRATE_USER);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.REGISTRATE_USER);
 			pst.setString(1, user.getEmail());
 			pst.setString(2, user.getPassword());
 			pst.setString(3, user.getFullName());
 			pst.setString(4, user.getPhoneNumber());
 			isRegistered = pst.execute();
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
-		
+
 		return isRegistered;
 	}
 
@@ -84,28 +84,68 @@ public class MysqlCommonDAO implements CommonDAO {
 	public List<RoomPattern> getRoomList() {
 		List<RoomPattern> roomList = new ArrayList<RoomPattern>();
 		Connection con = null;
-		try{
+		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOMS_MPAGE);
-			while(rs.next()){
+			while (rs.next()) {
 				RoomPattern currPattern = new RoomPattern();
-				currPattern.setRoomClass(rs.getString("class"));
+				currPattern.setaClass(getApClassById(rs.getInt("class_id")));
 				currPattern.setPrice(rs.getInt("price"));
 				currPattern.setSize(rs.getInt("size"));
 				currPattern.setDescription(rs.getString("description"));
 				currPattern.setPhotoSetPath(rs.getString("photoSetPath"));
 				roomList.add(currPattern);
 			}
-		}
-		catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
-		}
-		finally{
+		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return roomList;
 	}
 
+	@Override
+	public List<ApartmentClass> getApClasses() {
+		List<ApartmentClass> apartmentClasses = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			apartmentClasses = new ArrayList<ApartmentClass>();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_APPARTMENT_CLASSES);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				apartmentClasses.add(FillBean.getSingleton()
+						.generateApartmentClass(rs));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return apartmentClasses;
+	}
+
+	@Override
+	public ApartmentClass getApClassById(int id) {
+		ApartmentClass currApartmentClass = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_APPARTMENT_CLASS_BY_ID);
+			pst.setInt(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			currApartmentClass = FillBean.getSingleton()
+					.generateApartmentClass(rs);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currApartmentClass;
+	}
 
 }

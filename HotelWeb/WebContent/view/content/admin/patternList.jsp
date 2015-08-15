@@ -20,7 +20,7 @@
 		<c:forEach var="pattern" items="${patterns}">
 			<tr>
 				<td>${pattern.id}</td>
-				<td>${pattern.roomClass}</td>
+				<td>${pattern.aClass.aClass}</td>
 				<td>${pattern.price}</td>
 				<td>${pattern.size}</td>
 				<td>${pattern.description}</td>
@@ -29,7 +29,7 @@
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
 					class="btnImg" alt="editBtn" id="editBtn_${pattern.id}"
-					onClick="editRow('${pageContext.request.contextPath}', 'room_pattern', this)"></td>
+					onClick="editRow('${pageContext.request.contextPath}', 'PatternEdit', this)"></td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/deleteBtn.png"
 					class="btnImg" alt="deleteBtn" id="deleteBtn_${pattern.id}"

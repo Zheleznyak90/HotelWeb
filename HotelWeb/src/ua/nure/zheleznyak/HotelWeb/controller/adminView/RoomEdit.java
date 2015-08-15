@@ -39,11 +39,11 @@ public class RoomEdit extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Room currRoom = MysqlAdminDAO.getSingleton().getRoomById(id);
-		//TODO List<String> patterns= MysqlAdminDAO.getSingleton().getPatternsName();
+		// TODO List<String> patterns=
+		// MysqlAdminDAO.getSingleton().getPatternsName();
 		request.setAttribute("room", currRoom);
-		//request.setAttribute("patterns", patterns);
-		request.getRequestDispatcher("/view/pages/admin/roomEdit.jsp").forward(request, response);
+		// request.setAttribute("patterns", patterns);
+		request.getRequestDispatcher("/view/pages/admin/roomEdit.jsp").forward(
+				request, response);
 	}
-
-
 }

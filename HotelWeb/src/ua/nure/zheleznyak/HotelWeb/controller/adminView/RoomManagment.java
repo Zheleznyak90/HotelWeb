@@ -45,11 +45,8 @@ public class RoomManagment extends HttpServlet {
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		
-		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
 		List<Room> rooms = MysqlAdminDAO.getSingleton().getRoomList();
-		
 		request.setAttribute("rooms", rooms);
-		request.setAttribute("patterns", patterns);
 		request.getRequestDispatcher("/view/pages/admin/roomManagment.jsp").forward(request, response);
 	}
 }

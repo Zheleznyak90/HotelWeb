@@ -14,10 +14,10 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class PaternEdit
+ * Servlet implementation class PatternEdit
  */
-@WebServlet("/admin/PaternEdit")
-public class PaternEdit extends HttpServlet {
+@WebServlet("/admin/PatternEdit")
+public class PatternEdit extends HttpServlet {
 	/**
 	 * 
 	 */

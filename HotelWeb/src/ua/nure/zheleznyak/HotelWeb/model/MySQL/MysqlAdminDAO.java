@@ -122,8 +122,8 @@ public class MysqlAdminDAO implements AdminDAO {
 							+ SQLPatterns.CHANGE_FIELD_P2 + field
 							+ SQLPatterns.CHANGE_FIELD_P3);
 			// Create statement UPDATE tableName SET fieldName=? WHERE id=?
-			pst.setInt(1, id);
-			pst.setString(2, value.toString());
+			pst.setInt(2, id);
+			pst.setObject(1, value);
 			pst.execute();
 		} catch (SQLException e) {
 			e.printStackTrace();

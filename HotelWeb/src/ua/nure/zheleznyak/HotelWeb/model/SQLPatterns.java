@@ -6,18 +6,22 @@ public class SQLPatterns {
 			+ "FROM userT u, role r WHERE u.role_id = r.id AND email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_ROOMS_MPAGE = "SELECT class, size, price, description, photoSetPath "
-			+ "FROM room_pattern rp, room_class rc "
-			+ "WHERE rp.class_id = rc.id AND rp.id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern HAVING COUNT(*)>0)";
+	public static final String GET_ROOMS_MPAGE = "SELECT class_id, size, price, description, photoSetPath "
+			+ "FROM room_pattern rp WHERE rp.id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern HAVING COUNT(*)>0)";
 
+	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
+	public static final String GET_APPARTMENT_CLASS_BY_ID = "SELECT * FROM room_class WHERE id = ?";
+	
 	// Administrator sql requests
+	public static final String GET_ROLES = "SELECT * FROM role";
+	public static final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE id = ?";
+	
 	public static final String GET_USER_LIST = "SELECT u.id AS id, role, email, fullName, phoneNumber "
 			+ "FROM UserT u, Role r WHERE r.id=u.role_id";
 	public static final String GET_USER_BY_ID = "SELECT * FROM userT WHERE id =?";
 
-	public static final String GET_PATTERN_LIST = "SELECT room_pattern.id, class, size, price, description, photoSetPath, rating "
-			+ "FROM room_pattern, room_class "
-			+ "WHERE room_pattern.class_id = room_class.id";
+	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, photoSetPath, rating "
+			+ "FROM room_pattern ";
 	public static final String GET_PATTERN_BY_ID = "SELECT * FROM room_pattern WHERE id =?";
 	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, size, price) VALUES (? ,? ,?)";
 

@@ -14,7 +14,7 @@
 				</div>
 				<div class="roomClass">
 					Class:
-					<c:out value="${room.roomClass }"></c:out>
+					<c:out value="${room.aClass.aClass }"></c:out>
 				</div>
 				<div class="size">
 					Number of person:

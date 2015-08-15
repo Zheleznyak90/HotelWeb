@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 
 public class FillBean {
 	private static FillBean singleton;
@@ -77,7 +78,8 @@ public class FillBean {
 		RoomPattern currPattern = new RoomPattern();
 		try {
 			currPattern.setId(rs.getInt("id"));
-			currPattern.setRoomClass(rs.getString("class"));
+			
+			currPattern.setaClass(MysqlCommonDAO.getSingleton().getApClassById(rs.getInt("class_id")));
 			currPattern.setPrice(rs.getInt("price"));
 			currPattern.setSize(rs.getInt("size"));
 			currPattern.setDescription(rs.getString("description"));
@@ -87,6 +89,28 @@ public class FillBean {
 			e.printStackTrace();
 		}
 		return currPattern;
+	}
+	
+	public ApartmentClass generateApartmentClass(ResultSet rs){
+		ApartmentClass aClass = new ApartmentClass();
+		try {
+			aClass.setId(rs.getInt("id"));
+			aClass.setaClass(rs.getString("class"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return aClass;
+	}
+	
+	public Role generateRole(ResultSet rs){
+		Role currRole = new Role();
+		try {
+			currRole.setId(rs.getInt("id"));
+			currRole.setRole(rs.getString("role"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return currRole;
 	}
 
 }

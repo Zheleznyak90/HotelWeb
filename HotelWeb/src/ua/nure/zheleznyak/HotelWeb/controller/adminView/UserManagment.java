@@ -43,7 +43,6 @@ public class UserManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-	
 		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
 		request.setAttribute("users", users);
 		request.getRequestDispatcher("/view/pages/admin/usrManagment.jsp").forward(request, response);
