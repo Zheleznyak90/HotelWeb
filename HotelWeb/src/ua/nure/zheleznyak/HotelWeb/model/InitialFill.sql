@@ -16,12 +16,11 @@ INSERT INTO room_class(class) VALUES
 ("middle"),
 ("lux");
 
-INSERT INTO room_pattern(class_id, size, price, photoSetPath) VALUES
+INSERT INTO room_pattern(class_id, size, price, name) VALUES
 ("1","7","15","poor1"),
 ("2","2","50","middle1"),
 ("2","3","70","middle2"),
-("3","2","200","lux1"),
-("3","2","1","lux1");
+("3","2","200","lux1");
 
 INSERT INTO room(room_pattern, number, floor) VALUES
 ("1","12","1"),

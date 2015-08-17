@@ -46,6 +46,7 @@ public class RoomManagment extends HttpServlet {
 		
 		List<Room> rooms = MysqlAdminDAO.getSingleton().getRoomList();
 		request.setAttribute("rooms", rooms);
-		request.getRequestDispatcher("/view/pages/admin/roomManagment.jsp").forward(request, response);
+		request.setAttribute("jspPage", "list/room");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

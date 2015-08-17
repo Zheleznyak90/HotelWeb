@@ -6,7 +6,7 @@ public class SQLPatterns {
 			+ "FROM userT WHERE email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_ROOMS_MPAGE = "SELECT class_id, size, price, description, photoSetPath "
+	public static final String GET_ROOMS_MPAGE = "SELECT class_id, size, price, description, name "
 			+ "FROM room_pattern rp WHERE rp.id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern HAVING COUNT(*)>0)";
 
 	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
@@ -20,7 +20,7 @@ public class SQLPatterns {
 	public static final String GET_USER_LIST = "SELECT id, role_id, email, fullName, phoneNumber FROM UserT ";
 	public static final String GET_USER_BY_ID = "SELECT * FROM userT WHERE id =?";
 
-	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, photoSetPath, rating "
+	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
 			+ "FROM room_pattern ";
 	public static final String GET_PATTERN_BY_ID = "SELECT * FROM room_pattern WHERE id =?";
 	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, size, price) VALUES (? ,? ,?)";

@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Role;
-import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class UserEdit
+ * Servlet implementation class UserAddInit
  */
-@WebServlet("/admin/UserEdit")
-public class UserEdit extends HttpServlet {
+@WebServlet("/admin/UserAddInit")
+public class UserAddInit extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6504882992447684664L;
+	private static final long serialVersionUID = 8901014480336204683L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -40,13 +38,10 @@ public class UserEdit extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		User currUser = MysqlAdminDAO.getSingleton().getUserById(id);
 		List<Role> roles = MysqlCommonDAO.getSingleton().getRoles();
-		request.setAttribute("user", currUser);
 		request.setAttribute("roles", roles);
-		request.setAttribute("jspPage", "edit/user");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/pages/admin/mealAdd.jsp").forward(request, response);
 	}
+
 
 }

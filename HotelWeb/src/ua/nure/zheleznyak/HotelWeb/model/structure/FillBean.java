@@ -83,7 +83,7 @@ public class FillBean {
 			currPattern.setPrice(rs.getInt("price"));
 			currPattern.setSize(rs.getInt("size"));
 			currPattern.setDescription(rs.getString("description"));
-			currPattern.setName(rs.getString("photoSetPath"));
+			currPattern.setName(rs.getString("name"));
 			currPattern.setRating(rs.getFloat("rating"));
 		} catch (SQLException e) {
 			e.printStackTrace();

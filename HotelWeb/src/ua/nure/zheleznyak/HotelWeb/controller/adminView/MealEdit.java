@@ -45,7 +45,8 @@ public class MealEdit extends HttpServlet {
 		String id = request.getParameter("id");
 		Meal currMeal = MysqlAdminDAO.getSingleton().getMealById(id);
 		request.setAttribute("meal", currMeal);
-		request.getRequestDispatcher("/view/pages/admin/mealEdit.jsp").forward(request, response);
+		request.setAttribute("jspPage", "edit/meal");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

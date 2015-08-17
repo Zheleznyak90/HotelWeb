@@ -35,15 +35,16 @@ CREATE TABLE room_class(
 
 CREATE TABLE room_pattern(
 	id INT NOT NULL AUTO_INCREMENT,
+	name VARCHAR(50) NOT NULL,
 	class_id INT NOT NULL,
 	size INT NOT NULL,
 	price DECIMAL ,
 	description TEXT,
-	photoSetPath VARCHAR(500),
 	rating DECIMAL DEFAULT 0,
 	PRIMARY KEY (id),
 	FOREIGN KEY (class_id) REFERENCES room_class(id) 
-	ON DELETE RESTRICT
+	ON DELETE RESTRICT,
+	UNIQUE(name)
 );
 
 CREATE TABLE room(

@@ -5,7 +5,7 @@
 	<div title="meal" id="${meal.id}">
 		<br> Meal <br> <input type="text" value="${meal.meal}" class="changeable" id="meal">
 		<br> Price <br> <input type="text" value="${meal.price}" class="changeable" id="price">
-		<br> Description <br> <input type="text" value="${meal.description}" class="changeable" id="description" >
+		<br> Description <br> <textarea cols="40" rows="5" class="changeable" id="description" >${meal.description}</textarea>
 		<br> Is Active
 		<br> <input type="checkbox" ${meal.active?'checked':'' } class="changeable" id="isActive">
 	</div>

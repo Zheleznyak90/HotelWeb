@@ -45,7 +45,8 @@ public class PatternEdit extends HttpServlet {
 		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
 		request.setAttribute("pattern", currPattern);
 		request.setAttribute("classes", classes);
-		request.getRequestDispatcher("/view/pages/admin/patternEdit.jsp").forward(request, response);
+		request.setAttribute("jspPage", "edit/pattern");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 

@@ -45,6 +45,7 @@ public class PatternManagment extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
 		request.setAttribute("patterns", patterns);
-		request.getRequestDispatcher("/view/pages/admin/patternManagment.jsp").forward(request, response);
+		request.setAttribute("jspPage", "list/pattern");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

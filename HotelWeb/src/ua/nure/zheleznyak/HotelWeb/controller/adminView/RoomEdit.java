@@ -45,7 +45,7 @@ public class RoomEdit extends HttpServlet {
 		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
 		request.setAttribute("room", currRoom);
 		request.setAttribute("patterns", patterns);
-		request.getRequestDispatcher("/view/pages/admin/roomEdit.jsp").forward(
-				request, response);
+		request.setAttribute("jspPage", "edit/room");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

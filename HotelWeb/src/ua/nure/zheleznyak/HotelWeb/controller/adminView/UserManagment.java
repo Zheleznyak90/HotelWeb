@@ -45,6 +45,7 @@ public class UserManagment extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
 		request.setAttribute("users", users);
-		request.getRequestDispatcher("/view/pages/admin/usrManagment.jsp").forward(request, response);
+		request.setAttribute("jspPage", "list/user");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

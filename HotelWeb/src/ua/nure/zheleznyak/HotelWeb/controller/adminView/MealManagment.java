@@ -42,7 +42,8 @@ public class MealManagment extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<Meal> meals = MysqlAdminDAO.getSingleton().getMealList();
 		request.setAttribute("meals", meals);
-		request.getRequestDispatcher("/view/pages/admin/mealManagment.jsp").forward(request, response);
+		request.setAttribute("jspPage", "list/meal");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

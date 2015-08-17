@@ -94,7 +94,7 @@ public class MysqlCommonDAO implements CommonDAO {
 				currPattern.setPrice(rs.getInt("price"));
 				currPattern.setSize(rs.getInt("size"));
 				currPattern.setDescription(rs.getString("description"));
-				currPattern.setName(rs.getString("photoSetPath"));
+				currPattern.setName(rs.getString("name"));
 				roomList.add(currPattern);
 			}
 		} catch (SQLException e) {
