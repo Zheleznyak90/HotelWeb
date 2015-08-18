@@ -31,6 +31,6 @@
   </servlet>
   <servlet-mapping>
     <servlet-name>MealAdd</servlet-name>
-    <url-pattern>/admin/mealAdd</url-pattern>
+    <url-pattern>/admin/mealAddInit</url-pattern>
   </servlet-mapping>
 </web-app>

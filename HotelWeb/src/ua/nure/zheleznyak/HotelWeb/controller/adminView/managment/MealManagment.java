@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.managment;
 
 import java.io.IOException;
 import java.util.List;

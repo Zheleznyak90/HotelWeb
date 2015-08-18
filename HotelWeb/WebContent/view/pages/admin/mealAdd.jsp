@@ -3,5 +3,5 @@
 
 <t:wrapper>
 	<jsp:include page="/view/content/admin/adminFunctions.jsp" />
-	<jsp:include page="/view/content/admin/add/mealAdd.jsp" />
+	<jsp:include page="/view/content/admin/add/meal.jsp" />
 </t:wrapper>

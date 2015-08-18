@@ -6,7 +6,7 @@
 		<table>
 			<tr>
 				<td>Meal Name:</td>
-				<td><input type="text" name="name" maxlength="50"> *</td>
+				<td><input type="text" class ="unique" name="name" maxlength="50"> *</td>
 			</tr>
 			<tr>
 				<td>Price:</td>
@@ -14,7 +14,7 @@
 			</tr>
 			<tr>
 				<td>Description:</td>
-				<td><textarea cols="40" rows="5" name="Description" maxlength="500"></textarea>
+				<td><textarea cols="40" rows="5" name="description" maxlength="500"></textarea>
 				</td>
 			</tr>
 			<tr>

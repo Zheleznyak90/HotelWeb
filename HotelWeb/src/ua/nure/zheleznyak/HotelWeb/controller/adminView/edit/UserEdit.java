@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.edit;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,23 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Role;
+import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class RoomManagment
+ * Servlet implementation class UserEdit
  */
-@WebServlet("/admin/RoomManagment")
-public class RoomManagment extends HttpServlet {
-	
+@WebServlet("/admin/UserEdit")
+public class UserEdit extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2967905392951717674L;
+	private static final long serialVersionUID = 6504882992447684664L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
@@ -43,10 +40,13 @@ public class RoomManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		
-		List<Room> rooms = MysqlAdminDAO.getSingleton().getRoomList();
-		request.setAttribute("rooms", rooms);
-		request.setAttribute("jspPage", "list/room");
+		String id = request.getParameter("id");
+		User currUser = MysqlAdminDAO.getSingleton().getUserById(id);
+		List<Role> roles = MysqlCommonDAO.getSingleton().getRoles();
+		request.setAttribute("user", currUser);
+		request.setAttribute("roles", roles);
+		request.setAttribute("jspPage", "edit/user");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
+
 }

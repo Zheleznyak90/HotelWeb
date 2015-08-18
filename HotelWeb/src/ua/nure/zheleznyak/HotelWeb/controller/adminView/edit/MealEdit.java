@@ -1,7 +1,6 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.edit;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,23 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
-import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
- * Servlet implementation class RoomEdit
+ * Servlet implementation class MealEdit
  */
-@WebServlet("/admin/RoomEdit")
-public class RoomEdit extends HttpServlet {
+@WebServlet("/admin/MealEdit")
+public class MealEdit extends HttpServlet {
+	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -860834026603067447L;
+	private static final long serialVersionUID = 2053104710996131208L;
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
@@ -40,12 +43,10 @@ public class RoomEdit extends HttpServlet {
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
-		Room currRoom = MysqlAdminDAO.getSingleton().getRoomById(id);
-		
-		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
-		request.setAttribute("room", currRoom);
-		request.setAttribute("patterns", patterns);
-		request.setAttribute("jspPage", "edit/room");
+		Meal currMeal = MysqlAdminDAO.getSingleton().getMealById(id);
+		request.setAttribute("meal", currMeal);
+		request.setAttribute("jspPage", "edit/meal");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
+
 }

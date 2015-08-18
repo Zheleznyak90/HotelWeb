@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.edit;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,13 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class RoomAdd
+ * Servlet implementation class PatternEdit
  */
-@WebServlet("/admin/RoomAdd")
-public class RoomAdd extends HttpServlet {
+@WebServlet("/admin/PatternEdit")
+public class PatternEdit extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8017576581778428687L;
+
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
@@ -33,9 +40,14 @@ public class RoomAdd extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
-		request.setAttribute("patterns", patterns);
-		request.getRequestDispatcher("/view/pages/admin/roomAdd.jsp").forward(request, response);
+		String id = request.getParameter("id");
+		RoomPattern currPattern = MysqlAdminDAO.getSingleton().getPatternById(id);
+		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
+		request.setAttribute("pattern", currPattern);
+		request.setAttribute("classes", classes);
+		request.setAttribute("jspPage", "edit/pattern");
+		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
+
 
 }

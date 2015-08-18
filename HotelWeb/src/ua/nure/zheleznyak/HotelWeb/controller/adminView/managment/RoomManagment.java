@@ -1,6 +1,7 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.managment;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,18 +10,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 /**
- * Servlet implementation class MealEdit
+ * Servlet implementation class RoomManagment
  */
-@WebServlet("/admin/MealEdit")
-public class MealEdit extends HttpServlet {
+@WebServlet("/admin/RoomManagment")
+public class RoomManagment extends HttpServlet {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2053104710996131208L;
+	private static final long serialVersionUID = 2967905392951717674L;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
@@ -42,11 +43,10 @@ public class MealEdit extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		Meal currMeal = MysqlAdminDAO.getSingleton().getMealById(id);
-		request.setAttribute("meal", currMeal);
-		request.setAttribute("jspPage", "edit/meal");
+		
+		List<Room> rooms = MysqlAdminDAO.getSingleton().getRoomList();
+		request.setAttribute("rooms", rooms);
+		request.setAttribute("jspPage", "list/room");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
-
 }

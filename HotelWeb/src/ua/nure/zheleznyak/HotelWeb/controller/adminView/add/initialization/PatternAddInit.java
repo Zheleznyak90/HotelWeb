@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.adminView.add.initialization;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,20 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.Role;
-import ua.nure.zheleznyak.HotelWeb.model.structure.User;
+import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 
 /**
- * Servlet implementation class UserEdit
+ * Servlet implementation class PatternAddInit
  */
-@WebServlet("/admin/UserEdit")
-public class UserEdit extends HttpServlet {
+@WebServlet("/admin/PatternAddInit")
+public class PatternAddInit extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 6504882992447684664L;
+	private static final long serialVersionUID = 3456361361499855228L;
 
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -40,13 +38,9 @@ public class UserEdit extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
-		User currUser = MysqlAdminDAO.getSingleton().getUserById(id);
-		List<Role> roles = MysqlCommonDAO.getSingleton().getRoles();
-		request.setAttribute("user", currUser);
-		request.setAttribute("roles", roles);
-		request.setAttribute("jspPage", "edit/user");
+		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
+		request.setAttribute("classes", classes);
+		request.setAttribute("jspPage", "add/pattern");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
-
 }
