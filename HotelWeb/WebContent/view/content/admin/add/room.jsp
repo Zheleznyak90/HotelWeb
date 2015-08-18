@@ -4,29 +4,32 @@
 	<div id="errorMsg"></div>
 	<div title="room">
 
-		<form id="form_request" method="post" action="admin/RoomAddProc">
+		<form id="form_request" method="post" action="RoomAddProc">
 			<table>
 				<tr>
 					<td>Room type:</td>
-					<td><select id="room_pattern" name="pattern">
+					<td><select id="room_pattern" name="pattern" required>
 							<c:forEach var="currPattern" items="${patterns}">
 								<option value="${currPattern.id}"
 									${room.pattern.id == currPattern.id ? 'selected':'' }>${currPattern.name}</option>
 							</c:forEach>
-					</select> *</td>
+					</select></td>
+					<td>*</td>
 				</tr>
 				<tr>
 					<td>Number:</td>
 					<td><input class="unique" type="number" name="number" min=1
-						max=999> *</td>
+						max=999 required></td>
+					<td>*</td>
 				</tr>
 				<tr>
 					<td>Floor:</td>
-					<td><input type="number" name="floor" min=1 max=10> *</td>
+					<td><input type="number" name="floor" min=1 max=10 required></td>
+					<td>*</td>
 				</tr>
 				<tr>
 					<td>Is maintained:</td>
-					<td><input type="checkbox" name="isActive"></td>
+					<td><input type="checkbox" name="isMaintained" value="maintained"></td>
 				</tr>
 			</table>
 			<input type="submit" value="Create new room">

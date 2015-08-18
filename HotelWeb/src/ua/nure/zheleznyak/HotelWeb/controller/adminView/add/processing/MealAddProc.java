@@ -32,8 +32,10 @@ public class MealAddProc extends HttpServlet {
 		int code = validate(request, newMeal);
 		if (code == 0) {
 			MysqlAdminDAO.getSingleton().addMeal(newMeal);
+			response.sendRedirect("MealManagment");
 		} else {
 			System.out.println("cannot add meal. Error: " + code);
+			response.sendRedirect("MealAddInit");
 			// TODO trace
 		}
 	}
@@ -52,7 +54,6 @@ public class MealAddProc extends HttpServlet {
 		if (price.isEmpty() || price == null || Double.parseDouble(price) < 0) {
 			code += 10;
 		} else {
-			System.out.println(price);
 			meal.setPrice(Double.parseDouble(price));
 		}
 		String description = request.getParameter("description");

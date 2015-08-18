@@ -13,6 +13,10 @@ public class Room implements Serializable {
 	private int floor;
 	private int number;
 	private boolean maintained;
+	
+	public Room(){
+		pattern = new RoomPattern();
+	}
 
 	public int getId() {
 		return id;

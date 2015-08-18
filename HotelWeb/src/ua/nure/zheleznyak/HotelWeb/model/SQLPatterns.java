@@ -29,9 +29,9 @@ public class SQLPatterns {
 	public static final String GET_MEAL_BY_ID = "SELECT * FROM meal WHERE id =?";
 	public static final String ADD_MEAL = "INSERT INTO meal(meal, price, description, isActive) VALUES (?, ?, ?, ?)";
 
-	public static final String GET_ROOM_LIST = "SELECT * FROM room";
+	public static final String GET_ROOM_LIST = "SELECT * FROM room ORDER BY room_pattern";
 	public static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE id =?";
-	public static final String ADD_ROOM = "INSERT INTO room(room_pattern, status_id, number, floor) VALUES(?, ?, ?, ?)";
+	public static final String ADD_ROOM = "INSERT INTO room(room_pattern, number, floor, isMaintained) VALUES(?, ?, ?, ?)";
 
 	public static final String CHANGE_FIELD_P1 = "UPDATE ";
 	public static final String CHANGE_FIELD_P2 = " SET ";

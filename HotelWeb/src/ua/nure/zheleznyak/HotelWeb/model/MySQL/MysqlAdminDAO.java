@@ -188,8 +188,25 @@ public class MysqlAdminDAO implements AdminDAO {
 
 	@Override
 	public int addRoom(Room room) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		int errCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.ADD_ROOM);
+			pst.setInt(1, room.getPattern().getId());
+			pst.setInt(2, room.getNumber());
+			pst.setInt(3, room.getFloor());
+			pst.setBoolean(4, room.isMaintained());
+			pst.execute();
+		} catch (SQLException e) {
+			errCode = 301;
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+
+		return errCode;
 	}
 
 	@Override
