@@ -12,7 +12,6 @@ public interface AdminDAO {
 	
 	public List<User> getUsers();
 	public User getUserById(String id);
-	public int addUser(User user);
 	
 	public List<Room> getRoomList();
 	public Room getRoomById(String id);

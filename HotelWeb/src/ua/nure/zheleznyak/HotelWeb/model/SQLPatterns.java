@@ -27,7 +27,7 @@ public class SQLPatterns {
 
 	public static final String GET_MEAL_LIST = "SELECT * FROM meal";
 	public static final String GET_MEAL_BY_ID = "SELECT * FROM meal WHERE id =?";
-	public static final String ADD_MEAL = "INSERT INTO meal(meal, price) VALUES (?, ?)";
+	public static final String ADD_MEAL = "INSERT INTO meal(meal, price, description, isActive) VALUES (?, ?, ?, ?)";
 
 	public static final String GET_ROOM_LIST = "SELECT * FROM room";
 	public static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE id =?";

@@ -39,7 +39,8 @@ public class MysqlAdminDAO implements AdminDAO {
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERN_LIST);
 			while (rs.next()) {
-				patternList.add(FillBean.getSingleton().generateRoomPattern(rs));
+				patternList
+						.add(FillBean.getSingleton().generateRoomPattern(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -164,14 +165,25 @@ public class MysqlAdminDAO implements AdminDAO {
 
 	@Override
 	public int addMeal(Meal meal) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+		Connection con = null;
+		int errCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.ADD_MEAL);
+			pst.setString(1, meal.getMeal());
+			pst.setDouble(2, meal.getPrice());
+			pst.setString(3, meal.getDescription());
+			pst.setBoolean(4, meal.isActive());
+			pst.execute();
+		} catch (SQLException e) {
+			errCode = 301;
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
 
-	@Override
-	public int addUser(User user) {
-		// TODO Auto-generated method stub
-		return 0;
+		return errCode;
 	}
 
 	@Override
@@ -186,7 +198,8 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_USER_BY_ID);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_USER_BY_ID);
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
@@ -205,7 +218,8 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ROOM_BY_ID);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_ROOM_BY_ID);
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
@@ -224,7 +238,8 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_PATTERN_BY_ID);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_PATTERN_BY_ID);
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
@@ -243,7 +258,8 @@ public class MysqlAdminDAO implements AdminDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_MEAL_BY_ID);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_MEAL_BY_ID);
 			pst.setString(1, id);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
