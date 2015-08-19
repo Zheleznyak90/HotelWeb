@@ -38,7 +38,7 @@ CREATE TABLE room_pattern(
 	name VARCHAR(50) NOT NULL,
 	class_id INT NOT NULL,
 	size INT NOT NULL,
-	price DECIMAL ,
+	price DOUBLE NOT NULL ,
 	description TEXT,
 	rating DECIMAL DEFAULT 0,
 	PRIMARY KEY (id),
@@ -68,12 +68,12 @@ CREATE TABLE order_status(
 
 CREATE TABLE meal(
 	id INT NOT NULL AUTO_INCREMENT,
-	meal VARCHAR(50) NOT NULL,
+	name VARCHAR(50) NOT NULL,
 	price DOUBLE NOT NULL,
 	description TEXT,
 	isActive BOOLEAN NOT NULL DEFAULT TRUE,
 	PRIMARY KEY (id),
-	UNIQUE (meal)
+	UNIQUE (name)
 );
 
 CREATE TABLE booking_period(

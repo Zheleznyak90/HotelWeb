@@ -11,7 +11,7 @@ public class Meal implements Serializable {
 
 	private int id;
 
-	private String meal;
+	private String name;
 	private double price;
 	private String description;
 	private boolean active;
@@ -24,12 +24,12 @@ public class Meal implements Serializable {
 		this.id = id;
 	}
 
-	public String getMeal() {
-		return meal;
+	public String getName() {
+		return name;
 	}
 
-	public void setMeal(String meal) {
-		this.meal = meal;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public boolean isActive() {

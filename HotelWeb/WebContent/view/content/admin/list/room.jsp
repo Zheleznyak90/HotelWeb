@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="rightPanel">
-	<div id="errorMsg">123</div>
+	<div id="errorMsg"></div>
 	<table border="1">
 		<tr>
 			<td>Id</td>
@@ -34,13 +34,11 @@
 
 		</c:forEach>
 	</table>
+	<img src="${pageContext.request.contextPath}/view/img/addBtn.png"
+		class="btnImg" alt="addBtn" id="addBtn_Room"
+		onClick="addNew('${pageContext.request.contextPath}',this)">
 </div>
-<script src="<c:url value="/view/js/dbAdministrationScripts.js" />"
+<script src="<c:url value="/view/js/adminPages.js" />"
 	type="text/javascript"></script>
-<link href="<c:url value="/jslib/jquery-ui.css" />" rel="stylesheet"
-	type="text/css" />
 <script src="<c:url value="/jslib/jquery.min.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/jslib/jquery-ui.min.js" />"
-	type="text/javascript"></script>
-

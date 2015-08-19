@@ -37,3 +37,5 @@
 		</form>
 	</div>
 </div>
+<script src="<c:url value="/view/js/uniqueCheck.js" />"
+	type="text/javascript"></script>

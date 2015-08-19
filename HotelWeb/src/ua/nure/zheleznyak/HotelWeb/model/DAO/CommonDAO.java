@@ -18,4 +18,6 @@ public interface CommonDAO {
 	
 	public List<Role> getRoles();
 	public Role getRoleById(int id);
+	
+	public int isUnique(String table, String field, Object value);
 }

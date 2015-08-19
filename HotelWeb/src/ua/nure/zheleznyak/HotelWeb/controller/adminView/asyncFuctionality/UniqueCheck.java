@@ -1,31 +1,36 @@
 package ua.nure.zheleznyak.HotelWeb.controller.adminView.asyncFuctionality;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+
 /**
  * Servlet implementation class UniqueCheck
  */
 @WebServlet("/admin/UniqueCheck")
 public class UniqueCheck extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * 
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-	}
+	private static final long serialVersionUID = -7877989622500032006L;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String table = request.getParameter("table");
+		String field = request.getParameter("field");
+		Object value = request.getParameter("value");
+		int resCode = MysqlCommonDAO.getSingleton().isUnique(table, field, value);
+		response.setContentType("text/plain");
+		response.getWriter().print(resCode);
 	}
 
 }

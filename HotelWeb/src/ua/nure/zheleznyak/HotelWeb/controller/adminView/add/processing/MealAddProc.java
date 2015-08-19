@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
@@ -43,15 +44,16 @@ public class MealAddProc extends HttpServlet {
 	private int validate(HttpServletRequest request, Meal meal) {
 		int code = 0;
 		String name = request.getParameter("name");
-		if (name.length() > 50 || name.isEmpty() || name == null)// TODO check
-																	// unique
-		{
+		if (name == null
+				|| name.isEmpty()
+				|| name.length() > 50
+				|| MysqlCommonDAO.getSingleton().isUnique("meal", "name", name) != 0) {
 			code += 1;
 		} else {
-			meal.setMeal(name);
+			meal.setName(name);
 		}
 		String price = request.getParameter("price");
-		if (price.isEmpty() || price == null || Double.parseDouble(price) < 0) {
+		if (price == null || price.isEmpty() || Double.parseDouble(price) < 0) {
 			code += 10;
 		} else {
 			meal.setPrice(Double.parseDouble(price));

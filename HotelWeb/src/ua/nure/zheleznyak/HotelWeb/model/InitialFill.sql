@@ -35,7 +35,7 @@ INSERT INTO room(room_pattern, number, floor) VALUES
 ("3","20","2"),
 ("4","30","3");
 
-INSERT INTO meal(meal, price) VALUES 
+INSERT INTO meal(name, price) VALUES 
 ("breakfast included", "0"),
 ("half-board", "7"),
 ("all-inclusive", "16");

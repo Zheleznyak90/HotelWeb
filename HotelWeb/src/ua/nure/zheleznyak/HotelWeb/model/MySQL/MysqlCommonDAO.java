@@ -192,4 +192,30 @@ public class MysqlCommonDAO implements CommonDAO {
 		return currRole;
 	}
 
+	@Override
+	public int isUnique(String table, String field, Object value) {
+		Connection con = null;
+		int resCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.IS_UNIQUE_P1 + table
+							+ SQLPatterns.IS_UNIQUE_P2 +field +SQLPatterns.IS_UNIQUE_P3);
+			// Create statement SELECT id FROM tableName WHERE fieldName = ?
+
+			pst.setObject(1, value);
+			ResultSet rs = pst.executeQuery();
+			if (rs.isBeforeFirst() ) {    
+				 resCode = 300; 
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			resCode = 301;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return resCode;
+
+	}
+
 }

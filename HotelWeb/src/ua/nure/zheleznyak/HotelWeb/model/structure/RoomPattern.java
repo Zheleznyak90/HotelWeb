@@ -9,12 +9,16 @@ public class RoomPattern implements Serializable {
 	private int id;
 	private ApartmentClass aClass;
 	
-	private int price;
+	private double price;
 	private int size;
 	private String description;
 	private String name;
 	private static final String PhotoSetDefault = "view/PhotoSets/";
 	private float rating;
+	
+	public RoomPattern(){
+		aClass = new ApartmentClass();
+	}
 
 	public int getId() {
 		return id;
@@ -32,11 +36,11 @@ public class RoomPattern implements Serializable {
 		this.aClass = aClass;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 

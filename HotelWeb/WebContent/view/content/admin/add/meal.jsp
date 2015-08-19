@@ -6,7 +6,7 @@
 
 		<form id="form_request" method="post" action="MealAddProc">
 			<table>
-				<tr>
+				<tr id="check">
 					<td>Meal Name:</td>
 					<td><input type="text" class="unique" name="name"
 						maxlength="50" required></td>
@@ -33,3 +33,5 @@
 		</form>
 	</div>
 </div>
+<script src="<c:url value="/view/js/uniqueCheck.js" />"
+	type="text/javascript"></script>

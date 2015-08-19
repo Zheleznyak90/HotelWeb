@@ -38,3 +38,9 @@ function deleteRow(adress, table, element) {
 
 	});
 };
+
+function addNew(baseURL, element){
+	var type = element.id.split("_")[1];
+	window.location.assign(type+"AddInit");
+	
+};

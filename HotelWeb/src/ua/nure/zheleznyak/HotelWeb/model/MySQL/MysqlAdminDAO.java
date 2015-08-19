@@ -159,8 +159,26 @@ public class MysqlAdminDAO implements AdminDAO {
 
 	@Override
 	public int addRoomPattern(RoomPattern pattern) {
-		// TODO Auto-generated method stub
-		return 0;
+		Connection con = null;
+		int errCode = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.ADD_ROOM_PATTERN);
+			pst.setInt(1, pattern.getaClass().getId());
+			pst.setString(2, pattern.getName());
+			pst.setInt(3, pattern.getSize());
+			pst.setDouble(4, pattern.getPrice());
+			pst.setString(5, pattern.getDescription());
+			pst.execute();
+		} catch (SQLException e) {
+			errCode = 301;
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+
+		return errCode;
 	}
 
 	@Override
@@ -169,9 +187,8 @@ public class MysqlAdminDAO implements AdminDAO {
 		int errCode = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.ADD_MEAL);
-			pst.setString(1, meal.getMeal());
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.ADD_MEAL);
+			pst.setString(1, meal.getName());
 			pst.setDouble(2, meal.getPrice());
 			pst.setString(3, meal.getDescription());
 			pst.setBoolean(4, meal.isActive());
@@ -192,8 +209,7 @@ public class MysqlAdminDAO implements AdminDAO {
 		int errCode = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.ADD_ROOM);
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.ADD_ROOM);
 			pst.setInt(1, room.getPattern().getId());
 			pst.setInt(2, room.getNumber());
 			pst.setInt(3, room.getFloor());

@@ -24,7 +24,7 @@ public class FillBean {
 		Meal currMeal = new Meal();
 		try {
 			currMeal.setId(rs.getInt("id"));
-			currMeal.setMeal(rs.getString("meal"));
+			currMeal.setName(rs.getString("name"));
 			currMeal.setPrice(rs.getDouble("price"));
 			currMeal.setActive(rs.getBoolean("isActive"));
 			currMeal.setDescription(rs.getString("description"));

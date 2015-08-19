@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.CommonFunc;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
@@ -21,7 +22,7 @@ public class RoomAddProc extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -1319064333387822596L;
+	private static final long serialVersionUID = -997558870156839902L;
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -44,7 +45,7 @@ public class RoomAddProc extends HttpServlet {
 	private int validate(HttpServletRequest request, Room room) {
 		int code = 0;
 		String pattern = request.getParameter("pattern");
-		if (pattern.isEmpty() || pattern == null
+		if (pattern == null || pattern.isEmpty()
 				|| !CommonFunc.isNumeric(pattern))// TODO check existing
 		{
 			code += 1;
@@ -52,9 +53,13 @@ public class RoomAddProc extends HttpServlet {
 			room.getPattern().setId(Integer.parseInt(pattern));
 		}
 		String number = request.getParameter("number");
-		if (number.isEmpty() || number == null || !CommonFunc.isNumeric(number)
+		if (number == null
+				|| number.isEmpty()
+				|| !CommonFunc.isNumeric(number)
 				|| Integer.parseInt(number) < 0
-				|| Integer.parseInt(number) > 999) {//TODO get rid of hardcoded values
+				|| Integer.parseInt(number) > 999
+				|| MysqlCommonDAO.getSingleton().isUnique("room", "number",
+						number) != 0) {
 			code += 10;
 		} else {
 			room.setNumber(Integer.parseInt(number));
@@ -62,9 +67,13 @@ public class RoomAddProc extends HttpServlet {
 		}
 
 		String floor = request.getParameter("floor");
-		if (floor.isEmpty() || floor == null || !CommonFunc.isNumeric(floor)
-				|| Integer.parseInt(floor) < 0
-				|| Integer.parseInt(floor) > 9) {//TODO get rid of hardcoded values
+		if (floor == null || floor.isEmpty() || !CommonFunc.isNumeric(floor)
+				|| Integer.parseInt(floor) < 0 || Integer.parseInt(floor) > 9) {// TODO
+																				// get
+																				// rid
+																				// of
+																				// hardcoded
+																				// values
 			code += 100;
 		} else {
 			room.setFloor(Integer.parseInt(floor));

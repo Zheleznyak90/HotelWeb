@@ -15,6 +15,10 @@ public class SQLPatterns {
 	public static final String GET_ROLES = "SELECT * FROM role";
 	public static final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE id = ?";
 	
+	public static final String IS_UNIQUE_P1 ="SELECT id FROM ";
+	public static final String IS_UNIQUE_P2 =" WHERE ";
+	public static final String IS_UNIQUE_P3 =" = ?";
+	
 	// Administrator sql requests
 	
 	public static final String GET_USER_LIST = "SELECT id, role_id, email, fullName, phoneNumber FROM UserT ";
@@ -23,11 +27,11 @@ public class SQLPatterns {
 	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
 			+ "FROM room_pattern ";
 	public static final String GET_PATTERN_BY_ID = "SELECT * FROM room_pattern WHERE id =?";
-	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, size, price) VALUES (? ,? ,?)";
+	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, name, size, price, description) VALUES (? ,? ,?, ?, ?)";
 
 	public static final String GET_MEAL_LIST = "SELECT * FROM meal";
 	public static final String GET_MEAL_BY_ID = "SELECT * FROM meal WHERE id =?";
-	public static final String ADD_MEAL = "INSERT INTO meal(meal, price, description, isActive) VALUES (?, ?, ?, ?)";
+	public static final String ADD_MEAL = "INSERT INTO meal(name, price, description, isActive) VALUES (?, ?, ?, ?)";
 
 	public static final String GET_ROOM_LIST = "SELECT * FROM room ORDER BY room_pattern";
 	public static final String GET_ROOM_BY_ID = "SELECT * FROM room WHERE id =?";

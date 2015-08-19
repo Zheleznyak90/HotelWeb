@@ -4,17 +4,17 @@
 	<div id="errorMsg"></div>
 	<div title="room_pattern">
 
-		<form id="form_request" method="post" action="admin/PatternAddProc">
+		<form id="form_request" method="post" action="PatternAddProc">
 			<table>
 				<tr>
 					<td>Name:</td>
 					<td><input type="text" class="unique" name="name"
-						maxlength="50"></td>
+						maxlength="50" required></td>
 					<td>*</td>
 				</tr>
 				<tr>
 					<td>Class:</td>
-					<td><select name="class_id">
+					<td><select name="class_id" required>
 							<c:forEach var="currClass" items="${classes}">
 								<option value="${currClass.id}"
 									${pattern.aClass.id == currClass.id ? 'selected':'' }>${currClass.aClass}</option>
@@ -25,12 +25,12 @@
 
 				<tr>
 					<td>Price:</td>
-					<td><input type="text" name="price" min=0></td>
+					<td><input type="number" step="0.01" name="price" min=0 required></td>
 					<td>*</td>
 				</tr>
 				<tr>
 					<td>Size:</td>
-					<td><input type="number" name="size" min=0 max=10></td>
+					<td><input type="number" name="size" min=0 max=10 required></td>
 					<td>*</td>
 				</tr>
 				<tr>
@@ -40,7 +40,7 @@
 				</tr>
 				<tr>
 					<td>Photo preview:</td>
-					<td><input type="file" name="file1" id=1 name="photo">
+					<td><input type="file" name="file_1" id=1 name="photo">
 					</td>
 					<td>*</td>
 				</tr>
@@ -52,3 +52,5 @@
 	</div>
 
 </div>
+<script src="<c:url value="/view/js/uniqueCheck.js" />"
+	type="text/javascript"></script>
