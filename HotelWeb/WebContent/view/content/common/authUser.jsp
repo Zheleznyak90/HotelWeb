@@ -14,7 +14,7 @@
 		</a>
 	</c:when>
 </c:choose>
-<a class="auth" href="${pageContext.request.contextPath}/account">My
+<a class="auth" href="${pageContext.request.contextPath}/client/accManagment">My
 	Account</a>
 <a class="reg" href="${pageContext.request.contextPath}/LogOut">Log
 	Out</a>

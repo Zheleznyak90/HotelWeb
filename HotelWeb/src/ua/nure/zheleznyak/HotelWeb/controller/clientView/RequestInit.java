@@ -42,7 +42,7 @@ public class RequestInit extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
 		request.setAttribute("classes", classes);
-		request.getRequestDispatcher("/view/pages/request.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/pages/client/request.jsp").forward(request, response);
 	}
 
 }

@@ -10,7 +10,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public interface CommonDAO {
 	public User validateUser(String email, String password);
-	public boolean registrateUser(User user);
+	public int registrateUser(User user);
 	public List<RoomPattern> getPatternList();
 	public RoomPattern getPatternById(String id);
 	

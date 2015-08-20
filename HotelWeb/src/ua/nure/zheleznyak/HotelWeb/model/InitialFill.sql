@@ -45,3 +45,20 @@ INSERT INTO order_status(status) VALUES
 ("confirmed"),
 ("canceled");
 
+
+SET GLOBAL event_scheduler = ON;
+
+CREATE EVENT request_clean
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+ON COMPLETION PRESERVE
+DO
+      DELETE FROM orderT WHERE created < DATE_SUB(NOW(), INTERVAL 2 DAY)
+      AND order_status = 1;
+      
+CREATE EVENT order_clean
+ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+ON COMPLETION PRESERVE
+DO
+      DELETE FROM orderT WHERE created < DATE_SUB(NOW(), INTERVAL 2 DAY)
+      AND isserved = FALSE;
+

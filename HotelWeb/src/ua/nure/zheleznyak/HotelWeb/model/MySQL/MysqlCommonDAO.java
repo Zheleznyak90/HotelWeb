@@ -63,9 +63,9 @@ public class MysqlCommonDAO implements CommonDAO {
 	}
 
 	@Override
-	public boolean registrateUser(User user) {
+	public int registrateUser(User user) {
 		Connection con = null;
-		boolean isRegistered = false;
+		int  isRegistered = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
@@ -76,7 +76,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			pst.setString(2, hashedPass);
 			pst.setString(3, user.getFullName());
 			pst.setString(4, user.getPhoneNumber());
-			isRegistered = pst.execute();
+			isRegistered = pst.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

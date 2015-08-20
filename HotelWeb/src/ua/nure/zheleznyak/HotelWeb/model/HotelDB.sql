@@ -106,7 +106,7 @@ CREATE TABLE orderT(
 	meal_id INT NOT NULL,
 	manager_id INT,
 	order_status INT NOT NULL,
-	created DATE NOT NULL,
+	created DATETIME NOT NULL,
 	checkIn_date DATE NOT NULL,
 	checkOut_date DATE NOT NULL,
 	PRIMARY KEY (id),
@@ -131,3 +131,6 @@ ON DELETE CASCADE,
 FOREIGN KEY (order_id) REFERENCES orderT(id) 
 ON DELETE CASCADE
 );
+
+
+
