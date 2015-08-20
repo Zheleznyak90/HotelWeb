@@ -11,7 +11,8 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 public interface CommonDAO {
 	public User validateUser(String email, String password);
 	public boolean registrateUser(User user);
-	public List<RoomPattern> getRoomList();
+	public List<RoomPattern> getPatternList();
+	public RoomPattern getPatternById(String id);
 	
 	public List<ApartmentClass> getApClasses();
 	public ApartmentClass getApClassById(int id);

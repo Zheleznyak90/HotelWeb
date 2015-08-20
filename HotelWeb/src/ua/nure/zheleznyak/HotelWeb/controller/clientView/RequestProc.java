@@ -51,7 +51,8 @@ public class RequestProc extends HttpServlet {
 		Request roomReq = new Request();
 		roomReq.setClient(client);
 		roomReq.setNumberOfPerson(Integer.parseInt(request.getParameter("num")));
-		roomReq.setApartmentClass((String) request.getParameter("class"));
+		roomReq.getaClass().setId(Integer.parseInt(request.getParameter("class")));
+		//roomReq.setApartmentClass((String) request.getParameter("class"));
 		
 		try {
 			DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");

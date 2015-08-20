@@ -17,11 +17,8 @@ public interface AdminDAO {
 	public Room getRoomById(String id);
 	public int addRoom(Room room);
 			
-	public List<RoomPattern> getPatternList();
-	public RoomPattern getPatternById(String id);
 	public int addRoomPattern(RoomPattern pattern);
 	
-	public List<Meal> getMealList();
 	public Meal getMealById(String id);
 	public int addMeal(Meal meal);
 	

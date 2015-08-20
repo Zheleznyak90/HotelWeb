@@ -9,7 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 
 /**
  * Servlet implementation class RequestInit
@@ -39,7 +40,7 @@ public class RequestInit extends HttpServlet {
 	
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<String> classes = MysqlClientDAO.getSingleton().getRoomClasses();
+		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
 		request.setAttribute("classes", classes);
 		request.getRequestDispatcher("/view/pages/request.jsp").forward(request, response);
 	}

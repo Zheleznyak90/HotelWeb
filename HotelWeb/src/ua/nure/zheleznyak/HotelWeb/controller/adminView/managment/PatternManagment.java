@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
@@ -43,7 +43,7 @@ public class PatternManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
+		List<RoomPattern> patterns = MysqlCommonDAO.getSingleton().getPatternList();
 		request.setAttribute("patterns", patterns);
 		request.setAttribute("jspPage", "list/pattern");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);

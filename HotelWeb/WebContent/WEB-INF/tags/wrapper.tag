@@ -18,7 +18,7 @@
 	<div class="container">
 		<jsp:include page="/view/content/header.jsp" />
 		<div class="mainbody">
-			<p><jsp:doBody /></p>
+			<p><jsp:doBody />
 		</div>
 		<jsp:include page="/view/content/footer.jsp" />
 	</div>

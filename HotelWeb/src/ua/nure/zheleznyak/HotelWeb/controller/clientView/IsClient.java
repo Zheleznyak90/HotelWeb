@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView;
+package ua.nure.zheleznyak.HotelWeb.controller.clientView;
 
 import java.io.IOException;
 
@@ -15,28 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet Filter implementation class IsAdmin
+ * Servlet Filter implementation class IsClient
  */
-@WebFilter(urlPatterns = { "/admin/*" })
-public class IsAdmin implements Filter {
-
+@WebFilter(urlPatterns = { "/client/*" })
+public class IsClient implements Filter {
 
 	/**
 	 * @see Filter#destroy()
 	 */
 	public void destroy() {
-		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		User currUser = (User) ((HttpServletRequest) request).getSession().getAttribute("User");
-		if ( currUser == null || !currUser.getUserRole().getRole().equals("admin")) {
+		if ( currUser == null) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse) response).sendRedirect(contextPath+"/authorization");
+			((HttpServletResponse) response).sendRedirect(contextPath+"/m");
 		} else {
 			chain.doFilter(request, response);
 		}
@@ -46,7 +43,6 @@ public class IsAdmin implements Filter {
 	 * @see Filter#init(FilterConfig)
 	 */
 	public void init(FilterConfig fConfig) throws ServletException {
-		// TODO Auto-generated method stub
 	}
 
 }

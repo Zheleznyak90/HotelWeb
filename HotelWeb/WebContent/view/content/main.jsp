@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="rightPanel">
 	<c:forEach var="room" items="${roomList}">
-		<div class="room">
+		<div class="room" id="${room.id}" onClick="OfferRoom(this)">
 			<img src="${room.photoSetPath}/1.jpg" class="photo" alt="Room Photo">
 			<div class="price">
 				Rates from:<br> &#36;
@@ -26,3 +26,6 @@
 		</div>
 	</c:forEach>
 </div>
+
+<script src="<c:url value="/view/js/mainPage.js" />"
+	type="text/javascript"></script>

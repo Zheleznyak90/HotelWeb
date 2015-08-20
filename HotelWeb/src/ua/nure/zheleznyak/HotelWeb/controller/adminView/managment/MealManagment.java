@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
@@ -40,7 +41,7 @@ public class MealManagment extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<Meal> meals = MysqlAdminDAO.getSingleton().getMealList();
+		List<Meal> meals = MysqlClientDAO.getSingleton().getMealList();
 		request.setAttribute("meals", meals);
 		request.setAttribute("jspPage", "list/meal");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);

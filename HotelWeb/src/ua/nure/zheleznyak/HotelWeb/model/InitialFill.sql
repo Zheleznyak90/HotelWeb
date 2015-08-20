@@ -6,10 +6,10 @@ INSERT INTO role(role) VALUES
 ("admin");
 
 INSERT INTO userT(role_id, email, password) VALUES
-("1", "user1@mail.ru","1111"),
-("1", "user2@mail.ru","2222"),
-("2", "manager@mail.ru","3333"),
-("3", "admin@mail.ru","4444");
+("1", "user1@mail.ru","пїЅ_0пїЅ,пїЅпїЅE/9пїЅVпїЅ3пїЅB"),
+("1", "user2@mail.ru","пїЅпїЅпїЅWпїЅj*DпїЅпїЅФµ5пїЅ^'пїЅпїЅ=пїЅ"),
+("2", "manager@mail.ru","пїЅmcQпїЅqпїЅпїЅЮѕпїЅпїЅ5%пїЅ 6z"),
+("3", "admin@mail.ru","пїЅпїЅпїЅ$fпїЅпїЅHпїЅпїЅ<I#yпїЅ");
 
 INSERT INTO room_class(class) VALUES
 ("poor"),

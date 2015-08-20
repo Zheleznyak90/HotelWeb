@@ -46,7 +46,7 @@ public class UserValidation extends HttpServlet {
 		User currUser = MysqlCommonDAO.getSingleton().validateUser(email, password);
 		if (currUser == null) {
 			request.setAttribute("isInvalid", 1);
-			request.getRequestDispatcher("authorization.jsp").forward(request,
+			request.getRequestDispatcher("/authorization").forward(request,
 					response);
 
 		} else {

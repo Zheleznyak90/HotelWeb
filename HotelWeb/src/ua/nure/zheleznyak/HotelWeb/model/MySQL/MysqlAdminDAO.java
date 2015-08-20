@@ -30,7 +30,7 @@ public class MysqlAdminDAO implements AdminDAO {
 		return singleton;
 	}
 
-	@Override
+/*	@Override
 	public List<RoomPattern> getPatternList() {
 		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
 		Connection con = null;
@@ -49,7 +49,7 @@ public class MysqlAdminDAO implements AdminDAO {
 		}
 		return patternList;
 	}
-
+*/
 	@Override
 	public List<Room> getRoomList() {
 		List<Room> roomList = new ArrayList<Room>();
@@ -90,27 +90,6 @@ public class MysqlAdminDAO implements AdminDAO {
 		return userList;
 	}
 
-	@Override
-	public List<Meal> getMealList() {
-		List<Meal> mealList = new ArrayList<Meal>();
-		Connection con = null;
-		try {
-			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.GET_MEAL_LIST);
-			ResultSet rs = pst.executeQuery();
-			while (rs.next()) {
-				mealList.add(FillBean.getSingleton().generateMeal(rs));
-			}
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			MySQLConnection.getSingleton().closeConnection(con);
-		}
-		return mealList;
-
-	}
 
 	@Override
 	public int changeFieldValue(String table, String field, int id, Object value) {
@@ -265,25 +244,6 @@ public class MysqlAdminDAO implements AdminDAO {
 		return currRoom;
 	}
 
-	@Override
-	public RoomPattern getPatternById(String id) {
-		RoomPattern currRoomPattern = null;
-		Connection con = null;
-		try {
-			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.GET_PATTERN_BY_ID);
-			pst.setString(1, id);
-			ResultSet rs = pst.executeQuery();
-			rs.next();
-			currRoomPattern = FillBean.getSingleton().generateRoomPattern(rs);
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			MySQLConnection.getSingleton().closeConnection(con);
-		}
-		return currRoomPattern;
-	}
 
 	@Override
 	public Meal getMealById(String id) {

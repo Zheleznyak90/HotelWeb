@@ -9,6 +9,7 @@ public class MySQLConnection {
 	private static final String DB_MYSQL_DRIVER = "com.mysql.jdbc.Driver";
 	private static final String DB_MYSQL_URL = "jdbc:mysql://localhost/";
 	private static final String DB_MYSQL_DATABASE = "hoteldb";
+	private static final String DB_UTF8 = "?useUnicode=true&characterEncoding=utf-8";
 	private static final String DB_MYSQL_USER = "admin";
 	private static final String DB_MYSQL_PASSWORD = "admin";
 	
@@ -19,7 +20,7 @@ public class MySQLConnection {
 		
 		ds = new BasicDataSource();
 		ds.setDriverClassName(DB_MYSQL_DRIVER);
-		ds.setUrl(DB_MYSQL_URL+DB_MYSQL_DATABASE);
+		ds.setUrl(DB_MYSQL_URL+DB_MYSQL_DATABASE+DB_UTF8);
 		ds.setUsername(DB_MYSQL_USER);
 		ds.setPassword(DB_MYSQL_PASSWORD);
 		

@@ -11,6 +11,8 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 
 public class MysqlClientDAO implements ClientDAO {
@@ -45,22 +47,36 @@ public class MysqlClientDAO implements ClientDAO {
 
 	}
 
+	/*
+	 * @Override public List<String> getRoomClasses() { List<String> classes =
+	 * null; Connection con = null; try { con =
+	 * MySQLConnection.getSingleton().getConnection(); classes = new
+	 * ArrayList<String>(); Statement st = con.createStatement(); ResultSet rs =
+	 * st.executeQuery(SQLPatterns.GET_ROOM_CLASSES); while (rs.next()) {
+	 * classes.add(rs.getString("class")); } } catch (SQLException e) {
+	 * e.printStackTrace(); } return classes; }
+	 */
+
 	@Override
-	public List<String> getRoomClasses() {
-		List<String> classes = null;
+	public List<Meal> getMealList() {
+		List<Meal> mealList = new ArrayList<Meal>();
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			classes = new ArrayList<String>();
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(SQLPatterns.GET_ROOM_CLASSES);
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_MEAL_LIST);
+			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				classes.add(rs.getString("class"));
+				mealList.add(FillBean.getSingleton().generateMeal(rs));
 			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
 		}
-		return classes;
+		return mealList;
+
 	}
 
 	@Override
@@ -77,9 +93,10 @@ public class MysqlClientDAO implements ClientDAO {
 			if (rs.next()) {
 				pst = con.prepareStatement(SQLPatterns.ROOM_REQUEST);
 				pst.setString(1, req.getClient().getEmail());
-				pst.setInt(2, req.getNumberOfPerson());
-				pst.setLong(3, rs.getLong(1));
-				pst.setDate(4, new Date(System.currentTimeMillis()));
+				pst.setInt(2, req.getaClass().getId());
+				pst.setInt(3, req.getNumberOfPerson());
+				pst.setLong(4, rs.getLong(1));
+				pst.setDate(5, new Date(System.currentTimeMillis()));
 				pst.execute();
 
 			} else {

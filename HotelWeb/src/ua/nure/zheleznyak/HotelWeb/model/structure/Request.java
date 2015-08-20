@@ -14,12 +14,18 @@ public class Request implements Serializable {
 	private User client;
 	private User manager;
 	private int numberOfPerson;
+	
+	private ApartmentClass aClass;
 
 	private String apartmentClass;
 	private Date created;
 	private BookingPeriod period;
 
 	boolean isServed = false;
+	
+	public Request(){
+		aClass = new ApartmentClass();
+	}
 
 	public int getId() {
 		return id;
@@ -85,4 +91,13 @@ public class Request implements Serializable {
 		this.period = period;
 	}
 
+	public ApartmentClass getaClass() {
+		return aClass;
+	}
+
+	public void setaClass(ApartmentClass aClass) {
+		this.aClass = aClass;
+	}
+
+	
 }

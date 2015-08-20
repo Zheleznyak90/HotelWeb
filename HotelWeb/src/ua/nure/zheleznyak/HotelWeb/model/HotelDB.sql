@@ -4,6 +4,9 @@ CREATE DATABASE HotelDB;
 
 use HotelDB;
 
+SET NAMES 'UTF8';
+SET CHARACTER SET 'UTF8';
+
 CREATE TABLE role(
 	id INT NOT NULL AUTO_INCREMENT,
 	role VARCHAR(50) NOT NULL,
@@ -87,6 +90,7 @@ CREATE TABLE request(
 	id INT NOT NULL AUTO_INCREMENT,
 	client_id INT NOT NULL,
 	manager_id INT,
+	class_id INT NOT NULL,
 	number_of_person INT NOT NULL,
 	booking_period INT NOT NULL,
 	created DATETIME NOT NULL,
@@ -97,7 +101,10 @@ CREATE TABLE request(
 	FOREIGN KEY (client_id) REFERENCES userT(id) 
 	ON DELETE RESTRICT,
 	FOREIGN KEY (manager_id) REFERENCES userT(id) 
-	ON DELETE SET NULL
+	ON DELETE SET NULL,
+	FOREIGN KEY (class_id) REFERENCES room_class(id) 
+	ON DELETE RESTRICT
+	
 );
 
 CREATE TABLE orderT(
@@ -123,4 +130,13 @@ CREATE TABLE orderT(
 	FOREIGN KEY (booking_period) REFERENCES booking_period(id) 
 	ON DELETE RESTRICT
 	
+);
+
+CREATE TABLE request_order(
+request_id INT NOT NULL,
+order_id INT NOT NULL,
+FOREIGN KEY (request_id) REFERENCES request(id) 
+ON DELETE CASCADE,
+FOREIGN KEY (order_id) REFERENCES orderT(id) 
+ON DELETE CASCADE
 );

@@ -1,32 +1,24 @@
 package ua.nure.zheleznyak.HotelWeb.controller.common;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
+import javax.servlet.http.HttpSession;
 
 /**
- * Servlet implementation class MainPage
+ * Servlet implementation class LogOut
  */
-@WebServlet("/m")
-public class MainPage extends HttpServlet {
-
+@WebServlet("/LogOut")
+public class LogOut extends HttpServlet {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5708394050580366143L;
+	private static final long serialVersionUID = -951617369326192851L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
 	protected void doGet(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		processReq(request, response);
@@ -43,8 +35,8 @@ public class MainPage extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<RoomPattern> rooms = MysqlCommonDAO.getSingleton().getPatternList();
-		request.setAttribute("roomList", rooms);
-		request.getRequestDispatcher("/view/pages/mainPage.jsp").forward(request, response);
+		HttpSession userSession = request.getSession();
+		userSession.removeAttribute("User");
+		request.getRequestDispatcher("/m").forward(request, response);
 	}
 }

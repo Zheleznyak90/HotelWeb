@@ -6,26 +6,24 @@ public class SQLPatterns {
 			+ "FROM userT WHERE email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_ROOMS_MPAGE = "SELECT class_id, size, price, description, name "
-			+ "FROM room_pattern rp WHERE rp.id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern HAVING COUNT(*)>0)";
+	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
+			+ "FROM room_pattern ";
 
 	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
 	public static final String GET_APPARTMENT_CLASS_BY_ID = "SELECT * FROM room_class WHERE id = ?";
-	
+
 	public static final String GET_ROLES = "SELECT * FROM role";
 	public static final String GET_ROLE_BY_ID = "SELECT * FROM role WHERE id = ?";
-	
-	public static final String IS_UNIQUE_P1 ="SELECT id FROM ";
-	public static final String IS_UNIQUE_P2 =" WHERE ";
-	public static final String IS_UNIQUE_P3 =" = ?";
-	
+
+	public static final String IS_UNIQUE_P1 = "SELECT id FROM ";
+	public static final String IS_UNIQUE_P2 = " WHERE ";
+	public static final String IS_UNIQUE_P3 = " = ?";
+
 	// Administrator sql requests
-	
+
 	public static final String GET_USER_LIST = "SELECT id, role_id, email, fullName, phoneNumber FROM UserT ";
 	public static final String GET_USER_BY_ID = "SELECT * FROM userT WHERE id =?";
 
-	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
-			+ "FROM room_pattern ";
 	public static final String GET_PATTERN_BY_ID = "SELECT * FROM room_pattern WHERE id =?";
 	public static final String ADD_ROOM_PATTERN = "INSERT INTO room_pattern(class_id, name, size, price, description) VALUES (? ,? ,?, ?, ?)";
 
@@ -57,8 +55,8 @@ public class SQLPatterns {
 	public static final String CREATE_PERIOD = "INSERT INTO booking_period(checkIn_date, checkOut_date) "
 			+ "VALUES (?,?)";
 	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class";
-	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, number_of_person, booking_period, created) "
-			+ "VALUES((SELECT id FROM userT WHERE email = ?),?,?,?)";
+	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, class_id, number_of_person, booking_period, created) "
+			+ "VALUES((SELECT id FROM userT WHERE email = ?), ?, ?, ?, ?)";
 	public static final String BOOK_ROOM = "INSERT";
 	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
 	public static final String CANCEL_BOOKING = "UPDATE";
