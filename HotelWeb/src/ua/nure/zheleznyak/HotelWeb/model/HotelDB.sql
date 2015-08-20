@@ -19,7 +19,7 @@ CREATE TABLE userT(
 	role_id INT NOT NULL,
 	email VARCHAR(50) NOT NULL,
 	password VARCHAR(50) NOT NULL,
-	fullName VARCHAR(50),
+	fullName VARCHAR(200),
 	phoneNumber VARCHAR(20),
 	PRIMARY KEY (id),
 	FOREIGN KEY (role_id) REFERENCES role(id) 

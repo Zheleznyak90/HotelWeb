@@ -10,7 +10,7 @@ public class MySQLConnection {
 	private static final String DB_MYSQL_URL = "jdbc:mysql://localhost/";
 	private static final String DB_MYSQL_DATABASE = "hoteldb";
 	private static final String DB_UTF8 = "?useUnicode=true&characterEncoding=utf-8";
-	private static final String DB_MYSQL_USER = "admin";
+	private static final String DB_MYSQL_USER = "root";
 	private static final String DB_MYSQL_PASSWORD = "admin";
 	
 	private static MySQLConnection singleton;

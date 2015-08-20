@@ -43,16 +43,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			pst.setString(1, email);
 			String hashedPass = CommonFunc.hashPass(password);
 			pst.setString(2, hashedPass);
-		    PrintStream out;
-			try {
-				out = new PrintStream(System.out, true, "UTF-8");
-				out.println(pst);
-			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		    
-			ResultSet rs = pst.executeQuery();
+		    ResultSet rs = pst.executeQuery();
 			if (!rs.next()) {
 				// Not valid login+pass
 			} else {
