@@ -1,7 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<form id="form_request" method="post" action="RequestProc">
+<form id="form_request" method="post" action="OrderProc">
+<input type="hidden" name ="pattern_id" value="${pattern.id}">
 	<table>
 		<tr>
 			<td>Name</td>

@@ -52,15 +52,23 @@ public class SQLPatterns {
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 
 	// Client sql requests
-	public static final String CREATE_PERIOD = "INSERT INTO booking_period(checkIn_date, checkOut_date) "
-			+ "VALUES (?,?)";
+	public static final String GET_SPARE_ROOMS_BY_PATTERN = "SELECT r.*"
+			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"
+			+ " LEFT JOIN orderT o ON(r.id = o.room_id)"
+			+ " WHERE rp.id=?"
+			+ " AND COALESCE((o.checkIn_date NOT BETWEEN ? AND ?), TRUE) "
+			+ " AND COALESCE((o.checkOut_date NOT BETWEEN ? AND ?), TRUE)";
 	public static final String GET_ROOM_CLASSES = "SELECT class FROM room_class";
-	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, class_id, number_of_person, booking_period, created) "
-			+ "VALUES((SELECT id FROM userT WHERE email = ?), ?, ?, ?, ?)";
-	public static final String BOOK_ROOM = "INSERT";
+	public static final String ROOM_REQUEST = "INSERT INTO request(client_id, class_id, number_of_person, created, checkIn_date, checkOut_date) "
+			+ "VALUES((SELECT id FROM userT WHERE email = ?), ?, ?, ?, ?, ?)";
+	public static final String BOOK_ROOM = "INSERT INTO orderT "
+			+ "(room_id, client_id, order_status, meal_id, created, checkIn_date, checkOut_date)"
+			+ " VALUES (?, (SELECT id FROM userT WHERE email = ?), (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
 	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
 	public static final String CANCEL_BOOKING = "UPDATE";
 
-	// public static final String VERIFY_USER = "";
-
 }
+/*
+ *SELECT r.id FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o ON(r.id = o.room_id) WHERE rp.id='1' AND (o.checkIn_date NOT BETWEEN '2015-08-20' AND '2015-08-21') 
+ * SELECT r.* FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o ON(r.id = o.room_id) WHERE rp.id='1' AND COALESCE((o.checkIn_date NOT BETWEEN '2015-08-20' AND '2015-08-21'), TRUE  ) AND COALESCE((o.checkOut_date NOT BETWEEN '2015-08-20' AND '2015-08-21'), TRUE)
+ * */

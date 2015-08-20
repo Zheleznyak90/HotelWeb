@@ -21,8 +21,7 @@ public class DbStructure {
 		database.put("meal", getClassFields(Meal.class));
 		database.put("request", getClassFields(Request.class));
 		database.put("orderT", getClassFields(Order.class));
-		database.put("booking_period", getClassFields(BookingPeriod.class));
-
+		
 	}
 
 	public static DbStructure getSigleton() {

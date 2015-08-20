@@ -15,10 +15,10 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class RoomOfferInit
+ * Servlet implementation class OrderInit
  */
-@WebServlet("/client/RoomOfferInit")
-public class RoomOfferInit extends HttpServlet {
+@WebServlet("/client/OrderInit")
+public class OrderInit extends HttpServlet {
 	
 	/**
 	 * 

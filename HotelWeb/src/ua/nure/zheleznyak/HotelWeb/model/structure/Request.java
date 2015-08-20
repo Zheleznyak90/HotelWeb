@@ -19,9 +19,10 @@ public class Request implements Serializable {
 
 	private String apartmentClass;
 	private Date created;
-	private BookingPeriod period;
-
 	boolean isServed = false;
+	
+	private Date checkOutDate;
+	private Date checkInDate;
 	
 	public Request(){
 		aClass = new ApartmentClass();
@@ -83,20 +84,27 @@ public class Request implements Serializable {
 		this.apartmentClass = apartmentClass;
 	}
 
-	public BookingPeriod getPeriod() {
-		return period;
-	}
-
-	public void setPeriod(BookingPeriod period) {
-		this.period = period;
-	}
-
 	public ApartmentClass getaClass() {
 		return aClass;
 	}
 
 	public void setaClass(ApartmentClass aClass) {
 		this.aClass = aClass;
+	}
+	public Date getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	public Date getCheckInDate() {
+		return checkInDate;
+	}
+
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
 	}
 
 	

@@ -4,7 +4,7 @@
 function OfferRoom(element) {
 	
 	var id = element.id;
-	var nextPage = "client/RoomOfferInit";
+	var nextPage = "client/OrderInit";
 
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");

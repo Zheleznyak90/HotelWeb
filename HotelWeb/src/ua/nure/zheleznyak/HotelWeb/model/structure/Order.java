@@ -1,7 +1,7 @@
 package ua.nure.zheleznyak.HotelWeb.model.structure;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 public class Order implements Serializable {
 
@@ -17,9 +17,29 @@ public class Order implements Serializable {
 	private User client;
 	private User manager;
 	private String status;
-
-	private BookingPeriod period;
 	private Date creationDate;
+
+	private Date checkOutDate;
+	private Date checkInDate;
+
+	public Order (){
+		meal = new Meal();
+	}
+	public Date getCheckOutDate() {
+		return checkOutDate;
+	}
+
+	public void setCheckOutDate(Date checkOutDate) {
+		this.checkOutDate = checkOutDate;
+	}
+
+	public Date getCheckInDate() {
+		return checkInDate;
+	}
+
+	public void setCheckInDate(Date checkInDate) {
+		this.checkInDate = checkInDate;
+	}
 
 	public int getId() {
 		return id;
@@ -27,14 +47,6 @@ public class Order implements Serializable {
 
 	public void setId(int id) {
 		this.id = id;
-	}
-
-	public BookingPeriod getPeriod() {
-		return period;
-	}
-
-	public void setPeriod(BookingPeriod period) {
-		this.period = period;
 	}
 
 	public Meal getMeal() {

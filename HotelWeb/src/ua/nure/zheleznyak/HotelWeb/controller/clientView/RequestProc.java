@@ -14,7 +14,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.BookingPeriod;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
@@ -30,21 +29,9 @@ public class RequestProc extends HttpServlet {
 	private static final long serialVersionUID = 4544445531898920968L;
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-
-	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-	
-	private void processReq(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession clientSession = request.getSession();
 		User client = (User) clientSession.getAttribute("User");
 		
@@ -52,24 +39,22 @@ public class RequestProc extends HttpServlet {
 		roomReq.setClient(client);
 		roomReq.setNumberOfPerson(Integer.parseInt(request.getParameter("num")));
 		roomReq.getaClass().setId(Integer.parseInt(request.getParameter("class")));
-		//roomReq.setApartmentClass((String) request.getParameter("class"));
 		
 		try {
 			DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 			Date currDate = new Date();
-			BookingPeriod bp = new BookingPeriod();
 			//Some strange convertation from MM/dd/yyyy to sql date format
-			bp.setCheckInDate(new java.sql.Date (sdf.parse(request.getParameter("checkInDate")).getTime()));
-			bp.setCheckOutDate(new java.sql.Date (sdf.parse(request.getParameter("checkOutDate")).getTime()));
-			roomReq.setPeriod(bp);
+			roomReq.setCheckInDate(new java.sql.Date (sdf.parse(request.getParameter("checkInDate")).getTime()));
+			roomReq.setCheckOutDate(new java.sql.Date (sdf.parse(request.getParameter("checkOutDate")).getTime()));
 			roomReq.setCreated(new java.sql.Date (currDate.getTime()));
-		} catch (ParseException e) {
+			int requestExec = MysqlClientDAO.getSingleton().createRequest(roomReq);
+			
+		} catch (ParseException e) {//TODO SEND INVALID
 			e.printStackTrace();
 		}
 		
-		int requestExec = MysqlClientDAO.getSingleton().createRequest(roomReq);
 		
 		request.getRequestDispatcher("/view/pages/tnxForRequest.jsp").forward(request, response);
 	}
-
+	
 }

@@ -5,7 +5,6 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +12,9 @@ import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 public class MysqlClientDAO implements ClientDAO {
 
@@ -30,8 +31,29 @@ public class MysqlClientDAO implements ClientDAO {
 	}
 
 	@Override
-	public void bookRoom() {
-		// TODO Auto-generated method stub
+	public void bookRoom(Order order, String roomPattern) {
+		List<Room> spareRooms = getAvailableRooms(order.getCheckInDate(),
+				order.getCheckOutDate(), roomPattern);
+		if (!spareRooms.isEmpty()) {
+			Connection con = null;
+			try {
+				con = MySQLConnection.getSingleton().getConnection();
+				PreparedStatement pst = con
+						.prepareStatement(SQLPatterns.BOOK_ROOM);
+				pst.setInt(1, spareRooms.get(0).getId());
+				pst.setString(2, order.getClient().getEmail());
+				pst.setInt(3, order.getMeal().getId());
+				pst.setDate(4, order.getCreationDate());
+				pst.setDate(5, order.getCheckInDate());
+				pst.setDate(6, order.getCheckOutDate());
+				boolean res = pst.execute();
+
+			} catch (SQLException e) {
+				e.printStackTrace();
+			} finally {
+				MySQLConnection.getSingleton().closeConnection(con);
+			}
+		}
 
 	}
 
@@ -46,16 +68,6 @@ public class MysqlClientDAO implements ClientDAO {
 		// TODO Auto-generated method stub
 
 	}
-
-	/*
-	 * @Override public List<String> getRoomClasses() { List<String> classes =
-	 * null; Connection con = null; try { con =
-	 * MySQLConnection.getSingleton().getConnection(); classes = new
-	 * ArrayList<String>(); Statement st = con.createStatement(); ResultSet rs =
-	 * st.executeQuery(SQLPatterns.GET_ROOM_CLASSES); while (rs.next()) {
-	 * classes.add(rs.getString("class")); } } catch (SQLException e) {
-	 * e.printStackTrace(); } return classes; }
-	 */
 
 	@Override
 	public List<Meal> getMealList() {
@@ -84,25 +96,15 @@ public class MysqlClientDAO implements ClientDAO {
 		Connection con = null;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(
-					SQLPatterns.CREATE_PERIOD, Statement.RETURN_GENERATED_KEYS);
-			pst.setDate(1, req.getPeriod().getCheckInDate());
-			pst.setDate(2, req.getPeriod().getCheckOutDate());
-			pst.executeUpdate();
-			ResultSet rs = pst.getGeneratedKeys();
-			if (rs.next()) {
-				pst = con.prepareStatement(SQLPatterns.ROOM_REQUEST);
-				pst.setString(1, req.getClient().getEmail());
-				pst.setInt(2, req.getaClass().getId());
-				pst.setInt(3, req.getNumberOfPerson());
-				pst.setLong(4, rs.getLong(1));
-				pst.setDate(5, new Date(System.currentTimeMillis()));
-				pst.execute();
-
-			} else {
-				// SQL problems code
-				return 301;
-			}
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.ROOM_REQUEST);
+			pst.setString(1, req.getClient().getEmail());
+			pst.setInt(2, req.getaClass().getId());
+			pst.setInt(3, req.getNumberOfPerson());
+			pst.setDate(4, new Date(System.currentTimeMillis()));
+			pst.setDate(5, req.getCheckInDate());
+			pst.setDate(6, req.getCheckOutDate());
+			pst.execute();
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -111,6 +113,35 @@ public class MysqlClientDAO implements ClientDAO {
 		}
 
 		return 0;
+	}
+
+	@Override
+	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
+			String roomPattern) {
+		List<Room> roomList = new ArrayList<Room>();
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS_BY_PATTERN);
+			pst.setString(1, roomPattern);
+			pst.setDate(2, checkIn);
+			pst.setDate(3, checkOut);
+			pst.setDate(4, checkIn);
+			pst.setDate(5, checkOut);
+			System.out.println(pst);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				roomList.add(FillBean.getSingleton().generateRoom(rs));
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return roomList;
+
 	}
 
 }

@@ -10,7 +10,6 @@ import java.util.List;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ManagerDAO;
-import ua.nure.zheleznyak.HotelWeb.model.structure.BookingPeriod;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
@@ -47,10 +46,8 @@ public class MysqlManegerDAO implements ManagerDAO {
 			while (rs.next()) {
 				Request currReq = new Request();
 				currReq.setNumberOfPerson(rs.getInt("number_of_person"));
-				BookingPeriod period = new BookingPeriod();
-				period.setCheckInDate(rs.getDate("checkIn_date"));
-				period.setCheckOutDate(rs.getDate("checkOut_date"));
-				currReq.setPeriod(period);
+				currReq.setCheckInDate(rs.getDate("checkIn_date"));
+				currReq.setCheckOutDate(rs.getDate("checkOut_date"));
 				requests.add(currReq);
 			}
 		} catch (SQLException e) {

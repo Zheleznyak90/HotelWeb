@@ -79,25 +79,17 @@ CREATE TABLE meal(
 	UNIQUE (name)
 );
 
-CREATE TABLE booking_period(
-	id INT NOT NULL AUTO_INCREMENT,
-	checkIn_date DATE NOT NULL,
-	checkOut_date DATE NOT NULL,
-	PRIMARY KEY (id)
-);
-
 CREATE TABLE request(
 	id INT NOT NULL AUTO_INCREMENT,
 	client_id INT NOT NULL,
 	manager_id INT,
 	class_id INT NOT NULL,
 	number_of_person INT NOT NULL,
-	booking_period INT NOT NULL,
+	checkIn_date DATE NOT NULL,
+	checkOut_date DATE NOT NULL,
 	created DATETIME NOT NULL,
 	isServed BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (id),
-	FOREIGN KEY (booking_period) REFERENCES booking_period(id) 
-	ON DELETE RESTRICT,
 	FOREIGN KEY (client_id) REFERENCES userT(id) 
 	ON DELETE RESTRICT,
 	FOREIGN KEY (manager_id) REFERENCES userT(id) 
@@ -115,7 +107,8 @@ CREATE TABLE orderT(
 	manager_id INT,
 	order_status INT NOT NULL,
 	created DATE NOT NULL,
-	booking_period INT NOT NULL,
+	checkIn_date DATE NOT NULL,
+	checkOut_date DATE NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (room_id) REFERENCES room(id) 
 	ON DELETE RESTRICT,
@@ -126,8 +119,6 @@ CREATE TABLE orderT(
 	FOREIGN KEY (manager_id) REFERENCES userT(id) 
 	ON DELETE SET NULL,
 	FOREIGN KEY (order_status) REFERENCES order_status(id) 
-	ON DELETE RESTRICT,
-	FOREIGN KEY (booking_period) REFERENCES booking_period(id) 
 	ON DELETE RESTRICT
 	
 );
