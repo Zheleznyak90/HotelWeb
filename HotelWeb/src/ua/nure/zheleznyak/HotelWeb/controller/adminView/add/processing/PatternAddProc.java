@@ -14,7 +14,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.CommonFunc;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class MealAddProc
+ * Servlet validate incoming date and create new pattern entity in database.
  */
 @WebServlet("/admin/PatternAddProc")
 public class PatternAddProc extends HttpServlet {

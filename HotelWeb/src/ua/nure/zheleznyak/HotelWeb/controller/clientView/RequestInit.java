@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 
 /**
- * Servlet implementation class RequestInit
+ * Servlet prepare data for new request jsp page.
  */
 @WebServlet("/client/RequestInit")
 public class RequestInit extends HttpServlet {

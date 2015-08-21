@@ -16,7 +16,7 @@ public class Order implements Serializable {
 	private Room room;
 	private User client;
 	private User manager;
-	private String status;
+	private OrderStatus status;
 	private Date creationDate;
 
 	private Date checkOutDate;
@@ -24,6 +24,10 @@ public class Order implements Serializable {
 
 	public Order (){
 		meal = new Meal();
+		client = new User();
+		manager = new User();
+		room = new Room();
+		status = new OrderStatus();
 	}
 	public Date getCheckOutDate() {
 		return checkOutDate;
@@ -81,11 +85,11 @@ public class Order implements Serializable {
 		this.manager = manager;
 	}
 
-	public String getStatus() {
+	public OrderStatus getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(OrderStatus status) {
 		this.status = status;
 	}
 

@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 /**
- * Servlet implementation class RoomManagment
+ * Servlet get room list from database and pass it to jsp page.implementation class RoomManagment
  */
 @WebServlet("/admin/RoomManagment")
 public class RoomManagment extends HttpServlet {

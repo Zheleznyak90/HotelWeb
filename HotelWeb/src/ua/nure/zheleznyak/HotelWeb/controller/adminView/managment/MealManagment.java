@@ -9,12 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
- * Servlet implementation class MealManagment
+ * Servlet get meal list from database and pass it to jsp page.
  */
 @WebServlet("/admin/MealManagment")
 public class MealManagment extends HttpServlet {

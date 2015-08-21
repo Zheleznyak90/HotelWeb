@@ -93,7 +93,7 @@ public class MysqlCommonDAO implements CommonDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERN_LIST);
+			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS);
 			while (rs.next()) {
 				patternList
 						.add(FillBean.getSingleton().generateRoomPattern(rs));

@@ -14,7 +14,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.CommonFunc;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 /**
- * Servlet implementation class MealAddProc
+ * Servlet validate incoming date and create new room entity in database.
  */
 @WebServlet("/admin/RoomAddProc")
 public class RoomAddProc extends HttpServlet {

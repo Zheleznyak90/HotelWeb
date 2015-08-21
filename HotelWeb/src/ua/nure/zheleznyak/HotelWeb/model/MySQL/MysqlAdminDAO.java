@@ -30,7 +30,7 @@ public class MysqlAdminDAO implements AdminDAO {
 		return singleton;
 	}
 
-/*	@Override
+	@Override
 	public List<RoomPattern> getPatternList() {
 		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
 		Connection con = null;
@@ -49,7 +49,7 @@ public class MysqlAdminDAO implements AdminDAO {
 		}
 		return patternList;
 	}
-*/
+
 	@Override
 	public List<Room> getRoomList() {
 		List<Room> roomList = new ArrayList<Room>();

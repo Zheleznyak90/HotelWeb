@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class RoomAddInit
+ * Servlet prepare data for room creation page.
  */
 @WebServlet("/admin/RoomAddInit")
 public class RoomAddInit extends HttpServlet {

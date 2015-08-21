@@ -15,7 +15,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class RoomEdit
+ * Servlet search for room using its id and pass room entity to jsp for it's editing.
  */
 @WebServlet("/admin/RoomEdit")
 public class RoomEdit extends HttpServlet {
@@ -24,21 +24,11 @@ public class RoomEdit extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -860834026603067447L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-
-	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		Room currRoom = MysqlAdminDAO.getSingleton().getRoomById(id);
@@ -49,4 +39,5 @@ public class RoomEdit extends HttpServlet {
 		request.setAttribute("jspPage", "edit/room");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
+
 }

@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet Filter implementation class IsClient
+ * Servlet filter any /client/ request and grant access only for authorized users.
  */
 @WebFilter(urlPatterns = { "/client/*" })
 public class IsClient implements Filter {

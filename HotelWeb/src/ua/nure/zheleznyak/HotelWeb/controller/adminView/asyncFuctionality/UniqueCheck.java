@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 
 /**
- * Servlet implementation class UniqueCheck
+ * Servlet return result of unique field value checking.
  */
 @WebServlet("/admin/UniqueCheck")
 public class UniqueCheck extends HttpServlet {

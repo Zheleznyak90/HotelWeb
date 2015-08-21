@@ -18,7 +18,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class RequestProc
+ * Servlet create new request in database.
  */
 @WebServlet("/client/RequestProc")
 public class RequestProc extends HttpServlet {

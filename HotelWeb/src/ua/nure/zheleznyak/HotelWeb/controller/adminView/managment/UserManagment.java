@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class UserManagment
+ * Servlet get user list from database and pass it to jsp page.
  */
 @WebServlet("/admin/UserManagment")
 public class UserManagment extends HttpServlet {

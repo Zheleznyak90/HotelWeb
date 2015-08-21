@@ -1,8 +1,8 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="rightPanel">
-	<div id="errorMsg">123</div>
-	<table border="1">
+	<div id="errorMsg"></div>
+	<table border="1" class="sortable">
 		<tr>
 			<td>Id</td>
 			<td>Email</td>
@@ -34,9 +34,9 @@
 		</c:forEach>
 	</table>
 </div>
-<script src="<c:url value="/view/js/adminPages.js" />"
+<script src="<c:url value="/view/js/sorttable.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/jslib/jquery.min.js" />"
+<script src="<c:url value="/view/js/adminPages.js" />"
 	type="text/javascript"></script>
 
 

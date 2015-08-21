@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
- * Servlet implementation class MealAddProc
+ * Servlet validate incoming date and create new meal entity in database.
  */
 @WebServlet("/admin/MealAddProc")
 public class MealAddProc extends HttpServlet {

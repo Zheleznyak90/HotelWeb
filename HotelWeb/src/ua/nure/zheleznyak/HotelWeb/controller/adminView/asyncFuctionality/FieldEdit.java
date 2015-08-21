@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 
 /**
- * Servlet implementation class FieldEdit
+ * Servlet allow async db editing. 
  */
 @WebServlet("/admin/FieldEdit")
 public class FieldEdit extends HttpServlet {

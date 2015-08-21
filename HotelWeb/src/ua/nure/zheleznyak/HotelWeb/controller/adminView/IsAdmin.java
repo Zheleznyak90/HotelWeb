@@ -15,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet Filter implementation class IsAdmin
+ * Servlet filter any /admin/ request and grant access only for administrators.
  */
 @WebFilter(urlPatterns = { "/admin/*" })
 public class IsAdmin implements Filter {
@@ -37,9 +37,8 @@ public class IsAdmin implements Filter {
 		if ( currUser == null || !currUser.getUserRole().getRole().equals("admin")) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();
 			((HttpServletResponse) response).sendRedirect(contextPath+"/authorization");
-		} else {
-			chain.doFilter(request, response);
 		}
+			chain.doFilter(request, response);
 	}
 
 	/**

@@ -2,7 +2,7 @@
 
 <div class="rightPanel">
 	<div id="errorMsg"></div>
-	<table border="1">
+	<table border="1" class="sortable">
 		<tr>
 			<td>Id</td>
 			<td>Room pattern</td>
@@ -38,7 +38,7 @@
 		class="btnImg" alt="addBtn" id="addBtn_Room"
 		onClick="addNew('${pageContext.request.contextPath}',this)">
 </div>
-<script src="<c:url value="/view/js/adminPages.js" />"
+<script src="<c:url value="/view/js/sorttable.js" />"
 	type="text/javascript"></script>
-<script src="<c:url value="/jslib/jquery.min.js" />"
+<script src="<c:url value="/view/js/adminPages.js" />"
 	type="text/javascript"></script>
