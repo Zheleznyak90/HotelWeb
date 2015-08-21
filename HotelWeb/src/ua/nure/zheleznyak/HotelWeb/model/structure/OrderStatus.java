@@ -11,19 +11,31 @@ public class OrderStatus implements Serializable {
 
 	private int id;
 	private String status;
-
+	/**
+	 * Simple getter.
+	 * @return id
+	 */
 	public int getId() {
 		return id;
 	}
-
+	/**
+	 * Simple setter.
+	 * @param id to set id
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
-
+	/**
+	 * Simple getter.
+	 * @return status
+	 */
 	public String getStatus() {
 		return status;
 	}
-
+	/**
+	 * Simple setter.
+	 * @param status name to set status
+	 */
 	public void setStatus(String status) {
 		this.status = status;
 	}

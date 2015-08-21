@@ -1,7 +1,5 @@
 package ua.nure.zheleznyak.HotelWeb.model.MySQL;
 
-import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,7 +23,9 @@ public class MysqlCommonDAO implements CommonDAO {
 
 	private MysqlCommonDAO() {
 	}
-
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlCommonDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlCommonDAO();
@@ -33,6 +33,9 @@ public class MysqlCommonDAO implements CommonDAO {
 		return singleton;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public User validateUser(String email, String password) {
 		User currUser = null;
 		Connection con = null;
@@ -43,7 +46,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			pst.setString(1, email);
 			String hashedPass = CommonFunc.hashPass(password);
 			pst.setString(2, hashedPass);
-		    ResultSet rs = pst.executeQuery();
+			ResultSet rs = pst.executeQuery();
 			if (!rs.next()) {
 				// Not valid login+pass
 			} else {
@@ -62,17 +65,20 @@ public class MysqlCommonDAO implements CommonDAO {
 		return currUser;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int registrateUser(User user) {
 		Connection con = null;
-		int  isRegistered = 0;
+		int isRegistered = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
 					.prepareStatement(SQLPatterns.REGISTRATE_USER);
 			pst.setString(1, user.getEmail());
 			String hashedPass = CommonFunc.hashPass(user.getPassword());
-			
+
 			pst.setString(2, hashedPass);
 			pst.setString(3, user.getFullName());
 			pst.setString(4, user.getPhoneNumber());
@@ -86,6 +92,9 @@ public class MysqlCommonDAO implements CommonDAO {
 		return isRegistered;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<RoomPattern> getPatternList() {
 		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
@@ -93,7 +102,8 @@ public class MysqlCommonDAO implements CommonDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(SQLPatterns.GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS);
+			ResultSet rs = st
+					.executeQuery(SQLPatterns.GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS);
 			while (rs.next()) {
 				patternList
 						.add(FillBean.getSingleton().generateRoomPattern(rs));
@@ -105,7 +115,10 @@ public class MysqlCommonDAO implements CommonDAO {
 		}
 		return patternList;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public RoomPattern getPatternById(String id) {
 		RoomPattern currRoomPattern = null;
@@ -126,7 +139,9 @@ public class MysqlCommonDAO implements CommonDAO {
 		return currRoomPattern;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<ApartmentClass> getApClasses() {
 		List<ApartmentClass> apartmentClasses = null;
@@ -149,6 +164,9 @@ public class MysqlCommonDAO implements CommonDAO {
 		return apartmentClasses;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public ApartmentClass getApClassById(int id) {
 		ApartmentClass currApartmentClass = null;
@@ -169,7 +187,10 @@ public class MysqlCommonDAO implements CommonDAO {
 		}
 		return currApartmentClass;
 	}
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Role> getRoles() {
 		List<Role> roles = null;
@@ -177,12 +198,10 @@ public class MysqlCommonDAO implements CommonDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			roles = new ArrayList<Role>();
-			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.GET_ROLES);
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ROLES);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
-				roles.add(FillBean.getSingleton()
-						.generateRole(rs));
+				roles.add(FillBean.getSingleton().generateRole(rs));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -190,9 +209,12 @@ public class MysqlCommonDAO implements CommonDAO {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return roles;
-		
+
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Role getRoleById(int id) {
 		Role currRole = null;
@@ -204,8 +226,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			pst.setInt(1, id);
 			ResultSet rs = pst.executeQuery();
 			rs.next();
-			currRole = FillBean.getSingleton()
-					.generateRole(rs);
+			currRole = FillBean.getSingleton().generateRole(rs);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -214,6 +235,9 @@ public class MysqlCommonDAO implements CommonDAO {
 		return currRole;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int isUnique(String table, String field, Object value) {
 		Connection con = null;
@@ -222,13 +246,14 @@ public class MysqlCommonDAO implements CommonDAO {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
 					.prepareStatement(SQLPatterns.IS_UNIQUE_P1 + table
-							+ SQLPatterns.IS_UNIQUE_P2 +field +SQLPatterns.IS_UNIQUE_P3);
+							+ SQLPatterns.IS_UNIQUE_P2 + field
+							+ SQLPatterns.IS_UNIQUE_P3);
 			// Create statement SELECT id FROM tableName WHERE fieldName = ?
 
 			pst.setObject(1, value);
 			ResultSet rs = pst.executeQuery();
-			if (rs.isBeforeFirst() ) {    
-				 resCode = 300; 
+			if (rs.isBeforeFirst()) {
+				resCode = 300;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

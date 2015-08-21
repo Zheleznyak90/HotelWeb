@@ -23,6 +23,9 @@ public class MysqlAdminDAO implements AdminDAO {
 	private MysqlAdminDAO() {
 	}
 
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlAdminDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlAdminDAO();
@@ -30,6 +33,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return singleton;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<RoomPattern> getPatternList() {
 		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
@@ -50,6 +56,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return patternList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Room> getRoomList() {
 		List<Room> roomList = new ArrayList<Room>();
@@ -69,6 +78,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return roomList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<User> getUsers() {
 		List<User> userList = new ArrayList<User>();
@@ -90,7 +102,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return userList;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int changeFieldValue(String table, String field, int id, Object value) {
 		Connection con = null;
@@ -114,6 +128,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return resCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int deleteField(String table, int id) {
 		Connection con = null;
@@ -136,6 +153,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return resCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addRoomPattern(RoomPattern pattern) {
 		Connection con = null;
@@ -160,6 +180,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addMeal(Meal meal) {
 		Connection con = null;
@@ -182,6 +205,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addRoom(Room room) {
 		Connection con = null;
@@ -204,6 +230,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User getUserById(String id) {
 		User currUser = null;
@@ -224,6 +253,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return currUser;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Room getRoomById(String id) {
 		Room currRoom = null;
@@ -244,7 +276,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return currRoom;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Meal getMealById(String id) {
 		Meal currMeal = null;

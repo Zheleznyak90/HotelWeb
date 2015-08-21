@@ -19,14 +19,18 @@ public class MysqlManegerDAO implements ManagerDAO {
 
 	private MysqlManegerDAO() {
 	}
-
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlManegerDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlManegerDAO();
 		}
 		return singleton;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Order> getUnexpiredOrders() {
 		List<Order> orders = null;
@@ -55,9 +59,11 @@ public class MysqlManegerDAO implements ManagerDAO {
 		}
 		return orders;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public List<Request> showClientRequests(String email) {
+	public List<Request> getClientRequests(String email) {
 		List<Request> requests = null;
 		Connection con = null;
 		try {
@@ -81,7 +87,9 @@ public class MysqlManegerDAO implements ManagerDAO {
 		}
 		return requests;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int offerRoom(Order order, int clientId, User manager) {
 		Connection con = null;
@@ -99,33 +107,43 @@ public class MysqlManegerDAO implements ManagerDAO {
 		}
 		return resCode;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean confirmBooking(int roomId, int clientId) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean confirmBookingCancel() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean showStat() {
 		// TODO Auto-generated method stub
 		return false;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public List<Order> showClientOrders(String email) {
+	public List<Order> getClientOrders(String email) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public List<Request> showUnservedRequests() {
+	public List<Request> getUnservedRequests() {
 		// TODO Auto-generated method stub
 		return null;
 	}

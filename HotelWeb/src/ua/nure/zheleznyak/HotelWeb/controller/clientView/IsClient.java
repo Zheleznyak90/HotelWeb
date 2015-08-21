@@ -30,6 +30,7 @@ public class IsClient implements Filter {
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+		
 		User currUser = (User) ((HttpServletRequest) request).getSession().getAttribute("User");
 		if ( currUser == null) {
 			String contextPath = ((HttpServletRequest)request).getContextPath();

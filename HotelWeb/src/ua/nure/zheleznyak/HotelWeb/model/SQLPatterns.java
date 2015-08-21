@@ -9,7 +9,7 @@ public class SQLPatterns {
 	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
 			+ "FROM room_pattern ";
 	public static final String GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS = "SELECT id, class_id, size, price, description, name, rating "
-			+ "FROM room_pattern WHERE id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern)";
+			+ "FROM room_pattern WHERE id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern )";
 
 	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
 	public static final String GET_APPARTMENT_CLASS_BY_ID = "SELECT * FROM room_class WHERE id = ?";

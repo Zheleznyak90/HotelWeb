@@ -22,14 +22,18 @@ public class MysqlClientDAO implements ClientDAO {
 
 	private MysqlClientDAO() {
 	}
-
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlClientDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlClientDAO();
 		}
 		return singleton;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void bookRoom(Order order, String roomPattern) {
 		List<Room> spareRooms = getAvailableRooms(order.getCheckInDate(),
@@ -56,19 +60,25 @@ public class MysqlClientDAO implements ClientDAO {
 		}
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void confirmBook() {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void cancelBook() {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Meal> getMealList() {
 		List<Meal> mealList = new ArrayList<Meal>();
@@ -90,7 +100,9 @@ public class MysqlClientDAO implements ClientDAO {
 		return mealList;
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int createRequest(Request req) {
 		Connection con = null;
@@ -114,7 +126,9 @@ public class MysqlClientDAO implements ClientDAO {
 
 		return 0;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
 			String roomPattern) {
