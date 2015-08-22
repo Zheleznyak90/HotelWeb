@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="rightPanel">
 	<div id="errorMsg"></div>
-	<div title="UserT" id="${user.id}">
+	<div class ="currItem" title="UserT" id="${user.id}">
 		<br> Email <br> ${user.email}
 		<br> Role <br> <select class="changeable" id="role_id">
 		<c:forEach var="currRole" items="${roles}">

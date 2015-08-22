@@ -2,7 +2,7 @@
 
 <div class="rightPanel">
 	<div id="errorMsg"></div>
-	<div title="room" id="${room.id}">
+	<div class ="currItem" title="room" id="${room.id}">
 		<br> Room type 
 		<br> <select class="changeable" id="room_pattern">
 		<c:forEach var="currPattern" items="${patterns}">

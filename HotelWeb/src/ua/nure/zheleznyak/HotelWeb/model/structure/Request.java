@@ -25,6 +25,8 @@ public class Request implements Serializable {
 	
 	public Request(){
 		aClass = new ApartmentClass();
+		client = new User();
+		manager = new User();
 	}
 	/**
 	 * Simple getter.

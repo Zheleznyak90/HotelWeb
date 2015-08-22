@@ -1,7 +1,6 @@
 package ua.nure.zheleznyak.HotelWeb.controller.managerView;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,12 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlManegerDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 
 /**
  * Servlet prepare data for jsp, that create list of all unserded requests.
  */
-@WebServlet("/manager/ReqList")
+@WebServlet("/manager/RequestList")
 public class UnservedReqList extends HttpServlet {
 
 	/**
@@ -43,7 +43,9 @@ public class UnservedReqList extends HttpServlet {
 
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
-		List<Request> unserved = new ArrayList<Request>();
-		//unserved = MysqlManegerDAO.getSingleton().showClientRequests();
+		List<Request> unserved = MysqlManegerDAO.getSingleton().getUnservedRequests();
+		request.setAttribute("requests", unserved);
+		request.setAttribute("jspPage", "requests");
+		request.getRequestDispatcher("/view/pages/manager/managerPagePattern.jsp").forward(request, response);
 	}
 }

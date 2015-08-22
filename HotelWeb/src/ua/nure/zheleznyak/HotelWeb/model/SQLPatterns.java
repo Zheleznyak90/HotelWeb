@@ -45,14 +45,23 @@ public class SQLPatterns {
 	public static final String DELETE_ROW_P2 = " WHERE id = ?";
 
 	// Manager sql requests
+	public static final String GET_STATUS_LIST = "SELECT * FROM order_status";
+	
 	public static final String OFFER_ROOM = "INSERT INTO orderT "
 			+ "(room_id, client_id, manager_id, order_status, meal, created, checkIn_date, checkOut_date)"
 			+ " VALUES (?, ?, ?, (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
 	public static final String CONFIRM_BOOKING_MANAGER = "UPDATE orderT SET order_status = '2' WHERE id = ?";
-	public static final String GET_ALL_UNSERVED_REQUESTS = "SELECT number_of_person, checkIn_date, checkOut_date FROM request WHERE isServed=0 ORDER BY created DESC";
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 
+	public static final String GET_UNSERVED_REQUESTS = "SELECT r.id as id, c.email as client, man.email as manager," +
+			" r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person" +
+			" FROM userT c," +
+			" request r LEFT JOIN usert man ON man.id=r.manager_id," +
+			" room_class rc" +
+			" WHERE r.client_id=c.id AND r.class_id=rc.id AND isServed=0" +
+			" AND r.checkIn_date>NOW()";
+	
 	public static final String GET_UNEXPIRED_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
 			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +
@@ -66,7 +75,7 @@ public class SQLPatterns {
 			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
 			" room r, meal m, order_status os" +
 			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
-			" m.id = o.meal_id AND o.order_status = os.id WHERE o.id = ?";
+			" m.id = o.meal_id AND o.order_status = os.id AND o.id = ?";
 	public static final String GET_USER_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
 			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +

@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView.asyncFuctionality;
+package ua.nure.zheleznyak.HotelWeb.controller.managerView.asyncFuctionality;
 
 import java.io.IOException;
 
@@ -13,7 +13,7 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 /**
  * Servlet allow async db editing. 
  */
-@WebServlet("/admin/FieldEdit")
+@WebServlet("/manager/FieldEdit")
 public class FieldEdit extends HttpServlet {
 	
 	/**

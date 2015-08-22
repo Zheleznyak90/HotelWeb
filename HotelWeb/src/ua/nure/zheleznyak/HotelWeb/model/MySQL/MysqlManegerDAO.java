@@ -14,6 +14,7 @@ import org.apache.logging.log4j.Logger;
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ManagerDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
+import ua.nure.zheleznyak.HotelWeb.model.structure.OrderStatus;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
@@ -76,17 +77,6 @@ public class MysqlManegerDAO implements ManagerDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			requests = new ArrayList<Request>();
-			Statement stm = con.createStatement();
-			System.out.println(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
-			ResultSet rs = stm
-					.executeQuery(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
-			while (rs.next()) {
-				Request currReq = new Request();
-				currReq.setNumberOfPerson(rs.getInt("number_of_person"));
-				currReq.setCheckInDate(rs.getDate("checkIn_date"));
-				currReq.setCheckOutDate(rs.getDate("checkOut_date"));
-				requests.add(currReq);
-			}
 		} catch (SQLException e) {
 			logger.error(e);;
 		} finally {
@@ -159,8 +149,30 @@ public class MysqlManegerDAO implements ManagerDAO {
 	 */
 	@Override
 	public List<Request> getUnservedRequests() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Request> requests = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			requests = new ArrayList<Request>();
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(SQLPatterns.GET_UNSERVED_REQUESTS);
+			while (rs.next()) {
+				Request currReq = new Request();
+				currReq.setId(rs.getInt("id"));
+				currReq.getClient().setEmail(rs.getString("client"));
+				currReq.getManager().setEmail(rs.getString("manager"));
+				currReq.setNumberOfPerson(rs.getInt("number_of_person"));
+				currReq.getaClass().setaClass(rs.getString("aClass"));
+				currReq.setCheckInDate(rs.getDate("checkIn"));
+				currReq.setCheckOutDate(rs.getDate("checkOut"));
+				requests.add(currReq);
+			}
+		} catch (SQLException e) {
+			logger.error(e);;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return requests;
 	}
 
 	/**
@@ -193,6 +205,33 @@ public class MysqlManegerDAO implements ManagerDAO {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return currOrder;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<OrderStatus> getStatusList() {
+		Connection con = null;
+		List<OrderStatus> statuses = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			statuses = new ArrayList<OrderStatus>();
+			Statement stm = con.createStatement();
+			ResultSet rs = stm.executeQuery(SQLPatterns.GET_STATUS_LIST);
+			while(rs.next()){
+				OrderStatus currStat = new OrderStatus();
+				currStat.setId(rs.getInt("id"));
+				currStat.setStatus(rs.getString("status"));
+				statuses.add(currStat);
+			}
+
+		} catch (SQLException e) {
+			logger.error(e);;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return statuses;
 	}
 
 }
