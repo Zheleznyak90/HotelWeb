@@ -17,6 +17,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
  */
 @WebServlet("/admin/PatternAddInit")
 public class PatternAddInit extends HttpServlet {
+	
 	/**
 	 * 
 	 */

@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
@@ -17,6 +20,8 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
  */
 @WebServlet("/admin/MealAddProc")
 public class MealAddProc extends HttpServlet {
+	private static final Logger logger = LogManager.getLogger(MealAddProc.class.getName());
+	
 
 	/**
 	 * 
@@ -35,7 +40,7 @@ public class MealAddProc extends HttpServlet {
 			MysqlAdminDAO.getSingleton().addMeal(newMeal);
 			response.sendRedirect("MealManagment");
 		} else {
-			System.out.println("cannot add meal. Error: " + code);
+			logger.trace("Cannot add meal. Error: " + code);
 			response.sendRedirect("MealAddInit");
 			// TODO trace
 		}

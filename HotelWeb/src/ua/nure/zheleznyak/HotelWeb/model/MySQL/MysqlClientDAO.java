@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
@@ -17,6 +20,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 public class MysqlClientDAO implements ClientDAO {
+	private static final Logger logger = LogManager.getLogger(MysqlClientDAO.class.getName());
 
 	private static MysqlClientDAO singleton;
 
@@ -53,7 +57,7 @@ public class MysqlClientDAO implements ClientDAO {
 				boolean res = pst.execute();
 
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} finally {
 				MySQLConnection.getSingleton().closeConnection(con);
 			}
@@ -93,7 +97,7 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -119,7 +123,7 @@ public class MysqlClientDAO implements ClientDAO {
 			pst.execute();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -150,7 +154,7 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

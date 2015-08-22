@@ -53,21 +53,21 @@ public class SQLPatterns {
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 
-	public static final String GET_UNEXPIRED_ORDERS = "SELECT r.number as number, c.email as client, man.email as manager," +
+	public static final String GET_UNEXPIRED_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
 			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +
 			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
 			" room r, meal m, order_status os" +
 			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
 			" m.id = o.meal_id AND o.order_status = os.id AND o.checkIn_date>NOW()";
-	public static final String GET_ORDER_BY_ID = "SELECT r.number as number, c.email as client, man.email as manager," +
+	public static final String GET_ORDER_BY_ID = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
 			" o.meal_id as meal, o.order_status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +
 			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
 			" room r, meal m, order_status os" +
 			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
-			" m.id = o.meal_id AND o.order_status = os.id";
-	public static final String GET_USER_ORDERS = "SELECT r.number as number, c.email as client, man.email as manager," +
+			" m.id = o.meal_id AND o.order_status = os.id WHERE o.id = ?";
+	public static final String GET_USER_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
 			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +
 			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +

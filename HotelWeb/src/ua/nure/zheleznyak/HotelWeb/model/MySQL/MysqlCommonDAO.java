@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.CommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
@@ -18,6 +21,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlCommonDAO implements CommonDAO {
+	private static final Logger logger = LogManager.getLogger(MysqlCommonDAO.class.getName());
 
 	private static MysqlCommonDAO singleton;
 
@@ -58,7 +62,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -84,7 +88,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			pst.setString(4, user.getPhoneNumber());
 			isRegistered = pst.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -109,7 +113,7 @@ public class MysqlCommonDAO implements CommonDAO {
 						.add(FillBean.getSingleton().generateRoomPattern(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -132,7 +136,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			rs.next();
 			currRoomPattern = FillBean.getSingleton().generateRoomPattern(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -157,7 +161,7 @@ public class MysqlCommonDAO implements CommonDAO {
 						.generateApartmentClass(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -181,7 +185,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			currApartmentClass = FillBean.getSingleton()
 					.generateApartmentClass(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -204,7 +208,7 @@ public class MysqlCommonDAO implements CommonDAO {
 				roles.add(FillBean.getSingleton().generateRole(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -228,7 +232,7 @@ public class MysqlCommonDAO implements CommonDAO {
 			rs.next();
 			currRole = FillBean.getSingleton().generateRole(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -256,7 +260,7 @@ public class MysqlCommonDAO implements CommonDAO {
 				resCode = 300;
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 			resCode = 301;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);

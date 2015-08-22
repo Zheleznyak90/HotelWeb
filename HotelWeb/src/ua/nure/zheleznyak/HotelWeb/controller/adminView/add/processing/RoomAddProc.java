@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.CommonFunc;
@@ -18,7 +21,8 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
  */
 @WebServlet("/admin/RoomAddProc")
 public class RoomAddProc extends HttpServlet {
-
+	private static final Logger logger = LogManager.getLogger(RoomAddProc.class.getName());
+	
 	/**
 	 * 
 	 */
@@ -36,7 +40,7 @@ public class RoomAddProc extends HttpServlet {
 			MysqlAdminDAO.getSingleton().addRoom(newRoom);
 			response.sendRedirect("RoomManagment");
 		} else {
-			System.out.println("cannot add room. Error: " + code);
+			logger.trace("Cannot add room. Error: " + code);
 			response.sendRedirect("RoomAddInit");
 			// TODO trace
 		}

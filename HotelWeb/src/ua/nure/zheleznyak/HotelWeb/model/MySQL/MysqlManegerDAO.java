@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ManagerDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
@@ -15,10 +18,12 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlManegerDAO implements ManagerDAO {
+	private static final Logger logger = LogManager.getLogger(MysqlManegerDAO.class.getName());
 	private static MysqlManegerDAO singleton;
 
 	private MysqlManegerDAO() {
 	}
+
 	/**
 	 * Return singleton object.
 	 */
@@ -28,6 +33,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		}
 		return singleton;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -39,10 +45,10 @@ public class MysqlManegerDAO implements ManagerDAO {
 			con = MySQLConnection.getSingleton().getConnection();
 			orders = new ArrayList<Order>();
 			Statement stm = con.createStatement();
-			ResultSet rs = stm
-					.executeQuery(SQLPatterns.GET_UNEXPIRED_ORDERS);
+			ResultSet rs = stm.executeQuery(SQLPatterns.GET_UNEXPIRED_ORDERS);
 			while (rs.next()) {
 				Order currOrder = new Order();
+				currOrder.setId(rs.getInt("id"));
 				currOrder.getClient().setEmail(rs.getString("client"));
 				currOrder.getManager().setEmail(rs.getString("manager"));
 				currOrder.getMeal().setName(rs.getString("meal"));
@@ -53,12 +59,13 @@ public class MysqlManegerDAO implements ManagerDAO {
 				orders.add(currOrder);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return orders;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -81,12 +88,13 @@ public class MysqlManegerDAO implements ManagerDAO {
 				requests.add(currReq);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return requests;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -96,17 +104,20 @@ public class MysqlManegerDAO implements ManagerDAO {
 		int resCode = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.OFFER_ROOM);
-			//pst.set
-			//ResultSet rs = stm.executeQuery(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
-			
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.OFFER_ROOM);
+			// pst.set
+			// ResultSet rs =
+			// stm.executeQuery(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
+
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return resCode;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -115,6 +126,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -123,6 +135,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -131,6 +144,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -139,6 +153,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -146,6 +161,38 @@ public class MysqlManegerDAO implements ManagerDAO {
 	public List<Request> getUnservedRequests() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public Order getOrderById(String id) {
+		Order currOrder = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pstm = con
+					.prepareStatement(SQLPatterns.GET_ORDER_BY_ID);
+			pstm.setString(1, id);
+			ResultSet rs = pstm.executeQuery();
+			rs.next();
+			currOrder = new Order();
+			currOrder.setId(rs.getInt("id"));
+			currOrder.getClient().setEmail(rs.getString("client"));
+			currOrder.getManager().setEmail(rs.getString("manager"));
+			currOrder.getMeal().setId(rs.getInt("meal"));
+			currOrder.getRoom().setNumber(rs.getInt("number"));
+			currOrder.getStatus().setId(rs.getInt("status"));
+			currOrder.setCheckInDate(rs.getDate("checkIn"));
+			currOrder.setCheckOutDate(rs.getDate("checkOut"));
+
+		} catch (SQLException e) {
+			logger.error(e);;
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return currOrder;
 	}
 
 }

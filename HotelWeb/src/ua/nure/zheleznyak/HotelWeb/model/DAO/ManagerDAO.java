@@ -23,6 +23,10 @@ public interface ManagerDAO {
 	 * Return List of Request objects for single user based on database.
 	 */
 	public List<Request> getClientRequests(String email);
+	/**
+	 * Create single Order object using database row with passed id.
+	 */
+	public Order getOrderById(String id);
 	
 	public int offerRoom(Order order, int clientId, User manager);
 	
