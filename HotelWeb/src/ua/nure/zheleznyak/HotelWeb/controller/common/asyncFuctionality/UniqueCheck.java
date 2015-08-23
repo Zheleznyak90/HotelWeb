@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.adminView.asyncFuctionality;
+package ua.nure.zheleznyak.HotelWeb.controller.common.asyncFuctionality;
 
 import java.io.IOException;
 
@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 
 /**
- * Servlet implementation class UniqueCheck
+ * Servlet return result of unique field value checking.
  */
-@WebServlet("/admin/UniqueCheck")
+@WebServlet("/UniqueCheck")
 public class UniqueCheck extends HttpServlet {
 
 	/**

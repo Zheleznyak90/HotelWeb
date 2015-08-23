@@ -8,6 +8,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.AdminDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
@@ -19,10 +22,14 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 public class MysqlAdminDAO implements AdminDAO {
 
 	private static MysqlAdminDAO singleton;
+	private static final Logger logger = LogManager.getLogger(MysqlAdminDAO.class.getName());
 
 	private MysqlAdminDAO() {
 	}
 
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlAdminDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlAdminDAO();
@@ -30,7 +37,10 @@ public class MysqlAdminDAO implements AdminDAO {
 		return singleton;
 	}
 
-/*	@Override
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public List<RoomPattern> getPatternList() {
 		List<RoomPattern> patternList = new ArrayList<RoomPattern>();
 		Connection con = null;
@@ -43,13 +53,16 @@ public class MysqlAdminDAO implements AdminDAO {
 						.add(FillBean.getSingleton().generateRoomPattern(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return patternList;
 	}
-*/
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Room> getRoomList() {
 		List<Room> roomList = new ArrayList<Room>();
@@ -62,13 +75,16 @@ public class MysqlAdminDAO implements AdminDAO {
 				roomList.add(FillBean.getSingleton().generateRoom(rs));
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return roomList;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<User> getUsers() {
 		List<User> userList = new ArrayList<User>();
@@ -83,14 +99,16 @@ public class MysqlAdminDAO implements AdminDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return userList;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int changeFieldValue(String table, String field, int id, Object value) {
 		Connection con = null;
@@ -106,7 +124,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.setObject(1, value);
 			pst.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 			resCode = 301;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
@@ -114,6 +132,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return resCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int deleteField(String table, int id) {
 		Connection con = null;
@@ -128,7 +149,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.setInt(1, id);
 			pst.execute();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 			resCode = 301;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
@@ -136,6 +157,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return resCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addRoomPattern(RoomPattern pattern) {
 		Connection con = null;
@@ -152,7 +176,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -160,6 +184,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addMeal(Meal meal) {
 		Connection con = null;
@@ -174,7 +201,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -182,6 +209,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int addRoom(Room room) {
 		Connection con = null;
@@ -196,7 +226,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -204,6 +234,9 @@ public class MysqlAdminDAO implements AdminDAO {
 		return errCode;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public User getUserById(String id) {
 		User currUser = null;
@@ -217,13 +250,16 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currUser = FillBean.getSingleton().generateUser(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return currUser;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Room getRoomById(String id) {
 		Room currRoom = null;
@@ -237,14 +273,16 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currRoom = FillBean.getSingleton().generateRoom(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return currRoom;
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public Meal getMealById(String id) {
 		Meal currMeal = null;
@@ -258,7 +296,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currMeal = FillBean.getSingleton().generateMeal(rs);
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

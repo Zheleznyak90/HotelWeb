@@ -18,7 +18,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet implementation class OrderProc
+ * Servlet create new order in database.
  */
 @WebServlet("/client/OrderProc")
 public class OrderProc extends HttpServlet {
@@ -56,7 +56,7 @@ public class OrderProc extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher("/view/pages/tnxForRequest.jsp").forward(request, response);
+		request.getRequestDispatcher("/view/pages/client/tnxForRequest.jsp").forward(request, response);
 	}
 
 }

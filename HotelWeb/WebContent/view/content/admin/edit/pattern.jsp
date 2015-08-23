@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div class="rightPanel">
 	<div id="errorMsg"></div>
-	<div title="room_pattern" id="${pattern.id}">
+	<div class ="currItem" title="room_pattern" id="${pattern.id}">
 		<br> Class 
 		<br> <select class="changeable" id="class_id">
 		<c:forEach var="currClass" items="${classes}">

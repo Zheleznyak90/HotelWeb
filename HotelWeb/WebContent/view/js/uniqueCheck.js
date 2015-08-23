@@ -8,7 +8,7 @@ $(".unique").change(function() {
 	var value = $(this).val();
 	var thisObj = $(this);
 
-	$.post("/HotelWeb/admin/UniqueCheck", {
+	$.post("/HotelWeb/UniqueCheck", {
 		table : table,
 		field : field,
 		value : value

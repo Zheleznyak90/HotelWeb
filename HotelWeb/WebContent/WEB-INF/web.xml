@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
   <display-name>HotelWeb</display-name>
   <servlet>
     <servlet-name>RegistrationJsp</servlet-name>
-    <jsp-file>/view/pages/registration.jsp</jsp-file>
+    <jsp-file>/view/pages/common/registration.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrationJsp</servlet-name>
@@ -11,7 +11,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AuthorizationJsp</servlet-name>
-    <jsp-file>/view/pages/authorization.jsp</jsp-file>
+    <jsp-file>/view/pages/common/authorization.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AuthorizationJsp</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AfterReqRedirect</servlet-name>
-    <jsp-file>/view/pages/tnxForRequest.jsp</jsp-file>
+    <jsp-file>/view/pages/client/tnxForRequest.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AfterReqRedirect</servlet-name>
@@ -32,5 +32,13 @@
   <servlet-mapping>
     <servlet-name>MealAdd</servlet-name>
     <url-pattern>/admin/MealAddInit</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AccountManagment</servlet-name>
+    <jsp-file>/view/pages/client/accountManagment.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AccountManagment</servlet-name>
+    <url-pattern>/client/accManagment</url-pattern>
   </servlet-mapping>
 </web-app>

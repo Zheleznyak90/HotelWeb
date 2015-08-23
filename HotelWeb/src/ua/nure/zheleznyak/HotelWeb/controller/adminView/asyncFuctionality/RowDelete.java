@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlAdminDAO;
 
 /**
- * Servlet implementation class RowDelete
+ * Servlet allow async row deleting. 
  */
 @WebServlet("/admin/RowDelete")
 public class RowDelete extends HttpServlet {
@@ -22,28 +22,15 @@ public class RowDelete extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -1624999523766891926L;
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-
-	private void processReq(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		
 		int deleteId = Integer.parseInt(request.getParameter("id"));
 		String table = request.getParameter("table");
 		int code = MysqlAdminDAO.getSingleton().deleteField(table, deleteId);
 		response.setContentType("text/plain");
 		response.getWriter().print(code);
 	}
-
 }

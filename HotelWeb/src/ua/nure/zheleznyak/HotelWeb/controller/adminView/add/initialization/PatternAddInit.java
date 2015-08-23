@@ -13,10 +13,11 @@ import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 
 /**
- * Servlet implementation class PatternAddInit
+ * Servlet prepare data for pattern creation page.
  */
 @WebServlet("/admin/PatternAddInit")
 public class PatternAddInit extends HttpServlet {
+	
 	/**
 	 * 
 	 */

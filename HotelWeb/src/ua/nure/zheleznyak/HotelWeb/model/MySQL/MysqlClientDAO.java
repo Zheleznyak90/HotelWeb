@@ -8,6 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
@@ -17,19 +20,24 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 public class MysqlClientDAO implements ClientDAO {
+	private static final Logger logger = LogManager.getLogger(MysqlClientDAO.class.getName());
 
 	private static MysqlClientDAO singleton;
 
 	private MysqlClientDAO() {
 	}
-
+	/**
+	 * Return singleton object.
+	 */
 	public static MysqlClientDAO getSingleton() {
 		if (singleton == null) {
 			singleton = new MysqlClientDAO();
 		}
 		return singleton;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void bookRoom(Order order, String roomPattern) {
 		List<Room> spareRooms = getAvailableRooms(order.getCheckInDate(),
@@ -49,26 +57,32 @@ public class MysqlClientDAO implements ClientDAO {
 				boolean res = pst.execute();
 
 			} catch (SQLException e) {
-				e.printStackTrace();
+				logger.error(e);
 			} finally {
 				MySQLConnection.getSingleton().closeConnection(con);
 			}
 		}
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void confirmBook() {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void cancelBook() {
 		// TODO Auto-generated method stub
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Meal> getMealList() {
 		List<Meal> mealList = new ArrayList<Meal>();
@@ -83,14 +97,16 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return mealList;
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int createRequest(Request req) {
 		Connection con = null;
@@ -107,14 +123,16 @@ public class MysqlClientDAO implements ClientDAO {
 			pst.execute();
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 
 		return 0;
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
 			String roomPattern) {
@@ -136,7 +154,7 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error(e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

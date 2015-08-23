@@ -1,5 +1,5 @@
 $(".changeable").change(function() {
-	var parent = $(this).parent();
+	var parent = $(".currItem");
 	var table = $(parent).attr("title");
 	var id = $(parent).attr("id");
 	
@@ -15,7 +15,7 @@ $(".changeable").change(function() {
 	else{
 		value = this.value;
 	}
-	$.post("/HotelWeb/admin/FieldEdit", {
+	$.post("/HotelWeb/manager/FieldEdit", {
   		table : table,
   		field : field,
 		id : id,

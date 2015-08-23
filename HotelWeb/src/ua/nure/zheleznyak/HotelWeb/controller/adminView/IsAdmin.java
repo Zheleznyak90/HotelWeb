@@ -15,11 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet Filter implementation class IsAdmin
+ * Servlet filter any /admin/ request and grant access only for administrators.
  */
 @WebFilter(urlPatterns = { "/admin/*" })
 public class IsAdmin implements Filter {
-
 
 	/**
 	 * @see Filter#destroy()
@@ -33,13 +32,19 @@ public class IsAdmin implements Filter {
 	 */
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
-		User currUser = (User) ((HttpServletRequest) request).getSession().getAttribute("User");
-		if ( currUser == null || !currUser.getUserRole().getRole().equals("admin")) {
-			String contextPath = ((HttpServletRequest)request).getContextPath();
-			((HttpServletResponse) response).sendRedirect(contextPath+"/authorization");
+
+		User currUser = (User) ((HttpServletRequest) request).getSession()
+				.getAttribute("User");
+		if (currUser == null
+				|| !currUser.getUserRole().getRole().equals("admin")) {
+			String contextPath = ((HttpServletRequest) request)
+					.getContextPath();
+			((HttpServletResponse) response).sendRedirect(contextPath
+					+ "/authorization");
 		} else {
 			chain.doFilter(request, response);
 		}
+
 	}
 
 	/**

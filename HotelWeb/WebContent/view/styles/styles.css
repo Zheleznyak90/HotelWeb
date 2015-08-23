@@ -47,7 +47,7 @@ html,body {
 }
 
 .hcontainer {
-	background-color: #ff00ff;
+	background-color: whiteSmoke;
 	display: table;
 	width: 100%;
 }
@@ -59,7 +59,7 @@ html,body {
 }
 
 .lang {
-	background-color: #FFF2BC;
+	background-color:#D0CDCD;
 	width: 90%;
 	padding: 0 50px 0 10px;
 }

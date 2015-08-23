@@ -9,5 +9,5 @@
 			<td><input type="password" name="password"></td>
 		</tr>
 	</table>
-	<input type="submit" value="Enter">
+	<input type="submit" value="Log In">
 </form>

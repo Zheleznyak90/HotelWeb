@@ -2,11 +2,11 @@
 
 <c:choose>
 	<c:when test="${User.userRole.role=='client'}">
-		<a class="auth" href="${pageContext.request.contextPath}/client">Create
+		<a class="auth" href="${pageContext.request.contextPath}/client/RequestInit">Create
 			request</a>
 	</c:when>
 	<c:when test="${User.userRole.role=='manager'}">
-		<a class="auth" href="${pageContext.request.contextPath}/manager">Get
+		<a class="auth" href="${pageContext.request.contextPath}/manager/OrdersList">Get
 			requests</a>
 	</c:when>
 	<c:when test="${User.userRole.role=='admin'}">
@@ -14,7 +14,7 @@
 		</a>
 	</c:when>
 </c:choose>
-<a class="auth" href="${pageContext.request.contextPath}/account">My
+<a class="auth" href="${pageContext.request.contextPath}/client/accManagment">My
 	Account</a>
 <a class="reg" href="${pageContext.request.contextPath}/LogOut">Log
 	Out</a>

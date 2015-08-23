@@ -14,7 +14,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class PatternEdit
+ * Servlet search for pattern using its id and pass pattern entity to jsp for it's editing.
  */
 @WebServlet("/admin/PatternEdit")
 public class PatternEdit extends HttpServlet {
@@ -23,21 +23,12 @@ public class PatternEdit extends HttpServlet {
 	 */
 	private static final long serialVersionUID = -8017576581778428687L;
 
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
-		processReq(request, response);
-	}
-
-	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		String id = request.getParameter("id");
 		RoomPattern currPattern = MysqlCommonDAO.getSingleton().getPatternById(id);
@@ -47,6 +38,5 @@ public class PatternEdit extends HttpServlet {
 		request.setAttribute("jspPage", "edit/pattern");
 		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
-
 
 }

@@ -15,7 +15,7 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 import ua.nure.zheleznyak.HotelWeb.model.structure.RoomPattern;
 
 /**
- * Servlet implementation class OrderInit
+ * Servlet search for pattern using its id and pass pattern entity to jsp for order initialization.
  */
 @WebServlet("/client/OrderInit")
 public class OrderInit extends HttpServlet {
