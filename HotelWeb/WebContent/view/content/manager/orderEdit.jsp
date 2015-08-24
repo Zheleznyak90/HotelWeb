@@ -20,7 +20,7 @@
 				<td>Meal</td>
 				<td><select class="changeable" id="meal_id">
 						<c:forEach var="currMeal" items="${meals}">
-							<option value="${currMeal.id}" ${order.meal.id==currMeal.id? 'selected':'' }>${currMeal.name}</option>
+							<option value="${currMeal.id}" ${order.meal.name eq currMeal.name? 'selected':'' }>${currMeal.name}</option>
 						</c:forEach>
 				</select></td>
 			</tr>
@@ -28,7 +28,7 @@
 				<td>Status</td>
 				<td><select class="changeable" id="order_status">
 						<c:forEach var="currStatus" items="${statuses}">
-							<option value="${currStatus.id}" ${order.status.id==currStatus.id? 'selected':'' }>${currStatus.status}</option>
+							<option value="${currStatus.id}" ${order.status.status eq currStatus.status? 'selected':'' }>${currStatus.status}</option>
 						</c:forEach>
 				</select></td>
 			</tr>

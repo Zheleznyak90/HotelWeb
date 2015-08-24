@@ -4,9 +4,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 
 public class FillBean {
+	private static final Logger logger = LogManager.getLogger(MysqlCommonDAO.class.getName());
+
 	private static FillBean singleton;
 
 	private FillBean() {
@@ -28,7 +33,7 @@ public class FillBean {
 			currMeal.setActive(rs.getBoolean("isActive"));
 			currMeal.setDescription(rs.getString("description"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return currMeal;
 	}
@@ -53,7 +58,7 @@ public class FillBean {
 			}
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return currRoom;
 	}
@@ -69,7 +74,7 @@ public class FillBean {
 					rs.getInt("role_id")));
 
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return currUser;
 	}
@@ -78,7 +83,6 @@ public class FillBean {
 		RoomPattern currPattern = new RoomPattern();
 		try {
 			currPattern.setId(rs.getInt("id"));
-
 			currPattern.setaClass(MysqlCommonDAO.getSingleton().getApClassById(
 					rs.getInt("class_id")));
 			currPattern.setPrice(rs.getInt("price"));
@@ -87,7 +91,7 @@ public class FillBean {
 			currPattern.setName(rs.getString("name"));
 			currPattern.setRating(rs.getFloat("rating"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return currPattern;
 	}
@@ -98,18 +102,52 @@ public class FillBean {
 			aClass.setId(rs.getInt("id"));
 			aClass.setaClass(rs.getString("class"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return aClass;
 	}
-
+	
+	public Request generateRequest(ResultSet rs){
+		Request currReq = new Request();
+		try {
+			currReq.setId(rs.getInt("id"));
+			currReq.getClient().setEmail(rs.getString("client"));
+			currReq.getManager().setEmail(rs.getString("manager"));
+			currReq.setNumberOfPerson(rs.getInt("number_of_person"));
+			currReq.getaClass().setaClass(rs.getString("aClass"));
+			currReq.setCheckInDate(rs.getDate("checkIn"));
+			currReq.setCheckOutDate(rs.getDate("checkOut"));
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		}
+		return currReq;
+	}
+	
+	
+	public Order generateOrder(ResultSet rs){
+		Order currOrder = new Order();
+		try {
+			currOrder.setId(rs.getInt("id"));
+			currOrder.getClient().setEmail(rs.getString("client"));
+			currOrder.getManager().setEmail(rs.getString("manager"));
+			currOrder.getMeal().setName(rs.getString("meal"));
+			currOrder.getRoom().setNumber(rs.getInt("number"));
+			currOrder.getStatus().setStatus(rs.getString("status"));
+			currOrder.setCheckInDate(rs.getDate("checkIn"));
+			currOrder.setCheckOutDate(rs.getDate("checkOut"));
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		}
+		return currOrder;
+	}
+		
 	public Role generateRole(ResultSet rs) {
 		Role currRole = new Role();
 		try {
 			currRole.setId(rs.getInt("id"));
 			currRole.setRole(rs.getString("role"));
 		} catch (SQLException e) {
-			e.printStackTrace();
+			logger.error("SQL ERROR", e);
 		}
 		return currRole;
 	}

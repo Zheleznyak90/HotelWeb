@@ -1,6 +1,7 @@
 package ua.nure.zheleznyak.HotelWeb.model.MySQL;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,13 +14,16 @@ import org.apache.logging.log4j.Logger;
 
 import ua.nure.zheleznyak.HotelWeb.model.SQLPatterns;
 import ua.nure.zheleznyak.HotelWeb.model.DAO.ManagerDAO;
+import ua.nure.zheleznyak.HotelWeb.model.structure.FillBean;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
 import ua.nure.zheleznyak.HotelWeb.model.structure.OrderStatus;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 public class MysqlManegerDAO implements ManagerDAO {
-	private static final Logger logger = LogManager.getLogger(MysqlManegerDAO.class.getName());
+	private static final Logger logger = LogManager
+			.getLogger(MysqlManegerDAO.class.getName());
 	private static MysqlManegerDAO singleton;
 
 	private MysqlManegerDAO() {
@@ -48,19 +52,10 @@ public class MysqlManegerDAO implements ManagerDAO {
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(SQLPatterns.GET_UNEXPIRED_ORDERS);
 			while (rs.next()) {
-				Order currOrder = new Order();
-				currOrder.setId(rs.getInt("id"));
-				currOrder.getClient().setEmail(rs.getString("client"));
-				currOrder.getManager().setEmail(rs.getString("manager"));
-				currOrder.getMeal().setName(rs.getString("meal"));
-				currOrder.getRoom().setNumber(rs.getInt("number"));
-				currOrder.getStatus().setStatus(rs.getString("status"));
-				currOrder.setCheckInDate(rs.getDate("checkIn"));
-				currOrder.setCheckOutDate(rs.getDate("checkOut"));
-				orders.add(currOrder);
+				orders.add(FillBean.getSingleton().generateOrder(rs));
 			}
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -78,7 +73,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 			con = MySQLConnection.getSingleton().getConnection();
 			requests = new ArrayList<Request>();
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -101,7 +96,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 			// stm.executeQuery(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
 
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -157,18 +152,10 @@ public class MysqlManegerDAO implements ManagerDAO {
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(SQLPatterns.GET_UNSERVED_REQUESTS);
 			while (rs.next()) {
-				Request currReq = new Request();
-				currReq.setId(rs.getInt("id"));
-				currReq.getClient().setEmail(rs.getString("client"));
-				currReq.getManager().setEmail(rs.getString("manager"));
-				currReq.setNumberOfPerson(rs.getInt("number_of_person"));
-				currReq.getaClass().setaClass(rs.getString("aClass"));
-				currReq.setCheckInDate(rs.getDate("checkIn"));
-				currReq.setCheckOutDate(rs.getDate("checkOut"));
-				requests.add(currReq);
+				requests.add(FillBean.getSingleton().generateRequest(rs));
 			}
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -186,21 +173,14 @@ public class MysqlManegerDAO implements ManagerDAO {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pstm = con
 					.prepareStatement(SQLPatterns.GET_ORDER_BY_ID);
+			
 			pstm.setString(1, id);
 			ResultSet rs = pstm.executeQuery();
 			rs.next();
-			currOrder = new Order();
-			currOrder.setId(rs.getInt("id"));
-			currOrder.getClient().setEmail(rs.getString("client"));
-			currOrder.getManager().setEmail(rs.getString("manager"));
-			currOrder.getMeal().setId(rs.getInt("meal"));
-			currOrder.getRoom().setNumber(rs.getInt("number"));
-			currOrder.getStatus().setId(rs.getInt("status"));
-			currOrder.setCheckInDate(rs.getDate("checkIn"));
-			currOrder.setCheckOutDate(rs.getDate("checkOut"));
-
+			currOrder = FillBean.getSingleton().generateOrder(rs);
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
+			
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -219,7 +199,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 			statuses = new ArrayList<OrderStatus>();
 			Statement stm = con.createStatement();
 			ResultSet rs = stm.executeQuery(SQLPatterns.GET_STATUS_LIST);
-			while(rs.next()){
+			while (rs.next()) {
 				OrderStatus currStat = new OrderStatus();
 				currStat.setId(rs.getInt("id"));
 				currStat.setStatus(rs.getString("status"));
@@ -227,11 +207,60 @@ public class MysqlManegerDAO implements ManagerDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
 		return statuses;
+	}
+
+	@Override
+	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
+			String roomClass) {
+		List<Room> roomList = new ArrayList<Room>();
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS_BY_CLASS);
+			pst.setString(1, roomClass);
+			pst.setDate(2, checkIn);
+			pst.setDate(3, checkOut);
+			pst.setDate(4, checkIn);
+			pst.setDate(5, checkOut);
+			ResultSet rs = pst.executeQuery();
+			while (rs.next()) {
+				roomList.add(FillBean.getSingleton().generateRoom(rs));
+			}
+
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return roomList;
+
+	}
+
+	@Override
+	public Request getRequestById(String id) {
+		Connection con = null;
+		Request request = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.GET_REQUEST_BY_ID);
+			pst.setString(1, id);
+			ResultSet rs = pst.executeQuery();
+			rs.next();
+			request = FillBean.getSingleton().generateRequest(rs);
+
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		return request;
 	}
 
 }

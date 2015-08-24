@@ -96,7 +96,7 @@ public class RoomPattern implements Serializable {
 	 * @return full path to gallery directory
 	 */
 	public String getPhotoSetPath() {
-		return PhotoSetDefault + name;
+		return PhotoSetDefault + name+"/";
 	}
 	/**
 	 * Simple getter.

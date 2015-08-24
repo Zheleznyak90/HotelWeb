@@ -53,7 +53,7 @@ public class MysqlAdminDAO implements AdminDAO {
 						.add(FillBean.getSingleton().generateRoomPattern(rs));
 			}
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -75,7 +75,7 @@ public class MysqlAdminDAO implements AdminDAO {
 				roomList.add(FillBean.getSingleton().generateRoom(rs));
 			}
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -99,7 +99,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -124,7 +124,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.setObject(1, value);
 			pst.execute();
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 			resCode = 301;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
@@ -149,7 +149,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.setInt(1, id);
 			pst.execute();
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 			resCode = 301;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
@@ -176,7 +176,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -201,7 +201,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -226,7 +226,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			pst.execute();
 		} catch (SQLException e) {
 			errCode = 301;
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -250,7 +250,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currUser = FillBean.getSingleton().generateUser(rs);
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -273,7 +273,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currRoom = FillBean.getSingleton().generateRoom(rs);
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -296,7 +296,7 @@ public class MysqlAdminDAO implements AdminDAO {
 			rs.next();
 			currMeal = FillBean.getSingleton().generateMeal(rs);
 		} catch (SQLException e) {
-			logger.error(e);;
+			logger.error("SQL ERROR", e);;
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

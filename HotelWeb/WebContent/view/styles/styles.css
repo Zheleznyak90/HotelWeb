@@ -59,7 +59,7 @@ html,body {
 }
 
 .lang {
-	background-color:#D0CDCD;
+	background-color: #D0CDCD;
 	width: 90%;
 	padding: 0 50px 0 10px;
 }
@@ -131,9 +131,74 @@ html,body {
 	color: red;
 	font-size: 14px;
 	font-weight: bold;
-	display:none;
+	display: none;
 }
 
-tr{
- line-height:30px;
+tr {
+	line-height: 30px;
+}
+
+#slider1_container {
+	position: relative;
+	top: 0px;
+	left: 0px;
+		width: 600px;
+	height: 300px;
+/* 	width: 450px;
+	height: 414px; */
+}
+
+#slider {
+	cursor: move;
+	position: absolute;
+	overflow: hidden;
+	left: 0px;
+	top: 0px;
+	width: 600px;
+	height: 300px;
+}
+
+.galleryImage {
+	width: 600px;
+	height: 300px;
+}
+
+.jssora01l,.jssora01r {
+	display: block;
+	position: absolute;
+	/* size of arrow element */
+	width: 45px;
+	height: 45px;
+	cursor: pointer;
+	background: url(../img/a01.png) no-repeat;
+	overflow: hidden;
+}
+
+.jssora01l {
+	background-position: -8px -38px;
+}
+
+.jssora01r {
+	background-position: -68px -38px;
+}
+
+.jssora01l:hover {
+	background-position: -128px -38px;
+}
+
+.jssora01r:hover {
+	background-position: -188px -38px;
+}
+
+.jssora01l.jssora01ldn {
+	background-position: -8px -38px;
+}
+
+.jssora01r.jssora01rdn {
+	background-position: -68px -38px;
+}
+
+.tinySortArrow{	
+	width: 20px;
+	height: 20px;
 }

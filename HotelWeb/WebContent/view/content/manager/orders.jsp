@@ -18,7 +18,7 @@
 		</thead>
 		<tbody>
 			<c:forEach var="currOrder" items="${orders}">
-				<tr id="${currOrder.id }" onClick="selectOrder(this)">
+				<tr id="${currOrder.id }" onClick="selectItem(this,'OrderEdit')">
 					<td>${currOrder.room.number}</td>
 					<td>${currOrder.client.email}</td>
 					<td>${currOrder.manager.email}</td>
@@ -34,6 +34,6 @@
 </div>
 <script src="<c:url value="/view/js/sorttable.js" />"
 	type="text/javascript"></script>
-	<script src="<c:url value="/view/js/orders.js" />"
+	<script src="<c:url value="/view/js/managerPages.js" />"
 	type="text/javascript"></script>
 

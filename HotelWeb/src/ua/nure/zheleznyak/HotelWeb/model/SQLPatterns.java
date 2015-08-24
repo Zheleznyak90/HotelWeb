@@ -54,6 +54,13 @@ public class SQLPatterns {
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 
+	public static final String GET_REQUEST_BY_ID ="SELECT r.id as id, c.email as client, man.email as manager," +
+			" r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person" +
+			" FROM userT c," +
+			" request r LEFT JOIN usert man ON man.id=r.manager_id," +
+			" room_class rc" +
+			" WHERE r.client_id=c.id AND r.class_id=rc.id AND r.id=?";
+	
 	public static final String GET_UNSERVED_REQUESTS = "SELECT r.id as id, c.email as client, man.email as manager," +
 			" r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person" +
 			" FROM userT c," +
@@ -70,7 +77,7 @@ public class SQLPatterns {
 			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
 			" m.id = o.meal_id AND o.order_status = os.id AND o.checkIn_date>NOW()";
 	public static final String GET_ORDER_BY_ID = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
-			" o.meal_id as meal, o.order_status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
+			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
 			" FROM userT c," +
 			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
 			" room r, meal m, order_status os" +
@@ -83,7 +90,13 @@ public class SQLPatterns {
 			" room r, meal m, order_status os" +
 			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
 			" m.id = o.meal_id AND o.order_status = os.id AND c.email = ?";
-
+	public static final String GET_SPARE_ROOMS_BY_CLASS = "SELECT r.*"
+			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)" 
+			+ " LEFT JOIN room_class rc ON( rc.id=rp.class_id)"
+			+ " LEFT JOIN orderT o ON(r.id = o.room_id)" + " WHERE rc.class=? "
+			+ " AND r.isMaintained = 0"
+			+ " AND COALESCE((o.checkIn_date NOT BETWEEN ? AND ?), TRUE) "
+			+ " AND COALESCE((o.checkOut_date NOT BETWEEN ? AND ?), TRUE)";
 	// Client sql requests
 	public static final String GET_SPARE_ROOMS_BY_PATTERN = "SELECT r.*"
 			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"

@@ -30,7 +30,7 @@ public interface ClientDAO {
 
 	/**
 	 * Return List of Room objects based on database, that are free in assigned
-	 * period.
+	 * period and belongs to the roomPattern.
 	 */
 	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
 			String roomPattern);

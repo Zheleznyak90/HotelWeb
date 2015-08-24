@@ -42,7 +42,7 @@
 		</tr>
 	</table>
 	<div>
-		Total price: <div id="total">${pattern.price}</div>&#36
+		Total price: <span id="total">${pattern.price}</span>&#36
 		
 	</div>
 

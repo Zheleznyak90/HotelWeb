@@ -66,7 +66,6 @@ public class UserValidation extends HttpServlet {
 				break;
 				
 			case "admin":
-				System.out.println("admin redir");
 				HttpSession adminSession = request.getSession();
 				adminSession.setAttribute("User", currUser);
 				response.sendRedirect("admin/PatternManagment");

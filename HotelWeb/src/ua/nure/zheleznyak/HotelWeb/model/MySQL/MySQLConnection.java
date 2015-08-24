@@ -43,7 +43,7 @@ public class MySQLConnection {
 		try {
 			c.close();
 		} catch (SQLException e) {
-			logger.error(e);
+			logger.error("SQL ERROR", e);
 		}
 	}
 

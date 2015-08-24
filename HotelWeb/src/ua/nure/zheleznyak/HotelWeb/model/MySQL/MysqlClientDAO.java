@@ -57,7 +57,7 @@ public class MysqlClientDAO implements ClientDAO {
 				boolean res = pst.execute();
 
 			} catch (SQLException e) {
-				logger.error(e);
+				logger.error("SQL ERROR", e);
 			} finally {
 				MySQLConnection.getSingleton().closeConnection(con);
 			}
@@ -97,7 +97,7 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.error(e);
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -123,7 +123,7 @@ public class MysqlClientDAO implements ClientDAO {
 			pst.execute();
 
 		} catch (SQLException e) {
-			logger.error(e);
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}
@@ -154,7 +154,7 @@ public class MysqlClientDAO implements ClientDAO {
 			}
 
 		} catch (SQLException e) {
-			logger.error(e);
+			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

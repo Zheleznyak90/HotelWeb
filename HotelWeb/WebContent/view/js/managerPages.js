@@ -6,11 +6,9 @@ $(document).ready(function() {
 	$(".sortable").makeSortable(newTableObject);
 });
 
-function selectOrder(element){
+function selectItem(element,nextPage){
 	var id = element.id;
 	
-	var nextPage = "OrderEdit";
-
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action", nextPage);
