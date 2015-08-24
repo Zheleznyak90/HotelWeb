@@ -70,7 +70,7 @@ html,body {
 }
 
 /* room list styles */
-.room,.photo,.infoBlock,.price {
+.room,.photo,.infoBlock,.price,.roomOffer,.roomInfo,#slider1_container {
 	margin: 5px;
 	padding: 3px;
 }
@@ -91,35 +91,41 @@ html,body {
 }
 
 .infoBlock {
-	border: 1px solid black;
+	/* border: 1px solid black; */
 	overflow: hidden;
 }
 
 .price {
-	border: 1px solid black;
+	border: 1px solid black; 
 	width: 15%;
 	height: 128px;
 	float: right;
 }
 
-.description {
+.filler {
 	height: 109px;
+}
+
+.description {
+	height: 172px;
 }
 
 .size,.roomClass {
 	display: inline-block;
 	width: 45%;
+	position: relative;
+	bottom: 7px;
 }
 
 .leftPanel {
 	position: absolute;
 	top: 6em;
 	left: 1em;
-	width: 9em
+	width: 13em;
 }
 
 .rightPanel {
-	padding-left: 11em;
+	padding-left: 15em;
 }
 
 .btnImg {
@@ -138,29 +144,36 @@ tr {
 	line-height: 30px;
 }
 
+.roomInfo,.roomOffer {
+	height: 193px;
+}
+
+.roomInfo {
+	overflow: hidden;
+}
+
+.roomOffer {
+	float: right;
+}
+
+#slider1_container,#slider,galleryImage {
+	width: 333px;
+	height: 200px;
+}
+
 #slider1_container {
 	position: relative;
+	float: left;
 	top: 0px;
 	left: 0px;
-		width: 600px;
-	height: 300px;
-/* 	width: 450px;
-	height: 414px; */
 }
 
 #slider {
 	cursor: move;
-	position: absolute;
+	position: relative;
 	overflow: hidden;
 	left: 0px;
 	top: 0px;
-	width: 600px;
-	height: 300px;
-}
-
-.galleryImage {
-	width: 600px;
-	height: 300px;
 }
 
 .jssora01l,.jssora01r {
@@ -198,7 +211,65 @@ tr {
 	background-position: -68px -38px;
 }
 
-.tinySortArrow{	
+.tinySortArrow {
 	width: 20px;
 	height: 20px;
+}
+
+#map {
+	position: relative;
+	top: 2em;
+	left: 1em;
+	width: 11em;
+	height: 8em;
+}
+
+.offerBtn {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #45b8c7
+		), color-stop(1, #d1b94d) );
+	background: -moz-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
+	background: -webkit-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
+	background: -o-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
+	background: -ms-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
+	background: linear-gradient(to bottom, #45b8c7 5%, #d1b94d 100%);
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#45b8c7', endColorstr = '#d1b94d', GradientType = 0 );
+	background-color: #45b8c7;
+	-moz-border-radius: 28px;
+	-webkit-border-radius: 28px;
+	border-radius: 28px;
+	border: 1px solid #849686;
+	display: inline-block;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Georgia;
+	font-size: 25px;
+	font-style: italic;
+	padding: 40px 40px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #2f6627;
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+}
+
+.offerBtn:hover {
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0.05, #d1b94d
+		), color-stop(1, #45b8c7) );
+	background: -moz-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
+	background: -webkit-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
+	background: -o-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
+	background: -ms-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
+	background: linear-gradient(to bottom, #d1b94d 5%, #45b8c7 100%);
+	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
+		'#d1b94d', endColorstr = '#45b8c7', GradientType = 0 );
+	background-color: #d1b94d;
+}
+
+.offerBtn:active {
+	position: relative;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
 }

@@ -1,6 +1,33 @@
 /**
  * 
  */
+
+$(document).ready(function($) {
+	google.maps.event.addDomListener(window, 'load', initialize);
+
+});
+
+function initialize() {
+	var myLatlng = new google.maps.LatLng(50.0827754,36.236216,21);
+
+	var mapCanvas = document.getElementById('map');
+	var mapOptions = {
+		center : myLatlng,
+		zoom : 13,
+		mapTypeId : google.maps.MapTypeId.ROADMAP
+	};
+	var map = new google.maps.Map(mapCanvas, mapOptions);
+	
+
+	var marker = new google.maps.Marker({
+	    position: myLatlng,
+	    title:"HotelWeb"
+	});
+
+	// To add the marker to the map, call setMap();
+	marker.setMap(map);
+}
+
 function OfferRoom(element) {
 
 	var id = element.id;
@@ -47,12 +74,12 @@ function sort(type, order) {
 		}
 		break;
 	}
-	
+
 	var parent = document.getElementById('patternList');
 	parent.innerHTML = "";
 
-	for(var i = 0, l = toSort.length; i < l; i++) {
-	    parent.appendChild(toSort[i]);
+	for ( var i = 0, l = toSort.length; i < l; i++) {
+		parent.appendChild(toSort[i]);
 	}
 }
 function capacitySort(ele1, ele2) {
@@ -71,7 +98,6 @@ function classSort(ele1, ele2) {
 	var ele1Comp = ele1.getElementsByClassName('roomClassSort')[0].id;
 	var ele2Comp = ele2.getElementsByClassName('roomClassSort')[0].id;
 	return ele1Comp.localeCompare(ele2Comp);
-
 
 }
 function classSortDesc(ele1, ele2) {

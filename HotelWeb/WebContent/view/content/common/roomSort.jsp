@@ -25,6 +25,11 @@
 				onClick="sort('capacity','reverse')">
 		</span>
 	</ul>
+	<div id="map"></div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js"></script>
+
 <script src="<c:url value="/view/js/mainPage.js" />"
 	type="text/javascript"></script>
+
+	

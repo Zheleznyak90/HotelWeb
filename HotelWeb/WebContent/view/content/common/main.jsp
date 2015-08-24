@@ -10,8 +10,8 @@
 					USD
 				</div>
 				<div class="infoBlock">
-					<div class="description">
-						<c:out value="${room.description }"></c:out>
+					<div class="filler">
+					
 					</div>
 					<div class="roomClass">
 						Class:
