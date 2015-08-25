@@ -134,6 +134,7 @@ public class FillBean {
 			currOrder.getStatus().setStatus(rs.getString("status"));
 			currOrder.setCheckInDate(rs.getDate("checkIn"));
 			currOrder.setCheckOutDate(rs.getDate("checkOut"));
+			currOrder.setPrice(rs.getDouble("price"));
 		} catch (SQLException e) {
 			logger.error("SQL ERROR", e);
 		}

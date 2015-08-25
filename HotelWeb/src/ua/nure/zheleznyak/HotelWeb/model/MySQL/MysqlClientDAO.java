@@ -68,16 +68,46 @@ public class MysqlClientDAO implements ClientDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void confirmBook() {
-		// TODO Auto-generated method stub
+	public int confirmBook(String id, String email) {
+		Connection con = null;
+		int affectedRows = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.CONFIRM_BOOKING_CLIENT);
+			pst.setString(2, id);
+			pst.setString(1, email);
+			affectedRows = pst.executeUpdate();
+
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+
+		return affectedRows;
 
 	}
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void cancelBook() {
-		// TODO Auto-generated method stub
+	public int cancelBook(String id, String email) {
+		Connection con = null;
+		int affectedRows = 0;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			PreparedStatement pst = con
+					.prepareStatement(SQLPatterns.CANCEL_BOOKING);
+			pst.setString(2, id);
+			pst.setString(1, email);
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+
+		return affectedRows;
 
 	}
 	/**
@@ -147,7 +177,6 @@ public class MysqlClientDAO implements ClientDAO {
 			pst.setDate(3, checkOut);
 			pst.setDate(4, checkIn);
 			pst.setDate(5, checkOut);
-			System.out.println(pst);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				roomList.add(FillBean.getSingleton().generateRoom(rs));
@@ -171,7 +200,7 @@ public class MysqlClientDAO implements ClientDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			orders = new ArrayList<Order>();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ORDERS+SQLPatterns.CLIENT_ORDERS);
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ORDERS+SQLPatterns.CLIENT_ORDERS+SQLPatterns.UNEXPIRED_ORDERS);
 			pst.setString(1, email);
 			ResultSet rs = pst.executeQuery();
 			while(rs.next()){

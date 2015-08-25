@@ -13,10 +13,14 @@ public interface ClientDAO {
 	 * Create new Order row in database, based on passed Order object and RoomPattern id.
 	 */
 	public void bookRoom(Order order, String roomPattern);
-
-	public void confirmBook();
-
-	public void cancelBook();
+	/**
+	 * Set request status to confirmed.
+	 */
+	public int confirmBook(String id, String email);
+	/**
+	 * Set request status to canceled.
+	 */
+	public int cancelBook(String id, String email);
 	/**
 	 * Return List of Order objects for single user based on database.
 	 */

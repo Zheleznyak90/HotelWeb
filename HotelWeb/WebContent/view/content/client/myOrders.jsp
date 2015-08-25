@@ -6,16 +6,12 @@
 	<ul class="nav nav-tabs">
 		<style scoped>
 @import
-	url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css")
-	;
+	url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 </style>
 		<li><a href="accManagment">Account</a>
 		</li>
 		<li class="active"><a href="MyOrders">My orders</a>
 		</li>
-		<li><a href="MyRequests">My requests</a>
-		</li>
-
 	</ul>
 	<div>
 		<jsp:useBean id="tomorrow" class="java.util.Date" />
@@ -23,7 +19,7 @@
 			value="${tomorrow.time + 86400000}" />
 
 		<c:forEach var="currOrder" items="${orders}">
-			<div class="order">
+			<div class="order" id="${currOrder.id}">
 				<div class="left">
 					<div class="manager">
 						Your manager : <span>${currOrder.manager.email}</span>
@@ -45,21 +41,22 @@
 							Order status: <span>${currOrder.status.status}</span>
 						</div>
 						<c:if
-							test="${currOrder.status.status eq 'panding' && currOrder.checkInDate.time>tomorrow.time}">
+							test="${currOrder.status.status eq 'pending' && currOrder.checkInDate.time>tomorrow.time}">
 							<div class="orderInfoItem">
-								<button>Confirm</button>
+								<button onClick="changeBooking(this,'Confirm')">Confirm</button>
 							</div>
 						</c:if>
 
 						<c:if
 							test="${(currOrder.status.status eq 'confirmed' || currOrder.status.status eq 'unconfirmed') && currOrder.checkInDate.time>tomorrow.time}">
 							<div class="orderInfoItem">
-								<button>Cancel</button>
+								<button onClick="changeBooking(this,'Cancel')">Cancel</button>
 							</div>
 						</c:if>
+						<script src="<c:url value="view/js/orders.js" />"></script>
 					</div>
 				</div>
-				<div class="total">1 000 000$</div>
+				<div class="total">Total price is: ${currOrder.price}</div>
 
 			</div>
 
@@ -70,6 +67,7 @@
 
 
 </div>
+<script src="<c:url value="/view/js/orders.js" />" type="text/javascript"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script

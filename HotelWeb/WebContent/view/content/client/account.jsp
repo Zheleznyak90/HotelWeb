@@ -9,8 +9,7 @@
 		</li>
 		<li><a href="MyOrders">My orders</a>
 		</li>
-		<li><a href="MyRequests">My requests</a>
-		</li>
+
 
 	</ul>
 	<table>

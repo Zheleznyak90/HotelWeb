@@ -16,7 +16,6 @@ $(document).ready(function($) {
 });
 
 function OfferRoom() {
-
 	var id = document.getElementsByClassName('room')[0].id;
 	var nextPage = "client/OrderInit";
 

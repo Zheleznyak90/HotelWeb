@@ -100,7 +100,9 @@ public class SQLPatterns {
 	public static final String BOOK_ROOM = "INSERT INTO orderT "
 			+ "(room_id, client_id, order_status, meal_id, created, checkIn_date, checkOut_date)"
 			+ " VALUES (?, (SELECT id FROM userT WHERE email = ?), (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
-	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE";
-	public static final String CANCEL_BOOKING = "UPDATE";
+	public static final String CONFIRM_BOOKING_CLIENT = "UPDATE orderT o JOIN userT c ON(c.id=o.client_id) SET o.order_status='3' WHERE c.email=? AND o.id=?";
+	public static final String CANCEL_BOOKING = "UPDATE orderT o JOIN userT c ON(c.id=o.client_id) SET o.order_status='4' WHERE c.email=? AND o.id=?";
 
 }
+
+//UPDATE orderT o JOIN userT c ON(c.id=o.client_id) SET o.order_status='4' WHERE c.email='admin@gmail.com' AND o.id='4'

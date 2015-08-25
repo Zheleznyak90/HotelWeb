@@ -16,12 +16,12 @@
 		</tr>
 		<tr>
 			<td>Check-In Date</td>
-			<td><input type="date" name="checkInDate" class="date" required>
+			<td><input type="text" name="checkInDate" class="date" required>
 			</td>
 		</tr>
 		<tr>
 			<td>Check-Out Date</td>
-			<td><input type="date" name="checkOutDate" class="date" required>
+			<td><input type="text" name="checkOutDate" class="date" required>
 			</td>
 		</tr>
 	</table>
@@ -31,4 +31,4 @@
  <link rel="stylesheet" href="<c:url value="/jslib/jquery-ui.css" />">
 <script src="<c:url value="/jslib/jquery.min.js" />"></script>
 <script src="<c:url value="/jslib/jquery-ui.min.js" />"></script>
-<script src="<c:url value="/jslib/requestPage.js" />"></script>
+<script src="<c:url value="/view/js/requestPage.js" />"></script>

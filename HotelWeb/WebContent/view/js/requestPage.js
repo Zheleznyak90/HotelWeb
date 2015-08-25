@@ -18,7 +18,5 @@ $(".recalc").change(function() {
 	else{
 		//TODO BLA BLAchange date
 	}
-	/*
-	 SELECT r.id FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o ON(r.id = o.room_id) WHERE rp.id=? AND o.checkIn_date NOT BETWEEN(?,?) AND o.checkOut_date NOT BETWEEN(?,?) 
-	  */
+
 });

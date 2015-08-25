@@ -31,13 +31,13 @@
 		
 		<tr>
 			<td>Check-In Date</td>
-			<td><input type="date" id ="checkin" name="checkInDate" class="date recalc"
+			<td><input type="text" id ="checkin" name="checkInDate" class="date recalc"
 				value="<fmt:formatDate value="${now}" pattern="MM/dd/yyyy" />"
 				required></td>
 		</tr>
 		<tr>
 			<td>Check-Out Date</td>
-			<td><input type="date" id ="checkout" name="checkOutDate" class="date recalc"
+			<td><input type="text" id ="checkout" name="checkOutDate" class="date recalc"
 			value="<fmt:formatDate value="${tomorrow}" pattern="MM/dd/yyyy" />" required></td>
 		</tr>
 	</table>
@@ -52,4 +52,4 @@
 <link rel="stylesheet" href="<c:url value="/jslib/jquery-ui.css" />">
 <script src="<c:url value="/jslib/jquery.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/jslib/jquery-ui.min.js" />" type="text/javascript"></script>
-<script src="<c:url value="/jslib/requestPage.js" />" type="text/javascript"></script>	
+<script src="<c:url value="/view/js/requestPage.js" />" type="text/javascript"></script>	

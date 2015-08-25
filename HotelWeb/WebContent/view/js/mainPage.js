@@ -32,8 +32,7 @@ function OfferRoom(element) {
 
 	var id = element.id;
 	var nextPage = "RoomPage"
-	/* var nextPage = "client/OrderInit"; */
-
+	
 	var form = document.createElement("form");
 	form.setAttribute("method", "post");
 	form.setAttribute("action", nextPage);
