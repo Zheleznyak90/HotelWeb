@@ -50,7 +50,7 @@ public class MysqlManegerDAO implements ManagerDAO {
 			con = MySQLConnection.getSingleton().getConnection();
 			orders = new ArrayList<Order>();
 			Statement stm = con.createStatement();
-			ResultSet rs = stm.executeQuery(SQLPatterns.GET_UNEXPIRED_ORDERS);
+			ResultSet rs = stm.executeQuery(SQLPatterns.GET_ORDERS+SQLPatterns.UNEXPIRED_ORDERS);
 			while (rs.next()) {
 				orders.add(FillBean.getSingleton().generateOrder(rs));
 			}
@@ -68,17 +68,19 @@ public class MysqlManegerDAO implements ManagerDAO {
 	@Override
 	public List<Request> getClientRequests(String email) {
 		List<Request> requests = null;
-		Connection con = null;
-		try {
-			con = MySQLConnection.getSingleton().getConnection();
-			requests = new ArrayList<Request>();
-		} catch (SQLException e) {
-			logger.error("SQL ERROR", e);
-		} finally {
-			MySQLConnection.getSingleton().closeConnection(con);
-		}
+		/*
+		 * Connection con = null; try { con =
+		 * MySQLConnection.getSingleton().getConnection(); requests = new
+		 * ArrayList<Request>(); PreparedStatement pst =
+		 * con.prepareStatement(SQLPatterns)
+		 * 
+		 * } catch (SQLException e) { logger.error("SQL ERROR", e); } finally {
+		 * MySQLConnection.getSingleton().closeConnection(con); }
+		 */
 		return requests;
 	}
+
+
 
 	/**
 	 * {@inheritDoc}
@@ -134,15 +136,6 @@ public class MysqlManegerDAO implements ManagerDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<Order> getClientOrders(String email) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
 	public List<Request> getUnservedRequests() {
 		List<Request> requests = null;
 		Connection con = null;
@@ -172,15 +165,15 @@ public class MysqlManegerDAO implements ManagerDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pstm = con
-					.prepareStatement(SQLPatterns.GET_ORDER_BY_ID);
-			
+					.prepareStatement(SQLPatterns.GET_ORDERS+SQLPatterns.ORDER_BY_ID);
+
 			pstm.setString(1, id);
 			ResultSet rs = pstm.executeQuery();
 			rs.next();
 			currOrder = FillBean.getSingleton().generateOrder(rs);
 		} catch (SQLException e) {
 			logger.error("SQL ERROR", e);
-			
+
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
 		}

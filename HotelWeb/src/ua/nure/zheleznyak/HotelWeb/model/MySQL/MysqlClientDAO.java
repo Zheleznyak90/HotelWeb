@@ -161,5 +161,28 @@ public class MysqlClientDAO implements ClientDAO {
 		return roomList;
 
 	}
-
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public List<Order> getClientOrders(String email) {
+		List<Order> orders = null;
+		Connection con = null;
+		try {
+			con = MySQLConnection.getSingleton().getConnection();
+			orders = new ArrayList<Order>();
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ORDERS+SQLPatterns.CLIENT_ORDERS);
+			pst.setString(1, email);
+			ResultSet rs = pst.executeQuery();
+			while(rs.next()){
+				orders.add(FillBean.getSingleton().generateOrder(rs));
+			}
+		} catch (SQLException e) {
+			logger.error("SQL ERROR", e);
+		} finally {
+			MySQLConnection.getSingleton().closeConnection(con);
+		}
+		// TODO Auto-generated method stub
+		return orders;
+	}
 }

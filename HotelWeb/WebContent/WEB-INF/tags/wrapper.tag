@@ -15,7 +15,7 @@
 </head>
 
 <body>
-	<div class="container">
+	<div class="Mcontainer">
 		<jsp:include page="/view/content/common/header.jsp" />
 		<div class="mainbody">
 			<p><jsp:doBody />

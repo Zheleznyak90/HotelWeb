@@ -12,15 +12,15 @@ INSERT INTO userT(role_id, email, password) VALUES
 ("3", "admin@mail.ru","пїЅпїЅпїЅ$fпїЅпїЅHпїЅпїЅ<I#yпїЅ");
 
 INSERT INTO room_class(class) VALUES
-("poor"),
-("middle"),
-("lux");
+("3 stars"),
+("4 stars"),
+("5 stars");
 
-INSERT INTO room_pattern(class_id, size, price, name) VALUES
-("1","7","15","poor1"),
-("2","2","50","middle1"),
-("2","3","70","middle2"),
-("3","2","200","lux1");
+INSERT INTO room_pattern(class_id, size, price, name, description) VALUES
+("1","4","15","poor1",""),
+("2","2","50","middle1","In HotelWeb, even the rooms that we define as standard offer 5 star comfort. Single, double or family... Everyone lives this comfort and unique luxury. What are the things that make a room comfortable? Bathroom with a bathtub, central air conditioner, direct phone line, blow dryer, satellite broadcasting plasma TV, info and music channels, internet access, minibar, safe and balcony... And it is in the ideal size for families... After all of these opportunities, the only thing you have to do is to enjoy your perfect room and holiday."),
+("2","3","70","middle2","In HotelWeb, even the rooms that we define as standard offer 5 star comfort. Single, double or family... Everyone lives this comfort and unique luxury. What are the things that make a room comfortable? Bathroom with a bathtub, central air conditioner, direct phone line, blow dryer, satellite broadcasting plasma TV, info and music channels, internet access, minibar, safe and balcony... And it is in the ideal size for families... After all of these opportunities, the only thing you have to do is to enjoy your perfect room and holiday. "),
+("3","2","200","lux1","Things you can only experience in a dream are in HotelWeb, because we were inspired from your dreams. That's why it is so unique and unequalled. 1 living room 1 Bedroom 1 Bathtub Central air conditioner Direct phone line Blow dryer Satellite broadcasting plasma TV Info and music channels Internet access Minibar Safe Balcony A sofa for third person Viewing either the sea or the golf field... To offer you the maximum comfort... ");
 
 INSERT INTO room(room_pattern, number, floor) VALUES
 ("1","12","1"),
@@ -41,8 +41,10 @@ INSERT INTO meal(name, price) VALUES
 ("all-inclusive", "16");
 
 INSERT INTO order_status(status) VALUES 
+("pending"),
 ("unconfirmed"),
 ("confirmed"),
+("waiting_for_cancel"),
 ("canceled");
 
 

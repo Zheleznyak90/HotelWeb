@@ -6,7 +6,7 @@ html,body {
 	height: 100%;
 }
 
-.container {
+.Mcontainer {
 	min-height: 100%;
 	position: relative;
 	background-color: #ffffff;
@@ -90,13 +90,12 @@ html,body {
 	float: left;
 }
 
-.infoBlock {
-	/* border: 1px solid black; */
+.infoBlock { /* border: 1px solid black; */
 	overflow: hidden;
 }
 
 .price {
-	border: 1px solid black; 
+	border: 1px solid black;
 	width: 15%;
 	height: 128px;
 	float: right;
@@ -232,8 +231,9 @@ tr {
 	background: -o-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
 	background: -ms-linear-gradient(top, #45b8c7 5%, #d1b94d 100%);
 	background: linear-gradient(to bottom, #45b8c7 5%, #d1b94d 100%);
-	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
-		'#45b8c7', endColorstr = '#d1b94d', GradientType = 0 );
+	filter: progid :   DXImageTransform.Microsoft.gradient (   startColorstr
+		= 
+		 '#45b8c7', endColorstr =   '#d1b94d', GradientType =   0 );
 	background-color: #45b8c7;
 	-moz-border-radius: 28px;
 	-webkit-border-radius: 28px;
@@ -262,8 +262,9 @@ tr {
 	background: -o-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
 	background: -ms-linear-gradient(top, #d1b94d 5%, #45b8c7 100%);
 	background: linear-gradient(to bottom, #d1b94d 5%, #45b8c7 100%);
-	filter: progid : DXImageTransform.Microsoft.gradient ( startColorstr =
-		'#d1b94d', endColorstr = '#45b8c7', GradientType = 0 );
+	filter: progid :   DXImageTransform.Microsoft.gradient (   startColorstr
+		= 
+		 '#d1b94d', endColorstr =   '#45b8c7', GradientType =   0 );
 	background-color: #d1b94d;
 }
 
@@ -272,4 +273,30 @@ tr {
 	top: 50%;
 	left: 50%;
 	transform: translateY(-50%) translateX(-50%);
+}
+
+.order {
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+	overflow: auto;
+	margin: 5px;
+	display: table;
+	width: 100%;
+	text-align: center;
+}
+
+.manager,.orderInfo,.status {
+	table-layout: fixed;
+}
+
+.orderInfoItem {
+	display: table-cell;
+	padding:5px;
+	width: 5%;
+}
+
+.left {
+	display: table-cell;
 }

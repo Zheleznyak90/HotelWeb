@@ -16,7 +16,6 @@ public class RoomPattern implements Serializable {
 	private String description;
 	private String name;
 	private static final String PhotoSetDefault = "view/PhotoSets/";
-	private float rating;
 	
 	public RoomPattern(){
 		aClass = new ApartmentClass();
@@ -111,20 +110,6 @@ public class RoomPattern implements Serializable {
 	 */
 	public void setName(String name) {
 		this.name = name;
-	}
-	/**
-	 * Simple getter.
-	 * @return ratings
-	 */
-	public float getRating() {
-		return rating;
-	}
-	/**
-	 * Simple setter.
-	 * @param rating to set rating 
-	 */
-	public void setRating(float rating) {
-		this.rating = rating;
 	}
 
 }

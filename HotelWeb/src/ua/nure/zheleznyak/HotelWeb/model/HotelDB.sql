@@ -43,7 +43,6 @@ CREATE TABLE room_pattern(
 	size INT NOT NULL,
 	price DOUBLE NOT NULL ,
 	description TEXT,
-	rating DECIMAL DEFAULT 0,
 	PRIMARY KEY (id),
 	FOREIGN KEY (class_id) REFERENCES room_class(id) 
 	ON DELETE RESTRICT,
@@ -88,7 +87,6 @@ CREATE TABLE request(
 	checkIn_date DATE NOT NULL,
 	checkOut_date DATE NOT NULL,
 	created DATETIME NOT NULL,
-	isServed BOOLEAN NOT NULL DEFAULT FALSE,
 	PRIMARY KEY (id),
 	FOREIGN KEY (client_id) REFERENCES userT(id) 
 	ON DELETE RESTRICT,
@@ -106,6 +104,7 @@ CREATE TABLE orderT(
 	meal_id INT NOT NULL,
 	manager_id INT,
 	order_status INT NOT NULL,
+	request_id INT,
 	created DATETIME NOT NULL,
 	checkIn_date DATE NOT NULL,
 	checkOut_date DATE NOT NULL,
@@ -119,18 +118,12 @@ CREATE TABLE orderT(
 	FOREIGN KEY (manager_id) REFERENCES userT(id) 
 	ON DELETE SET NULL,
 	FOREIGN KEY (order_status) REFERENCES order_status(id) 
-	ON DELETE RESTRICT
+	ON DELETE RESTRICT,
+	FOREIGN KEY (request_id) REFERENCES request(id) 
+	ON DELETE CASCADE
 	
 );
 
-CREATE TABLE request_order(
-request_id INT NOT NULL,
-order_id INT NOT NULL,
-FOREIGN KEY (request_id) REFERENCES request(id) 
-ON DELETE CASCADE,
-FOREIGN KEY (order_id) REFERENCES orderT(id) 
-ON DELETE CASCADE
-);
 
 
 

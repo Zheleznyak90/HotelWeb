@@ -6,9 +6,9 @@ public class SQLPatterns {
 			+ "FROM userT WHERE email = ? AND password = ?";
 	public static final String REGISTRATE_USER = "INSERT INTO userT(role_id, email, password, fullName, phoneNumber) VALUES "
 			+ "(1, ?, ?, ?, ?)";
-	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name, rating "
+	public static final String GET_PATTERN_LIST = "SELECT id, class_id, size, price, description, name "
 			+ "FROM room_pattern ";
-	public static final String GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS = "SELECT id, class_id, size, price, description, name, rating "
+	public static final String GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS = "SELECT id, class_id, size, price, description, name 	"
 			+ "FROM room_pattern WHERE id IN(SELECT room_pattern FROM room WHERE isMaintained = FALSE GROUP BY room_pattern )";
 
 	public static final String GET_APPARTMENT_CLASSES = "SELECT * FROM room_class";
@@ -46,7 +46,7 @@ public class SQLPatterns {
 
 	// Manager sql requests
 	public static final String GET_STATUS_LIST = "SELECT * FROM order_status";
-	
+
 	public static final String OFFER_ROOM = "INSERT INTO orderT "
 			+ "(room_id, client_id, manager_id, order_status, meal, created, checkIn_date, checkOut_date)"
 			+ " VALUES (?, ?, ?, (SELECT id FROM order_status WHERE status='unconfirmed'), ?, ?, ?, ?)";
@@ -54,50 +54,61 @@ public class SQLPatterns {
 	public static final String GET_USER_REQUEST = "SELECT * FROM request WHERE user_id = ?";
 	public static final String CONFIRM_BOOKING_CANCEL = "UPDATE orderT SET order_status = '3' WHERE id = ?";
 
-	public static final String GET_REQUEST_BY_ID ="SELECT r.id as id, c.email as client, man.email as manager," +
-			" r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person" +
-			" FROM userT c," +
-			" request r LEFT JOIN usert man ON man.id=r.manager_id," +
-			" room_class rc" +
-			" WHERE r.client_id=c.id AND r.class_id=rc.id AND r.id=?";
+	public static final String GET_REQUEST_BY_ID = "SELECT r.id as id, c.email as client, man.email as manager,"
+			+ " r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person"
+			+ " FROM userT c,"
+			+ " request r LEFT JOIN usert man ON man.id=r.manager_id,"
+			+ " room_class rc"
+			+ " WHERE r.client_id=c.id AND r.class_id=rc.id AND r.id=?";
+
+	public static final String GET_UNSERVED_REQUESTS = "SELECT r.id as id, c.email as client, man.email as manager,"
+			+ " r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person"
+			+ " FROM userT c, room_class rc,"
+			+ " request r LEFT JOIN usert man ON man.id=r.manager_id "
+			+ " LEFT OUTER JOIN orderT o ON o.request_id=r.id "
+			+ " WHERE r.client_id=c.id AND r.class_id=rc.id AND r.checkIn_date>NOW() AND o.request_id IS NULL";
 	
-	public static final String GET_UNSERVED_REQUESTS = "SELECT r.id as id, c.email as client, man.email as manager," +
-			" r.checkIn_date as checkIn, r.checkOut_date as checkOut, rc.class as aClass, r.number_of_person" +
-			" FROM userT c," +
-			" request r LEFT JOIN usert man ON man.id=r.manager_id," +
-			" room_class rc" +
-			" WHERE r.client_id=c.id AND r.class_id=rc.id AND isServed=0" +
-			" AND r.checkIn_date>NOW()";
+	public static final String GET_ORDERS = "SELECT o.id, r.number as number, c.email as client," +
+			" man.email as manager, m.name as meal, os.status as status, o.checkIn_date as checkIn," +
+			" o.checkOut_date as checkOut, DATEDIFF(o.checkOut_date, o.checkIn_date)*(m.price+rp.price) AS price" +
+			" FROM userT c, room_pattern rp, orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
+			" room r, meal m, order_status os" +
+			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
+			" rp.id=r.room_pattern AND m.id = o.meal_id AND o.order_status = os.id";
+	public static final String UNEXPIRED_ORDERS = " AND o.checkIn_date>NOW()";
+	public static final String ORDER_BY_ID = " AND o.id = ?";
 	
-	public static final String GET_UNEXPIRED_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
-			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
-			" FROM userT c," +
-			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
-			" room r, meal m, order_status os" +
-			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
-			" m.id = o.meal_id AND o.order_status = os.id AND o.checkIn_date>NOW()";
-	public static final String GET_ORDER_BY_ID = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
-			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
-			" FROM userT c," +
-			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
-			" room r, meal m, order_status os" +
-			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
-			" m.id = o.meal_id AND o.order_status = os.id AND o.id = ?";
-	public static final String GET_USER_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
-			" m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut" +
-			" FROM userT c," +
-			" orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
-			" room r, meal m, order_status os" +
-			" WHERE o.client_id=c.id AND r.id = o.room_id AND" +
-			" m.id = o.meal_id AND o.order_status = os.id AND c.email = ?";
+/*	public static final String GET_UNEXPIRED_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
+			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
+			+ " FROM userT c,"
+			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
+			+ " room r, meal m, order_status os"
+			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
+			+ " m.id = o.meal_id AND o.order_status = os.id AND o.checkIn_date>NOW()";
+	public static final String GET_ORDER_BY_ID = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
+			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
+			+ " FROM userT c,"
+			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
+			+ " room r, meal m, order_status os"
+			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
+			+ " m.id = o.meal_id AND o.order_status = os.id AND o.id = ?";*/
 	public static final String GET_SPARE_ROOMS_BY_CLASS = "SELECT r.*"
-			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)" 
+			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"
 			+ " LEFT JOIN room_class rc ON( rc.id=rp.class_id)"
 			+ " LEFT JOIN orderT o ON(r.id = o.room_id)" + " WHERE rc.class=? "
 			+ " AND r.isMaintained = 0"
 			+ " AND COALESCE((o.checkIn_date NOT BETWEEN ? AND ?), TRUE) "
 			+ " AND COALESCE((o.checkOut_date NOT BETWEEN ? AND ?), TRUE)";
 	// Client sql requests
+	public static final String CLIENT_ORDERS = " AND c.email = ?";
+/*	public static final String GET_CLIENT_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
+			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
+			+ " FROM userT c,"
+			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
+			+ " room r, meal m, order_status os"
+			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
+			+ " m.id = o.meal_id AND o.order_status = os.id AND c.email = ?";*/
+
 	public static final String GET_SPARE_ROOMS_BY_PATTERN = "SELECT r.*"
 			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"
 			+ " LEFT JOIN orderT o ON(r.id = o.room_id)" + " WHERE rp.id=? "
@@ -114,13 +125,30 @@ public class SQLPatterns {
 	public static final String CANCEL_BOOKING = "UPDATE";
 
 }
+
 /*
- * GET_PATTERNS_WITHOUT_MAINTAINED_ROOMS = "SELECT id, class_id, size, price,
- * description, name, rating FROM room_pattern WHERE id IN(SELECT room_pattern
- * FROM room WHERE isMaintained = FALSE GROUP BY room_pattern SELECT r.* FROM
- * room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o
- * ON(r.id = o.room_id) WHERE rp.id='1' AND COALESCE((o.checkIn_date NOT BETWEEN
- * '2015-08-20' AND '2015-08-21'), TRUE ) AND COALESCE((o.checkOut_date NOT
- * BETWEEN '2015-08-20' AND '2015-08-21'), TRUE)
+ * public static final String GET_USER_ORDERS =
+ * "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
+ * " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut, DATEDIFF(checkIn, checkOut)*(m.price+rp.price) AS price"
+ * + " FROM userT c, room_pattern rp" +
+ * " orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
+ * " room r, meal m, order_status os" +
+ * " WHERE o.client_id=c.id AND r.id = o.room_id AND rp.id=r.room_pattern" +
+ * " m.id = o.meal_id AND o.order_status = os.id";
  */
 
+/*
+ * public static final String GET_ORDERS = ""SELECT o.id, r.number as number,
+ * c.email as client, man.email as manager, m.name as meal, os.status as status,
+ * o.checkIn_date as checkIn, o.checkOut_date as checkOut,
+ * DATEDIFF(o.checkOut_date, o.checkIn_date)*(m.price+rp.price) AS price FROM
+ * userT c, room_pattern rp, orderT o LEFT JOIN usert man ON
+ * man.id=o.manager_id, room r, meal m, order_status os WHERE o.client_id=c.id
+ * AND r.id = o.room_id AND rp.id=r.room_pattern AND m.id = o.meal_id AND
+ * o.order_status = os.id"
+ */
+/*
+ * public static final String GET_USER_ORDERS =
+ * "SELECT o.id, r.number as number, c.email as client, man.email as manager, m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut, DATEDIFF(o.checkOut_date, o.checkIn_date)*(m.price+rp.price) AS price FROM userT c, room_pattern rp, orderT o LEFT JOIN usert man ON man.id=o.manager_id, room r, meal m, order_status os WHERE o.client_id=c.id AND r.id = o.room_id AND rp.id=r.room_pattern AND m.id = o.meal_id AND o.order_status = os.id"
+ * ;
+ */

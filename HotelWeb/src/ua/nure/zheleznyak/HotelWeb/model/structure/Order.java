@@ -155,4 +155,7 @@ public class Order implements Serializable {
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
 	}
+	public int getPrice(){
+		return 0;
+	}
 }

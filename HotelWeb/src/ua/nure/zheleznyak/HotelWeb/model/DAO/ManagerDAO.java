@@ -14,10 +14,7 @@ public interface ManagerDAO {
 	 * Return List of Order objects where checkIn date is further the current date based on database.
 	 */
 	public List<Order> getUnexpiredOrders();
-	/**
-	 * Return List of Order objects for single user based on database.
-	 */
-	public List<Order> getClientOrders(String email);
+
 	/**
 	 * Return List of Request objects that haven't been served yet based on database.
 	 */

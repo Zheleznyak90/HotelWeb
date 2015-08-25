@@ -2,7 +2,7 @@
 
 <div id="roomOverview">
 
-	<div class="room" id="${pattern.id}" onClick="OfferRoom(this)">
+	<div class="room" id="${pattern.id}">
 		<div id="slider1_container">
 			<div u="slides" id="slider">
 				<c:forEach var="photo" items="${photoGallery}">
@@ -23,7 +23,7 @@
 		<c:choose>
 			<c:when test="${not empty User}">
 				<div class="roomOffer">
-					<a class="offerBtn" onClick="OfferRoom">Offer for 
+					<a class="offerBtn" onClick="OfferRoom()">Offer for 
 					<br>${pattern.price}&#36 rate  </a>
 				</div>
 			</c:when>

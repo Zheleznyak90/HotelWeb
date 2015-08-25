@@ -17,6 +17,10 @@ public interface ClientDAO {
 	public void confirmBook();
 
 	public void cancelBook();
+	/**
+	 * Return List of Order objects for single user based on database.
+	 */
+	public List<Order> getClientOrders(String email);
 
 	/**
 	 * Return List of Meal objects based on database.

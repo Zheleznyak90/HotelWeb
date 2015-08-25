@@ -8,9 +8,7 @@
 			<td>Class</td>
 			<td>Price</td>
 			<td>Size</td>
-			<td>Description</td>
 			<td>Name</td>
-			<td>Rating</td>
 			<td>Edit</td>
 			<td>Delete</td>
 
@@ -21,9 +19,7 @@
 				<td>${pattern.aClass.aClass}</td>
 				<td>${pattern.price}</td>
 				<td>${pattern.size}</td>
-				<td>${pattern.description}</td>
 				<td>${pattern.name}</td>
-				<td>${pattern.rating}</td>
 				<td><img
 					src="${pageContext.request.contextPath}/view/img/editBtn.png"
 					class="btnImg" alt="editBtn" id="editBtn_${pattern.id}"
