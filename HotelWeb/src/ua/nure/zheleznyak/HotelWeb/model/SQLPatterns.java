@@ -78,20 +78,6 @@ public class SQLPatterns {
 	public static final String UNEXPIRED_ORDERS = " AND o.checkIn_date>NOW()";
 	public static final String ORDER_BY_ID = " AND o.id = ?";
 	
-/*	public static final String GET_UNEXPIRED_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
-			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
-			+ " FROM userT c,"
-			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
-			+ " room r, meal m, order_status os"
-			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
-			+ " m.id = o.meal_id AND o.order_status = os.id AND o.checkIn_date>NOW()";
-	public static final String GET_ORDER_BY_ID = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
-			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
-			+ " FROM userT c,"
-			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
-			+ " room r, meal m, order_status os"
-			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
-			+ " m.id = o.meal_id AND o.order_status = os.id AND o.id = ?";*/
 	public static final String GET_SPARE_ROOMS_BY_CLASS = "SELECT r.*"
 			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"
 			+ " LEFT JOIN room_class rc ON( rc.id=rp.class_id)"
@@ -101,13 +87,6 @@ public class SQLPatterns {
 			+ " AND COALESCE((o.checkOut_date NOT BETWEEN ? AND ?), TRUE)";
 	// Client sql requests
 	public static final String CLIENT_ORDERS = " AND c.email = ?";
-/*	public static final String GET_CLIENT_ORDERS = "SELECT o.id, r.number as number, c.email as client, man.email as manager,"
-			+ " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut"
-			+ " FROM userT c,"
-			+ " orderT o LEFT JOIN usert man ON man.id=o.manager_id,"
-			+ " room r, meal m, order_status os"
-			+ " WHERE o.client_id=c.id AND r.id = o.room_id AND"
-			+ " m.id = o.meal_id AND o.order_status = os.id AND c.email = ?";*/
 
 	public static final String GET_SPARE_ROOMS_BY_PATTERN = "SELECT r.*"
 			+ " FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern)"
@@ -125,30 +104,3 @@ public class SQLPatterns {
 	public static final String CANCEL_BOOKING = "UPDATE";
 
 }
-
-/*
- * public static final String GET_USER_ORDERS =
- * "SELECT o.id, r.number as number, c.email as client, man.email as manager," +
- * " m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut, DATEDIFF(checkIn, checkOut)*(m.price+rp.price) AS price"
- * + " FROM userT c, room_pattern rp" +
- * " orderT o LEFT JOIN usert man ON man.id=o.manager_id," +
- * " room r, meal m, order_status os" +
- * " WHERE o.client_id=c.id AND r.id = o.room_id AND rp.id=r.room_pattern" +
- * " m.id = o.meal_id AND o.order_status = os.id";
- */
-
-/*
- * public static final String GET_ORDERS = ""SELECT o.id, r.number as number,
- * c.email as client, man.email as manager, m.name as meal, os.status as status,
- * o.checkIn_date as checkIn, o.checkOut_date as checkOut,
- * DATEDIFF(o.checkOut_date, o.checkIn_date)*(m.price+rp.price) AS price FROM
- * userT c, room_pattern rp, orderT o LEFT JOIN usert man ON
- * man.id=o.manager_id, room r, meal m, order_status os WHERE o.client_id=c.id
- * AND r.id = o.room_id AND rp.id=r.room_pattern AND m.id = o.meal_id AND
- * o.order_status = os.id"
- */
-/*
- * public static final String GET_USER_ORDERS =
- * "SELECT o.id, r.number as number, c.email as client, man.email as manager, m.name as meal, os.status as status, o.checkIn_date as checkIn, o.checkOut_date as checkOut, DATEDIFF(o.checkOut_date, o.checkIn_date)*(m.price+rp.price) AS price FROM userT c, room_pattern rp, orderT o LEFT JOIN usert man ON man.id=o.manager_id, room r, meal m, order_status os WHERE o.client_id=c.id AND r.id = o.room_id AND rp.id=r.room_pattern AND m.id = o.meal_id AND o.order_status = os.id"
- * ;
- */
