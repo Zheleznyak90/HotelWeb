@@ -105,23 +105,6 @@ public class MysqlManegerDAO implements ManagerDAO {
 		return resCode;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean confirmBooking(int roomId, int clientId) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public boolean confirmBookingCancel() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	/**
 	 * {@inheritDoc}

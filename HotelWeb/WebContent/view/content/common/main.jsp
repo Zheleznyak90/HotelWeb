@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="rightPanel">
 	<div id="patternList">
 		<c:forEach var="room" items="${roomList}">
@@ -14,11 +15,11 @@
 					
 					</div>
 					<div class="roomClass">
-						Class:
+						<fmt:message key="aClass" />:
 						<span class="roomClassSort" id ="classId_${room.aClass.id }"><c:out value="${room.aClass.aClass }"></c:out></span>
 					</div>
 					<div class="size">
-						Number of person:
+						<fmt:message key="size" />:
 						<span class="roomCapacitySort"><c:out value="${room.size }"></c:out></span>
 					</div>
 

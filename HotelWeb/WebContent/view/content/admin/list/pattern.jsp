@@ -1,16 +1,16 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="rightPanel">
 	<div id="errorMsg"></div>
 	<table border="1" class="sortable">
 		<tr>
 			<td>Id</td>
-			<td>Class</td>
-			<td>Price</td>
-			<td>Size</td>
-			<td>Name</td>
-			<td>Edit</td>
-			<td>Delete</td>
+			<td><fmt:message key="aClass" /></td>
+			<td><fmt:message key="price" /></td>
+			<td><fmt:message key="size" /></td>
+			<td><fmt:message key="sName" /></td>
+			<td><fmt:message key="edit" /></td>
+			<td><fmt:message key="delete" /></td>
 
 		</tr>
 		<c:forEach var="pattern" items="${patterns}">

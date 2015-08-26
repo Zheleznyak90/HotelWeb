@@ -1,5 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div id="roomOverview">
 
 	<div class="room" id="${pattern.id}">
@@ -41,12 +41,12 @@
 				<c:out value="${pattern.description }"></c:out>
 			</div>
 			<div class="roomClass">
-				Class: <span class="roomClassSort"
+				<fmt:message key="aClass" />: <span class="roomClassSort"
 					id="classId_${pattern.aClass.id }"><c:out
 						value="${pattern.aClass.aClass }"></c:out> </span>
 			</div>
 			<div class="size">
-				Number of person: <span class="roomCapacitySort"><c:out
+				<fmt:message key="size" />: <span class="roomCapacitySort"><c:out
 						value="${pattern.size }"></c:out> </span>
 			</div>
 

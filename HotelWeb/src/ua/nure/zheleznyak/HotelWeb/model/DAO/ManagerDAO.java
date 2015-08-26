@@ -45,7 +45,5 @@ public interface ManagerDAO {
 	
 	public int offerRoom(Order order, int clientId, User manager);
 	
-	public boolean confirmBooking(int roomId, int clientId);
-	public boolean confirmBookingCancel();
 	public boolean showStat();
 }

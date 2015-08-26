@@ -1,16 +1,17 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="rightPanel">
 
 	<table border="1" class="sortable">
 		<thead>
 			<tr>
-				<td>Client</td>
-				<td>Manager</td>
-				<td>Class</td>
-				<td>Number of guests</td>
-				<td>CheckIn</td>
-				<td>CheckOut</td>
+				<td><fmt:message key="number" /></td>
+				<td><fmt:message key="client" /></td>
+				<td><fmt:message key="aClass" /></td>
+				<td><fmt:message key="guestNum" /></td>
+				<td><fmt:message key="checkIn" /></td>
+				<td><fmt:message key="checkOut" /></td>
 			</tr>
 		</thead>
 		<tbody>

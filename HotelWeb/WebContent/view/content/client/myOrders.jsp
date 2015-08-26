@@ -1,6 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
 <div>
 
 	<ul class="nav nav-tabs">
@@ -8,9 +7,9 @@
 @import
 	url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 </style>
-		<li><a href="accManagment">Account</a>
+		<li><a href="accManagment"><fmt:message key="acc" /></a>
 		</li>
-		<li class="active"><a href="MyOrders">My orders</a>
+		<li class="active"><a href="MyOrders"><fmt:message key="myOrders" /></a>
 		</li>
 	</ul>
 	<div>
@@ -22,23 +21,23 @@
 			<div class="order" id="${currOrder.id}">
 				<div class="left">
 					<div class="manager">
-						Your manager : <span>${currOrder.manager.email}</span>
+						<fmt:message key="urManager" /> : <span>${currOrder.manager.email}</span>
 					</div>
 					<div class="orderInfo">
 						<div class="orderInfoItem">
-							Meal: <span>${currOrder.meal.name }</span>
+							<fmt:message key="mealName" />: <span>${currOrder.meal.name }</span>
 						</div>
 						<div class="orderInfoItem">
-							Check In: <span>${currOrder.checkInDate}</span>
+							<fmt:message key="checkIn" />: <span>${currOrder.checkInDate}</span>
 						</div>
 						<div class="orderInfoItem">
-							Check Out: <span>${currOrder.checkOutDate}</span>
+							<fmt:message key="checkOut" /> <span>${currOrder.checkOutDate}</span>
 						</div>
 					</div>
 					<div class="status">
 						<div class="orderInfoItem">
 
-							Order status: <span>${currOrder.status.status}</span>
+							<fmt:message key="orderStatus" />: <span>${currOrder.status.status}</span>
 						</div>
 						<c:if
 							test="${currOrder.status.status eq 'pending' && currOrder.checkInDate.time>tomorrow.time}">
@@ -56,7 +55,7 @@
 						<script src="<c:url value="view/js/orders.js" />"></script>
 					</div>
 				</div>
-				<div class="total">Total price is: ${currOrder.price}</div>
+				<div class="total"><fmt:message key="totalPrice" />: ${currOrder.price}</div>
 
 			</div>
 

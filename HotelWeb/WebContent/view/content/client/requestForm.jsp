@@ -1,13 +1,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <form id="form_request" method="post" action="RequestProc">
 	<table>
 		<tr>
-			<td>Number of person</td>
+			<td><fmt:message key="guestNum" /></td>
 			<td><input type="number" name="num" required></td>
 		</tr>
 		<tr>
-			<td>Apartment Class</td>
+			<td><fmt:message key="aClass" /></td>
 			<td><select name="class" required>
 					<c:forEach var="currClass" items="${classes}">
 						<option value="${currClass.id}">${currClass.aClass}</option>
@@ -15,17 +16,17 @@
 			</select></td>
 		</tr>
 		<tr>
-			<td>Check-In Date</td>
+			<td><fmt:message key="checkIn" /></td>
 			<td><input type="text" name="checkInDate" class="date" required>
 			</td>
 		</tr>
 		<tr>
-			<td>Check-Out Date</td>
+			<td><fmt:message key="checkOut" /></td>
 			<td><input type="text" name="checkOutDate" class="date" required>
 			</td>
 		</tr>
 	</table>
-	<input type="submit" value="Send request">
+	<input type="submit" value="<fmt:message key="sendReq" />">
 
 </form>
  <link rel="stylesheet" href="<c:url value="/jslib/jquery-ui.css" />">

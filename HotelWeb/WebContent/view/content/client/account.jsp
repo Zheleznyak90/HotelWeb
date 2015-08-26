@@ -1,35 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <div>
 	<style scoped>
 	@import url("http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css");
 
   </style>
 	<ul class="nav nav-tabs">
-		<li class="active"><a href="accManagment">Account</a>
+		<li class="active"><a href="accManagment"><fmt:message key="acc" /></a>
 		</li>
-		<li><a href="MyOrders">My orders</a>
+		<li><a href="MyOrders"><fmt:message key="myOrders" /></a>
 		</li>
 
 
 	</ul>
 	<table>
 		<tr>
-			<td>Change password</td>
-			<td><input type="password" class="pass">
-			</td>
-		</tr>
-		<tr>
-			<td>Confirm password</td>
-			<td><input type="password" class="pass">
-			</td>
-		</tr>
-		<tr>
-			<td>Change name</td>
+			<td><fmt:message key="changeName" /></td>
 			<td><input>
 			</td>
 		</tr>
 		<tr>
-			<td>Change phone number</td>
+			<td><fmt:message key="changePNumber" /></td>
 			<td><input>
 			</td>
 		</tr>

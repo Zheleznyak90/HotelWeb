@@ -5,19 +5,19 @@
 <input type="hidden" name ="pattern_id" value="${pattern.id}">
 	<table>
 		<tr>
-			<td>Name</td>
+			<td><fmt:message key="patternName" /></td>
 			<td>${pattern.name}</td>
 		</tr>
 		<tr>
-			<td>Number of person</td>
+			<td><fmt:message key="guestNum" /></td>
 			<td>${pattern.size}</td>
 		</tr>
 		<tr>
-			<td>Price</td>
+			<td><fmt:message key="price" /></td>
 			<td id="roomPrice">${pattern.price}&#36</td>
 		</tr>
 		<tr>
-			<td>Meal</td>
+			<td><fmt:message key="mealName" /></td>
 			<td><select class="recalc" name="meal" id="mealSelect" required>
 					<c:forEach var="currMeal" items="${meals}">
 						<option value="${currMeal.id}">${currMeal.name} -
@@ -30,19 +30,19 @@
 		<jsp:setProperty name="tomorrow" property="time" value="${tomorrow.time + 86400000}"/>
 		
 		<tr>
-			<td>Check-In Date</td>
+			<td><fmt:message key="checkIn" /></td>
 			<td><input type="text" id ="checkin" name="checkInDate" class="date recalc"
 				value="<fmt:formatDate value="${now}" pattern="MM/dd/yyyy" />"
 				required></td>
 		</tr>
 		<tr>
-			<td>Check-Out Date</td>
+			<td><fmt:message key="checkOut" /></td>
 			<td><input type="text" id ="checkout" name="checkOutDate" class="date recalc"
 			value="<fmt:formatDate value="${tomorrow}" pattern="MM/dd/yyyy" />" required></td>
 		</tr>
 	</table>
 	<div>
-		Total price: <span id="total">${pattern.price}</span>&#36
+		<fmt:message key="totalPrice" />: <span id="total">${pattern.price}</span>&#36
 		
 	</div>
 

@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <div class="rightPanel">
@@ -7,12 +7,11 @@
 		<tr>
 			<td>Id</td>
 			<td>Email</td>
-			<td>Role</td>
-			
-			<td>Full name</td>
-			<td>Phone number</td>
-			<td>Edit</td>
-			<td>Delete</td>
+			<td><fmt:message key="role" /></td>
+			<td><fmt:message key="name" /></td>
+			<td><fmt:message key="pNumber" /></td>
+			<td><fmt:message key="edit" /></td>
+			<td><fmt:message key="delete" /></td>
 
 		</tr>
 		<c:forEach var="user" items="${users}">

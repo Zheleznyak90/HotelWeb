@@ -1,4 +1,5 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <div class="rightPanel">
 
 	<div id="errorMsg"></div>
@@ -7,7 +8,7 @@
 		<form id="form_request" method="post" action="RoomAddProc">
 			<table>
 				<tr>
-					<td>Room type:</td>
+					<td><fmt:message key="patternName" />:</td>
 					<td><select id="room_pattern" name="pattern" required>
 							<c:forEach var="currPattern" items="${patterns}">
 								<option value="${currPattern.id}"
@@ -17,22 +18,22 @@
 					<td>*</td>
 				</tr>
 				<tr>
-					<td>Number:</td>
+					<td><fmt:message key="number" />:</td>
 					<td><input class="unique" type="number" name="number" min=1
 						max=999 required></td>
 					<td>*</td>
 				</tr>
 				<tr>
-					<td>Floor:</td>
+					<td><fmt:message key="floor" />:</td>
 					<td><input type="number" name="floor" min=1 max=10 required></td>
 					<td>*</td>
 				</tr>
 				<tr>
-					<td>Is maintained:</td>
+					<td><fmt:message key="maintained" />:</td>
 					<td><input type="checkbox" name="isMaintained" value="maintained"></td>
 				</tr>
 			</table>
-			<input type="submit" value="Create new room">
+			<input type="submit" value="<fmt:message key="add" />">
 
 		</form>
 	</div>
