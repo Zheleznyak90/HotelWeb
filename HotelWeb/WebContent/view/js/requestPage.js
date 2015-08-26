@@ -20,3 +20,20 @@ $(".recalc").change(function() {
 	}
 
 });
+
+function validate(){
+	var errMsg = "";
+	var checkIn = new Date($("#checkin").val());
+	var checkOut = new Date($("#checkout").val());
+	var midnightNow = new Date().setHours(0, 0, 0, 0);
+	var tomorrowDate = new Date(midnightNow.getTime() + 24 * 60 * 60 * 1000);
+	if((checkOut - checkIn)<1){
+		errMsg += "Check in date must be earlier than checkout";
+	}
+	alert((checkIn-tomorrowDate)/(24 * 60 * 60 * 1000));
+	/*if()*/
+	
+	if(errMsg != ""){
+		alert("err");
+	}
+}

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Currency;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -39,6 +40,8 @@ public class RequestProc extends HttpServlet {
 		roomReq.setClient(client);
 		roomReq.setNumberOfPerson(Integer.parseInt(request.getParameter("num")));
 		roomReq.getaClass().setId(Integer.parseInt(request.getParameter("class")));
+		roomReq.getMeal().setId(Integer.parseInt(request.getParameter("meal")));
+		System.out.println(roomReq.getMeal().getId());
 		
 		try {
 			DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -49,7 +52,7 @@ public class RequestProc extends HttpServlet {
 			roomReq.setCreated(new java.sql.Date (currDate.getTime()));
 			int requestExec = MysqlClientDAO.getSingleton().createRequest(roomReq);
 			
-		} catch (ParseException e) {//TODO SEND INVALID
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
 		

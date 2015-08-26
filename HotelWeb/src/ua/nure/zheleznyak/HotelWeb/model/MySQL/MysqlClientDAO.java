@@ -20,12 +20,14 @@ import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Room;
 
 public class MysqlClientDAO implements ClientDAO {
-	private static final Logger logger = LogManager.getLogger(MysqlClientDAO.class.getName());
+	private static final Logger logger = LogManager
+			.getLogger(MysqlClientDAO.class.getName());
 
 	private static MysqlClientDAO singleton;
 
 	private MysqlClientDAO() {
 	}
+
 	/**
 	 * Return singleton object.
 	 */
@@ -35,13 +37,15 @@ public class MysqlClientDAO implements ClientDAO {
 		}
 		return singleton;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
 	@Override
-	public void bookRoom(Order order, String roomPattern) {
+	public int bookRoom(Order order, String roomPattern) {
 		List<Room> spareRooms = getAvailableRooms(order.getCheckInDate(),
 				order.getCheckOutDate(), roomPattern);
+		int res = 0;
 		if (!spareRooms.isEmpty()) {
 			Connection con = null;
 			try {
@@ -54,7 +58,7 @@ public class MysqlClientDAO implements ClientDAO {
 				pst.setDate(4, order.getCreationDate());
 				pst.setDate(5, order.getCheckInDate());
 				pst.setDate(6, order.getCheckOutDate());
-				boolean res = pst.execute();
+				res = pst.executeUpdate();
 
 			} catch (SQLException e) {
 				logger.error("SQL ERROR", e);
@@ -62,8 +66,10 @@ public class MysqlClientDAO implements ClientDAO {
 				MySQLConnection.getSingleton().closeConnection(con);
 			}
 		}
+		return res;
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -88,6 +94,7 @@ public class MysqlClientDAO implements ClientDAO {
 		return affectedRows;
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -110,6 +117,7 @@ public class MysqlClientDAO implements ClientDAO {
 		return affectedRows;
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -134,6 +142,7 @@ public class MysqlClientDAO implements ClientDAO {
 		return mealList;
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -150,6 +159,7 @@ public class MysqlClientDAO implements ClientDAO {
 			pst.setDate(4, new Date(System.currentTimeMillis()));
 			pst.setDate(5, req.getCheckInDate());
 			pst.setDate(6, req.getCheckOutDate());
+			pst.setInt(7, req.getMeal().getId());
 			pst.execute();
 
 		} catch (SQLException e) {
@@ -160,6 +170,7 @@ public class MysqlClientDAO implements ClientDAO {
 
 		return 0;
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -171,12 +182,11 @@ public class MysqlClientDAO implements ClientDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS_BY_PATTERN);
-			pst.setString(1, roomPattern);
+					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS + SQLPatterns.SPARE_ROOM_BY_PATTERN);
+			
+			pst.setDate(1, checkOut);
 			pst.setDate(2, checkIn);
-			pst.setDate(3, checkOut);
-			pst.setDate(4, checkIn);
-			pst.setDate(5, checkOut);
+			pst.setString(3, roomPattern);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				roomList.add(FillBean.getSingleton().generateRoom(rs));
@@ -190,6 +200,7 @@ public class MysqlClientDAO implements ClientDAO {
 		return roomList;
 
 	}
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -200,10 +211,11 @@ public class MysqlClientDAO implements ClientDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			orders = new ArrayList<Order>();
-			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ORDERS+SQLPatterns.CLIENT_ORDERS+SQLPatterns.UNEXPIRED_ORDERS);
+			PreparedStatement pst = con.prepareStatement(SQLPatterns.GET_ORDERS
+					+ SQLPatterns.CLIENT_ORDERS + SQLPatterns.UNEXPIRED_ORDERS);
 			pst.setString(1, email);
 			ResultSet rs = pst.executeQuery();
-			while(rs.next()){
+			while (rs.next()) {
 				orders.add(FillBean.getSingleton().generateOrder(rs));
 			}
 		} catch (SQLException e) {
@@ -215,3 +227,5 @@ public class MysqlClientDAO implements ClientDAO {
 		return orders;
 	}
 }
+//SELECT r.* FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o ON(r.id = o.room_id) WHERE rp.id='4'  AND r.isMaintained = 0 AND COALESCE((o.checkIn_date NOT BETWEEN '2015-09-27' AND '2015-09-28'), TRUE)  AND COALESCE((o.checkOut_date NOT BETWEEN '2015-09-27' AND '2015-09-28'), TRUE)
+//SELECT r.* FROM room r LEFT JOIN room_pattern rp ON(rp.id=r.room_pattern) LEFT JOIN orderT o ON(r.id = o.room_id) WHERE rp.id='4'  AND r.isMaintained = 0 AND (COALESCE((o.checkIn_date < '2015-09-27'), TRUE) AND COALESCE((o.checkOut_date >'2015-09-28'), TRUE))

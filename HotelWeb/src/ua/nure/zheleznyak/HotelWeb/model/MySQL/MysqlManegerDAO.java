@@ -86,18 +86,40 @@ public class MysqlManegerDAO implements ManagerDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public int offerRoom(Order order, int clientId, User manager) {
+	public int offerRoom(Order order, String requestId) {
 		Connection con = null;
 		int resCode = 0;
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
+			con.setAutoCommit(false);
 			PreparedStatement pst = con
 					.prepareStatement(SQLPatterns.OFFER_ROOM);
-			// pst.set
-			// ResultSet rs =
-			// stm.executeQuery(SQLPatterns.GET_ALL_UNSERVED_REQUESTS);
-
+			pst.setInt(1, order.getRoom().getId());
+			pst.setString(2, order.getClient().getEmail());
+			pst.setString(3, order.getManager().getEmail());
+			pst.setInt(4, order.getMeal().getId());
+			pst.setDate(5, order.getCreationDate());
+			pst.setDate(6, order.getCheckInDate());
+			pst.setDate(7, order.getCheckOutDate());
+			pst.setString(8, requestId);
+			System.out.println(pst);
+			pst.executeUpdate();
+			
+			pst = con.prepareStatement(SQLPatterns.PROC_REQUEST);
+			pst.setInt(1, order.getRoom().getId());
+			pst.setString(2, order.getManager().getEmail());
+			pst.setString(3, requestId);
+			pst.executeUpdate();
+			System.out.println(pst);
+			con.commit();
+			
 		} catch (SQLException e) {
+			try {
+				con.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				logger.error("Failed rollback", e1);
+			}
 			logger.error("SQL ERROR", e);
 		} finally {
 			MySQLConnection.getSingleton().closeConnection(con);
@@ -198,12 +220,10 @@ public class MysqlManegerDAO implements ManagerDAO {
 		try {
 			con = MySQLConnection.getSingleton().getConnection();
 			PreparedStatement pst = con
-					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS_BY_CLASS);
-			pst.setString(1, roomClass);
+					.prepareStatement(SQLPatterns.GET_SPARE_ROOMS + SQLPatterns.SPARE_ROOM_BY_CLASS);
+			pst.setDate(1, checkOut);
 			pst.setDate(2, checkIn);
-			pst.setDate(3, checkOut);
-			pst.setDate(4, checkIn);
-			pst.setDate(5, checkOut);
+			pst.setString(3, roomClass);
 			ResultSet rs = pst.executeQuery();
 			while (rs.next()) {
 				roomList.add(FillBean.getSingleton().generateRoom(rs));

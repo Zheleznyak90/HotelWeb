@@ -43,7 +43,7 @@ public interface ManagerDAO {
 	public List<Room> getAvailableRooms(Date checkIn, Date checkOut,
 			String roomClass);
 	
-	public int offerRoom(Order order, int clientId, User manager);
+	public int offerRoom(Order order, String requestId);
 	
 	public boolean showStat();
 }

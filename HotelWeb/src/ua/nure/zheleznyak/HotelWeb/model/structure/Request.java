@@ -14,12 +14,14 @@ public class Request implements Serializable {
 	private User client;
 	private User manager;
 	private int numberOfPerson;
+	private Meal meal;
 	
 	private ApartmentClass aClass;
 
 	private Date created;
 	boolean isServed = false;
 	
+
 	private Date checkOutDate;
 	private Date checkInDate;
 	
@@ -27,6 +29,7 @@ public class Request implements Serializable {
 		aClass = new ApartmentClass();
 		client = new User();
 		manager = new User();
+		meal = new Meal();
 	}
 	/**
 	 * Simple getter.
@@ -154,6 +157,18 @@ public class Request implements Serializable {
 	public void setCheckInDate(Date checkInDate) {
 		this.checkInDate = checkInDate;
 	}
-
-	
+	/**
+	 * Simple getter.
+	 * @return Meal object
+	 */
+	public Meal getMeal() {
+		return meal;
+	}
+	/**
+	 * Simple setter.
+	 * @param Meal to set meal
+	 */
+	public void setMeal(Meal meal) {
+		this.meal = meal;
+	}
 }

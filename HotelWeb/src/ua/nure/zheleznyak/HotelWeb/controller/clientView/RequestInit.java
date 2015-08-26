@@ -9,8 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlCommonDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.ApartmentClass;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Meal;
 
 /**
  * Servlet prepare data for new request jsp page.
@@ -41,7 +43,9 @@ public class RequestInit extends HttpServlet {
 	private void processReq(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
+		List<Meal> meals = MysqlClientDAO.getSingleton().getMealList();
 		request.setAttribute("classes", classes);
+		request.setAttribute("meals", meals);
 		request.getRequestDispatcher("/view/pages/client/request.jsp").forward(request, response);
 	}
 

@@ -1,4 +1,4 @@
-package ua.nure.zheleznyak.HotelWeb.controller.clientView;
+package ua.nure.zheleznyak.HotelWeb.controller.managerView;
 
 import java.io.IOException;
 import java.text.DateFormat;
@@ -14,33 +14,35 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlClientDAO;
+import ua.nure.zheleznyak.HotelWeb.model.MySQL.MysqlManegerDAO;
 import ua.nure.zheleznyak.HotelWeb.model.structure.Order;
+import ua.nure.zheleznyak.HotelWeb.model.structure.Request;
 import ua.nure.zheleznyak.HotelWeb.model.structure.User;
 
 /**
- * Servlet create new order in database.
+ * Servlet implementation class OfferRoom
  */
-@WebServlet("/client/OrderProc")
-public class OrderProc extends HttpServlet {
+@WebServlet("/manager/OfferRoom")
+public class OfferRoom extends HttpServlet {
+
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 2553678448227167442L;
+	private static final long serialVersionUID = -6364638322755157186L;
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Order currOrder = new Order();
-		String nextPage = "/view/pages/client/tnxForRequest.jsp";
-		HttpSession clientSession = request.getSession();
-		currOrder.setClient((User) clientSession.getAttribute("User"));
-		currOrder.getMeal().setId(
-				Integer.parseInt(request.getParameter("meal")));
-		String patternId = request.getParameter("pattern_id");
+		HttpSession managerSession = request.getSession();
+		currOrder.setManager((User) managerSession.getAttribute("User"));
+		String id = request.getParameter("id");
+		Request currReq = MysqlManegerDAO.getSingleton().getRequestById(id);
+		currOrder.getMeal().setId(currReq.getMeal().getId());
+		currOrder.getClient().setEmail(currReq.getClient().getEmail());
+		currOrder.getRoom().setId(Integer.parseInt(request.getParameter("room_id")));
 
 		try {
 			DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
@@ -51,18 +53,14 @@ public class OrderProc extends HttpServlet {
 			currOrder.setCheckOutDate(new java.sql.Date(sdf.parse(
 					request.getParameter("checkOutDate")).getTime()));
 			currOrder.setCreationDate(new java.sql.Date(currDate.getTime()));
-			int res = MysqlClientDAO.getSingleton().bookRoom(currOrder, patternId);
-			System.out.println(res);
-			if(res==0){
-				nextPage = "/view/pages/client/noAvailable.jsp";
-			}
+			MysqlManegerDAO.getSingleton().offerRoom(currOrder, id);
 
 		} catch (ParseException e) {
-			nextPage = "/view/pages/client/noAvailable.jsp";
 			e.printStackTrace();
 		}
 		
-		request.getRequestDispatcher(nextPage).forward(request, response);
+		request.getRequestDispatcher("RequestList").forward(request, response);
+
 	}
 
 }

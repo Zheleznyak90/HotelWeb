@@ -116,6 +116,7 @@ public class FillBean {
 			currReq.getaClass().setaClass(rs.getString("aClass"));
 			currReq.setCheckInDate(rs.getDate("checkIn"));
 			currReq.setCheckOutDate(rs.getDate("checkOut"));
+			currReq.getMeal().setId(rs.getInt("meal"));
 		} catch (SQLException e) {
 			logger.error("SQL ERROR", e);
 		}

@@ -1,7 +1,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<form id="form_request" method="post" action="OrderProc">
+<form id="form_request" method="post" action="OrderProc" onSubmit="validate()">
 <input type="hidden" name ="pattern_id" value="${pattern.id}">
 	<table>
 		<tr>
@@ -25,20 +25,21 @@
 					</c:forEach>
 			</select></td>
 		</tr>
-		<jsp:useBean id="now" class="java.util.Date" />
 		<jsp:useBean id="tomorrow" class="java.util.Date" />
 		<jsp:setProperty name="tomorrow" property="time" value="${tomorrow.time + 86400000}"/>
+		<jsp:useBean id="dayAfterTomorrow" class="java.util.Date" />
+		<jsp:setProperty name="dayAfterTomorrow" property="time" value="${tomorrow.time + 86400000}"/>
 		
 		<tr>
 			<td><fmt:message key="checkIn" /></td>
 			<td><input type="text" id ="checkin" name="checkInDate" class="date recalc"
-				value="<fmt:formatDate value="${now}" pattern="MM/dd/yyyy" />"
+				value="<fmt:formatDate value="${tomorrow}" pattern="MM/dd/yyyy" />"
 				required></td>
 		</tr>
 		<tr>
 			<td><fmt:message key="checkOut" /></td>
 			<td><input type="text" id ="checkout" name="checkOutDate" class="date recalc"
-			value="<fmt:formatDate value="${tomorrow}" pattern="MM/dd/yyyy" />" required></td>
+			value="<fmt:formatDate value="${dayAfterTomorrow}" pattern="MM/dd/yyyy" />" required></td>
 		</tr>
 	</table>
 	<div>

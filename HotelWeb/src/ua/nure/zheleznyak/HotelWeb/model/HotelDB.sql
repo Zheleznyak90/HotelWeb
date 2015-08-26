@@ -82,6 +82,7 @@ CREATE TABLE request(
 	id INT NOT NULL AUTO_INCREMENT,
 	client_id INT NOT NULL,
 	manager_id INT,
+	meal_id INT NOT NULL,
 	class_id INT NOT NULL,
 	number_of_person INT NOT NULL,
 	checkIn_date DATE NOT NULL,
@@ -92,6 +93,8 @@ CREATE TABLE request(
 	ON DELETE RESTRICT,
 	FOREIGN KEY (manager_id) REFERENCES userT(id) 
 	ON DELETE SET NULL,
+	FOREIGN KEY (meal_id) REFERENCES meal(id) 
+	ON DELETE RESTRICT,
 	FOREIGN KEY (class_id) REFERENCES room_class(id) 
 	ON DELETE RESTRICT
 	

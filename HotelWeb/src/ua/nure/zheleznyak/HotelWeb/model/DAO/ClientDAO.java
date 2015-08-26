@@ -12,7 +12,7 @@ public interface ClientDAO {
 	/**
 	 * Create new Order row in database, based on passed Order object and RoomPattern id.
 	 */
-	public void bookRoom(Order order, String roomPattern);
+	public int bookRoom(Order order, String roomPattern);
 	/**
 	 * Set request status to confirmed.
 	 */
