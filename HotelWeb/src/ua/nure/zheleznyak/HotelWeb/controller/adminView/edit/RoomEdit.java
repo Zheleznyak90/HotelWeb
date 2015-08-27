@@ -37,7 +37,7 @@ public class RoomEdit extends HttpServlet {
 		request.setAttribute("room", currRoom);
 		request.setAttribute("patterns", patterns);
 		request.setAttribute("jspPage", "edit/room");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

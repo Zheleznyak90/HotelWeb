@@ -1,5 +1,5 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper>
-	<jsp:include page="/view/content/common/authorizationForm.jsp" />
+	<jsp:include page="/WEB-INF/content/client/requestForm.jsp" />
 </t:wrapper>

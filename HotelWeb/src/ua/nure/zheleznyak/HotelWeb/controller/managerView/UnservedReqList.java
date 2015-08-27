@@ -46,6 +46,6 @@ public class UnservedReqList extends HttpServlet {
 		List<Request> unserved = MysqlManegerDAO.getSingleton().getUnservedRequests();
 		request.setAttribute("requests", unserved);
 		request.setAttribute("jspPage", "requests");
-		request.getRequestDispatcher("/view/pages/manager/managerPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/manager/managerPagePattern.jsp").forward(request, response);
 	}
 }

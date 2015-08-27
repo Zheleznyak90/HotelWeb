@@ -19,11 +19,11 @@
 </head>
 <body>
 	<div class="Mcontainer">
-		<jsp:include page="/view/content/common/header.jsp" />
+		<jsp:include page="/WEB-INF/content/common/header.jsp" />
 		<div class="mainbody">
 			<p><jsp:doBody />
 		</div>
-		<jsp:include page="/view/content/common/footer.jsp" />
+		<jsp:include page="/WEB-INF/content/common/footer.jsp" />
 	</div>
 </body>
 </html>

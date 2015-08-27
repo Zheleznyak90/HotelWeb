@@ -42,6 +42,6 @@ public class PatternAddInit extends HttpServlet {
 		List<ApartmentClass> classes = MysqlCommonDAO.getSingleton().getApClasses();
 		request.setAttribute("classes", classes);
 		request.setAttribute("jspPage", "add/pattern");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

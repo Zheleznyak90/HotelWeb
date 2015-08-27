@@ -48,7 +48,7 @@ public class MyOrders extends HttpServlet {
 		List<Order> orders = MysqlClientDAO.getSingleton().getClientOrders(currUser.getEmail());
 		request.setAttribute("orders", orders);
 		request.setAttribute("jspPage", "myOrders");
-		request.getRequestDispatcher("/view/pages/client/clientPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/client/clientPagePattern.jsp").forward(request, response);
 
 	}
 

@@ -46,6 +46,6 @@ public class PatternManagment extends HttpServlet {
 		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
 		request.setAttribute("patterns", patterns);
 		request.setAttribute("jspPage", "list/pattern");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

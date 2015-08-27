@@ -43,7 +43,7 @@ public class RoomPage extends HttpServlet {
 		}
 		request.setAttribute("photoGallery", photoGallery);
 		request.setAttribute("pattern", currRoom);
-		request.getRequestDispatcher("/view/pages/common/roomOverview.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/common/roomOverview.jsp").forward(request, response);
 	}
 
 }

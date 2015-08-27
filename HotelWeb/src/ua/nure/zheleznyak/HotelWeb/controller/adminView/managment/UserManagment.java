@@ -46,6 +46,6 @@ public class UserManagment extends HttpServlet {
 		List<User> users = MysqlAdminDAO.getSingleton().getUsers();
 		request.setAttribute("users", users);
 		request.setAttribute("jspPage", "list/user");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 }

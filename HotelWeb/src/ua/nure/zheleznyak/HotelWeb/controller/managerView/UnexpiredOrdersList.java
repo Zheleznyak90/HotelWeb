@@ -46,7 +46,7 @@ public class UnexpiredOrdersList extends HttpServlet {
 		List<Order> unexpired = MysqlManegerDAO.getSingleton().getUnexpiredOrders();
 		request.setAttribute("orders", unexpired);
 		request.setAttribute("jspPage", "orders");
-		request.getRequestDispatcher("/view/pages/manager/managerPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/manager/managerPagePattern.jsp").forward(request, response);
 		
 	}
 

@@ -78,7 +78,7 @@ public class HandleRequest extends HttpServlet {
 		request.setAttribute("rooms", availableRooms);
 		request.setAttribute("jspPage", "createOrderOnReq");
 		request.getRequestDispatcher(
-				"/view/pages/manager/managerPagePattern.jsp").forward(request,
+				"/WEB-INF/pages/manager/managerPagePattern.jsp").forward(request,
 				response);
 /*		response.sendRedirect("/view/pages/manager/managerPagePattern.jsp");*/
 	}

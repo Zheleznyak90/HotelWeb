@@ -45,6 +45,6 @@ public class MainPage extends HttpServlet {
 			HttpServletResponse response) throws ServletException, IOException {
 		List<RoomPattern> rooms = MysqlCommonDAO.getSingleton().getPatternList();
 		request.setAttribute("roomList", rooms);
-		request.getRequestDispatcher("/view/pages/common/mainPage.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/common/mainPage.jsp").forward(request, response);
 	}
 }

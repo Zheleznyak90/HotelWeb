@@ -34,7 +34,7 @@ public class OrderInit extends HttpServlet {
 		List<Meal> meals = MysqlClientDAO.getSingleton().getMealList();
 		request.setAttribute("pattern", pattern);
 		request.setAttribute("meals", meals);
-		request.getRequestDispatcher("/view/pages/client/orderRoom.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/client/orderRoom.jsp").forward(request, response);
 	}
 
 }

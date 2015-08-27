@@ -42,7 +42,7 @@ public class RoomAddInit extends HttpServlet {
 		List<RoomPattern> patterns = MysqlAdminDAO.getSingleton().getPatternList();
 		request.setAttribute("patterns", patterns);
 		request.setAttribute("jspPage", "add/room");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

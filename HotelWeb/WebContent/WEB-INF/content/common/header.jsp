@@ -13,10 +13,10 @@
 
 		<c:choose>
 			<c:when test="${not empty User}">
-				<jsp:include page="/view/content/common/authUser.jsp" />
+				<jsp:include page="/WEB-INF/content/common/authUser.jsp" />
 			</c:when>
 			<c:otherwise>
-				<jsp:include page="/view/content/common/anonUser.jsp" />
+				<jsp:include page="/WEB-INF/content/common/anonUser.jsp" />
 			</c:otherwise>
 		</c:choose>
 	</div>

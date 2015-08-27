@@ -3,7 +3,7 @@
   <display-name>HotelWeb</display-name>
   <servlet>
     <servlet-name>RegistrationJsp</servlet-name>
-    <jsp-file>/view/pages/common/registration.jsp</jsp-file>
+    <jsp-file>/WEB-INF/pages/common/registration.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegistrationJsp</servlet-name>
@@ -11,7 +11,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AuthorizationJsp</servlet-name>
-    <jsp-file>/view/pages/common/authorization.jsp</jsp-file>
+    <jsp-file>/WEB-INF/pages/common/authorization.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AuthorizationJsp</servlet-name>
@@ -19,7 +19,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AfterReqRedirect</servlet-name>
-    <jsp-file>/view/pages/client/tnxForRequest.jsp</jsp-file>
+    <jsp-file>/WEB-INF/pages/client/tnxForRequest.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AfterReqRedirect</servlet-name>
@@ -27,7 +27,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>MealAdd</servlet-name>
-    <jsp-file>/view/pages/admin/mealAdd.jsp</jsp-file>
+    <jsp-file>/WEB-INF/pages/admin/mealAdd.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>MealAdd</servlet-name>
@@ -35,7 +35,7 @@
   </servlet-mapping>
   <servlet>
     <servlet-name>AccountManagment</servlet-name>
-    <jsp-file>/view/pages/client/accountManagment.jsp</jsp-file>
+    <jsp-file>/WEB-INF/pages/client/accountManagment.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
     <servlet-name>AccountManagment</servlet-name>
@@ -45,4 +45,15 @@
     <param-name>javax.servlet.jsp.jstl.fmt.fallbackLocale</param-name>
     <param-value>en</param-value>
   </context-param>
+  
+  <error-page>
+    <!-- Missing resource -->
+    <error-code>404</error-code>
+    <location>/WEB-INF/pages/common/unknownLoc.jsp</location>
+</error-page>
+<error-page>
+    <!-- Uncaught exception -->
+    <error-code>500</error-code>
+    <location>/WEB-INF/pages/common/exception.jsp</location>
+</error-page>
 </web-app>

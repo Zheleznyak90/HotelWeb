@@ -57,7 +57,7 @@ public class RequestProc extends HttpServlet {
 		}
 		
 		
-		request.getRequestDispatcher("/view/pages/client/tnxForRequest.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/client/tnxForRequest.jsp").forward(request, response);
 	}
 	
 }

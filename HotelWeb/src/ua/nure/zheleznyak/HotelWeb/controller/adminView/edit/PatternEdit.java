@@ -36,7 +36,7 @@ public class PatternEdit extends HttpServlet {
 		request.setAttribute("pattern", currPattern);
 		request.setAttribute("classes", classes);
 		request.setAttribute("jspPage", "edit/pattern");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

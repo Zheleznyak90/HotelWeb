@@ -38,7 +38,7 @@ public class OrderEdit extends HttpServlet {
 		request.setAttribute("meals", meals);
 		request.setAttribute("statuses", statuses);
 		request.setAttribute("jspPage", "orderEdit");
-		request.getRequestDispatcher("/view/pages/manager/managerPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/manager/managerPagePattern.jsp").forward(request, response);
 	}
 
 }

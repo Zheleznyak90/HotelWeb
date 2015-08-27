@@ -43,7 +43,7 @@ public class MealManagment extends HttpServlet {
 		List<Meal> meals = MysqlClientDAO.getSingleton().getMealList();
 		request.setAttribute("meals", meals);
 		request.setAttribute("jspPage", "list/meal");
-		request.getRequestDispatcher("/view/pages/admin/adminPagePattern.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/admin/adminPagePattern.jsp").forward(request, response);
 	}
 
 }

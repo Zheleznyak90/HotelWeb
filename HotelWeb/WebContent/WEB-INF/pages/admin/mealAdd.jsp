@@ -2,6 +2,6 @@
 <%@taglib prefix="t" tagdir="/WEB-INF/tags"%>
 
 <t:wrapper>
-	<jsp:include page="/view/content/manager/navi.jsp" />
-	<jsp:include page="/view/content/manager/${jspPage}.jsp" />
+	<jsp:include page="/WEB-INF/content/admin/adminFunctions.jsp" />
+	<jsp:include page="/WEB-INF/content/admin/add/meal.jsp" />
 </t:wrapper>

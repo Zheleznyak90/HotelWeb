@@ -46,7 +46,7 @@ public class RequestInit extends HttpServlet {
 		List<Meal> meals = MysqlClientDAO.getSingleton().getMealList();
 		request.setAttribute("classes", classes);
 		request.setAttribute("meals", meals);
-		request.getRequestDispatcher("/view/pages/client/request.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/pages/client/request.jsp").forward(request, response);
 	}
 
 }

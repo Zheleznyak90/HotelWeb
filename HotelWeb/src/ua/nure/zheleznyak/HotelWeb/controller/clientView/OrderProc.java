@@ -35,7 +35,7 @@ public class OrderProc extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		Order currOrder = new Order();
-		String nextPage = "/view/pages/client/tnxForRequest.jsp";
+		String nextPage = "/WEB-INF/pages/client/tnxForRequest.jsp";
 		HttpSession clientSession = request.getSession();
 		currOrder.setClient((User) clientSession.getAttribute("User"));
 		currOrder.getMeal().setId(
@@ -54,11 +54,11 @@ public class OrderProc extends HttpServlet {
 			int res = MysqlClientDAO.getSingleton().bookRoom(currOrder, patternId);
 			System.out.println(res);
 			if(res==0){
-				nextPage = "/view/pages/client/noAvailable.jsp";
+				nextPage = "/WEB-INF/pages/client/noAvailable.jsp";
 			}
 
 		} catch (ParseException e) {
-			nextPage = "/view/pages/client/noAvailable.jsp";
+			nextPage = "/WEB-INF/pages/client/noAvailable.jsp";
 			e.printStackTrace();
 		}
 		
