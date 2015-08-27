@@ -5,7 +5,7 @@
 	<div id="errorMsg"></div>
 	<div title="room_pattern">
 
-		<form id="form_request" method="post" action="PatternAddProc">
+		<form id="form_request" method="post" action="PatternAddProc" enctype="multipart/form-data">
 			<table>
 				<tr>
 					<td><fmt:message key="patternName" />:</td>

@@ -80,7 +80,7 @@ public class HandleRequest extends HttpServlet {
 		request.getRequestDispatcher(
 				"/view/pages/manager/managerPagePattern.jsp").forward(request,
 				response);
-
+/*		response.sendRedirect("/view/pages/manager/managerPagePattern.jsp");*/
 	}
 
 }
