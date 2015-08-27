@@ -37,7 +37,6 @@ public class IsManager implements Filter {
 		if (currUser == null
 				|| (!currUser.getUserRole().getRole().equals("admin") && !currUser
 						.getUserRole().getRole().equals("manager"))) {
-			System.out.println("WHY U HERE HER MANAGER");
 			String contextPath = ((HttpServletRequest) request)
 					.getContextPath();
 			((HttpServletResponse) response).sendRedirect(contextPath

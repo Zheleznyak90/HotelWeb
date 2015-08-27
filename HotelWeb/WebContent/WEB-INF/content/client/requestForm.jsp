@@ -2,7 +2,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <form id="form_request" method="post" action="RequestProc"
-	onSubmit="validate()">
+	onSubmit="return validate()">
 	<table>
 		<tr>
 			<td><fmt:message key="guestNum" />

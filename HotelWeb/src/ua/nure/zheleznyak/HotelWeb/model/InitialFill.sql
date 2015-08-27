@@ -5,11 +5,6 @@ INSERT INTO role(role) VALUES
 ("manager"),
 ("admin");
 
-INSERT INTO userT(role_id, email, password) VALUES
-("1", "user1@mail.ru","пїЅ_0пїЅ,пїЅпїЅE/9пїЅVпїЅ3пїЅB"),
-("1", "user2@mail.ru","пїЅпїЅпїЅWпїЅj*DпїЅпїЅФµ5пїЅ^'пїЅпїЅ=пїЅ"),
-("2", "manager@mail.ru","пїЅmcQпїЅqпїЅпїЅЮѕпїЅпїЅ5%пїЅ 6z"),
-("3", "admin@mail.ru","пїЅпїЅпїЅ$fпїЅпїЅHпїЅпїЅ<I#yпїЅ");
 
 INSERT INTO room_class(class) VALUES
 ("3 stars"),
@@ -17,7 +12,7 @@ INSERT INTO room_class(class) VALUES
 ("5 stars");
 
 INSERT INTO room_pattern(class_id, size, price, name, description) VALUES
-("1","4","15","poor1",""),
+("1","4","15","poor1","Cheap room for one night staying."),
 ("2","2","50","middle1","In HotelWeb, even the rooms that we define as standard offer 5 star comfort. Single, double or family... Everyone lives this comfort and unique luxury. What are the things that make a room comfortable? Bathroom with a bathtub, central air conditioner, direct phone line, blow dryer, satellite broadcasting plasma TV, info and music channels, internet access, minibar, safe and balcony... And it is in the ideal size for families... After all of these opportunities, the only thing you have to do is to enjoy your perfect room and holiday."),
 ("2","3","70","middle2","In HotelWeb, even the rooms that we define as standard offer 5 star comfort. Single, double or family... Everyone lives this comfort and unique luxury. What are the things that make a room comfortable? Bathroom with a bathtub, central air conditioner, direct phone line, blow dryer, satellite broadcasting plasma TV, info and music channels, internet access, minibar, safe and balcony... And it is in the ideal size for families... After all of these opportunities, the only thing you have to do is to enjoy your perfect room and holiday. "),
 ("3","2","200","lux1","Things you can only experience in a dream are in HotelWeb, because we were inspired from your dreams. That's why it is so unique and unequalled. 1 living room 1 Bedroom 1 Bathtub Central air conditioner Direct phone line Blow dryer Satellite broadcasting plasma TV Info and music channels Internet access Minibar Safe Balcony A sofa for third person Viewing either the sea or the golf field... To offer you the maximum comfort... ");
@@ -55,5 +50,5 @@ ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
 ON COMPLETION PRESERVE
 DO
       DELETE FROM orderT WHERE created < DATE_SUB(NOW(), INTERVAL 2 DAY)
-      AND order_status = 1;
+      AND order_status IN(1,2);
       

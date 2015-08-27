@@ -14,26 +14,34 @@ $(".recalc").change(function() {
 		var mealPrice = parseFloat(mealPriceWithScrap[0]);
 		var total = days * (roomPrice + mealPrice);
 		$("#total").html(total);
-	}
-	else{
-		//TODO BLA BLAchange date
+	} else {
+		// TODO BLA BLAchange date
 	}
 
 });
 
-function validate(){
+function validate() {
+	
+	alert("false");
+	return false;
+/*	if (event.defaultPrevented) {
+		event.defaultPrevented;
+	} else {
+		event.returnValue = false; // for IE as dont support preventDefault;
+	}*/
 	var errMsg = "";
 	var checkIn = new Date($("#checkin").val());
 	var checkOut = new Date($("#checkout").val());
 	var midnightNow = new Date().setHours(0, 0, 0, 0);
 	var tomorrowDate = new Date(midnightNow.getTime() + 24 * 60 * 60 * 1000);
-	if((checkOut - checkIn)<1){
+	if ((checkOut - checkIn) < 1) {
 		errMsg += "Check in date must be earlier than checkout";
 	}
-	alert((checkIn-tomorrowDate)/(24 * 60 * 60 * 1000));
-	/*if()*/
-	
-	if(errMsg != ""){
+	alert((checkIn - tomorrowDate) / (24 * 60 * 60 * 1000));
+	/* if() */
+
+	if (errMsg != "") {
 		alert("err");
 	}
+	return false;
 }

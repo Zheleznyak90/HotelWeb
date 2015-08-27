@@ -52,7 +52,6 @@ public class OrderProc extends HttpServlet {
 					request.getParameter("checkOutDate")).getTime()));
 			currOrder.setCreationDate(new java.sql.Date(currDate.getTime()));
 			int res = MysqlClientDAO.getSingleton().bookRoom(currOrder, patternId);
-			System.out.println(res);
 			if(res==0){
 				nextPage = "/WEB-INF/pages/client/noAvailable.jsp";
 			}
